@@ -22,13 +22,37 @@ export default function WebsitesPage() {
         </div>
       </section>
 
-      <Section>
-        <div className="card-grid three">
+      <Section className="website-styles-showcase">
+        <div className="style-choice-note reveal">
+          <span>Choose by ambition, not by template</span>
+          <p>Each direction below has a different layout logic, visual language and growth path. Div3rsa can also combine parts from multiple styles when that fits the business better.</p>
+        </div>
+        <div className="website-style-grid">
           {websiteStyles.map((style) => (
             <StyleCard key={style.title} item={style} />
           ))}
         </div>
       </Section>
+
+      <section className="style-comparison-section">
+        <div className="container style-comparison-grid reveal">
+          <article>
+            <span>01</span>
+            <h2>Premium 3D / Wow</h2>
+            <p>For companies where the first impression needs to feel like a premium product launch.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h2>Simple Information</h2>
+            <p>For companies that need clarity, trust and contact flow without unnecessary complexity.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h2>Hybrid Business</h2>
+            <p>For growing companies that want a polished website now and portal/system options later.</p>
+          </article>
+        </div>
+      </section>
 
       <Section
         eyebrow="Growth foundation"

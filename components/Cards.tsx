@@ -95,8 +95,11 @@ export function CaseCard({ item }: CaseCardProps) {
 
 type StyleCardProps = {
   item: {
+    slug: string;
     title: string;
     href: string;
+    eyebrow: string;
+    heroLine: string;
     description: string;
     fits: string[];
     features: string[];
@@ -104,26 +107,99 @@ type StyleCardProps = {
   };
 };
 
+function StyleCardVisual({ slug }: { slug: string }) {
+  if (slug === "simple-info") {
+    return (
+      <div className="style-card-demo simple-card-demo" aria-hidden="true">
+        <div className="simple-demo-page">
+          <div className="simple-demo-nav">
+            <strong>Service AB</strong>
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="simple-demo-hero">
+            <p>Professional services</p>
+            <h4>Clear website. Easy contact.</h4>
+            <i>Request quote</i>
+          </div>
+          <div className="simple-demo-list">
+            <span>Services</span>
+            <span>About</span>
+            <span>Contact</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (slug === "hybrid-business") {
+    return (
+      <div className="style-card-demo hybrid-card-demo" aria-hidden="true">
+        <div className="hybrid-demo-site">
+          <p>B2B Website</p>
+          <h4>Website + portal path</h4>
+          <div>
+            <span>Contact</span>
+            <span>Login</span>
+          </div>
+        </div>
+        <div className="hybrid-demo-dashboard">
+          <strong>Future dashboard</strong>
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="hybrid-demo-flow">
+          <span>Website</span>
+          <span>Portal</span>
+          <span>System</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="style-card-demo premium-card-demo" aria-hidden="true">
+      <div className="premium-demo-cube" />
+      <div className="premium-demo-browser">
+        <div className="premium-demo-dots">
+          <span />
+          <span />
+          <span />
+        </div>
+        <p>Premium product site</p>
+        <h4>3D hero, motion and SaaS energy</h4>
+      </div>
+      <span className="premium-demo-chip chip-one">3D</span>
+      <span className="premium-demo-chip chip-two">Portal</span>
+      <span className="premium-demo-chip chip-three">SaaS</span>
+    </div>
+  );
+}
+
 export function StyleCard({ item }: StyleCardProps) {
   return (
-    <article className="style-card reveal">
-      <div className="style-visual">
-        <span />
-        <span />
-        <span />
+    <article className={"style-card reveal style-card-" + item.slug}>
+      <StyleCardVisual slug={item.slug} />
+      <div className="style-card-copy">
+        <span className="card-kicker">{item.eyebrow}</span>
+        <h3>{item.title}</h3>
+        <p className="style-card-line">{item.heroLine}</p>
+        <p>{item.description}</p>
+        <div className="mini-list">
+          <strong>Best for</strong>
+          <span>{item.fits.slice(0, 3).join(" / ")}</span>
+        </div>
+        <div className="style-card-actions">
+          <Link className="text-link" href={item.href}>
+            See example page
+          </Link>
+          <ButtonLink href="/contact" variant="secondary">
+            {item.cta}
+          </ButtonLink>
+        </div>
       </div>
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
-      <div className="mini-list">
-        <strong>Fits</strong>
-        <span>{item.fits.slice(0, 3).join(" / ")}</span>
-      </div>
-      <Link className="text-link" href={item.href}>
-        Learn about this style
-      </Link>
-      <ButtonLink href="/contact" variant="secondary">
-        {item.cta}
-      </ButtonLink>
     </article>
   );
 }

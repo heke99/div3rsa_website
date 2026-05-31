@@ -261,8 +261,21 @@ export const websiteStyles = [
     slug: "premium-3d",
     title: "Premium 3D / Wow",
     href: "/websites/premium-3d",
+    eyebrow: "For brands that need impact",
+    heroLine: "A cinematic, high-conversion website that feels like a premium digital product.",
     description:
       "For companies that want to stand out immediately. A visual premium website with 3D feeling, animations, strong hero sections, modern effects and an exclusive brand experience.",
+    demoTitle: "Example: premium SaaS or tech company front page",
+    demoText:
+      "A hero with depth, floating product cards, login/customer portal links, conversion-focused CTAs and a product-led structure that makes the company feel established from the first second.",
+    exampleStructure: [
+      "Cinematic 3D hero with product cards",
+      "Premium service/product storytelling",
+      "Customer portal or login CTA",
+      "Case studies and trust indicators",
+      "Conversion CTA sections",
+    ],
+    growthPath: ["Brand site", "Product demo", "Portal", "SaaS platform"],
     fits: ["Tech companies", "SaaS", "Consulting firms", "Finance", "Startups", "Premium brands"],
     features: [
       "3D hero",
@@ -280,8 +293,21 @@ export const websiteStyles = [
     slug: "simple-info",
     title: "Simple Information Website",
     href: "/websites/simple-info",
+    eyebrow: "Clear, trustworthy and fast to understand",
+    heroLine: "A sharp information website that explains what you do and makes it easy to contact you.",
     description:
       "A clean and clear website for companies that want to present their services, build trust and get more customers without unnecessary complexity.",
+    demoTitle: "Example: service company or consultant website",
+    demoText:
+      "A focused structure with clear sections for services, about, trust, contact and mobile-first presentation. It is professional without feeling overbuilt.",
+    exampleStructure: [
+      "Clear homepage and service overview",
+      "About and credibility section",
+      "Contact form and email CTA",
+      "Mobile-first layout",
+      "Basic SEO-ready page structure",
+    ],
+    growthPath: ["Company website", "Lead flow", "Booking", "Simple customer area"],
     fits: [
       "Local businesses",
       "Consultants",
@@ -305,8 +331,21 @@ export const websiteStyles = [
     slug: "hybrid-business",
     title: "Hybrid / Modern Business",
     href: "/websites/hybrid-business",
+    eyebrow: "Premium website with system-ready structure",
+    heroLine: "A modern business website that can grow into a portal, dashboard or SaaS foundation.",
     description:
       "A balanced website that combines premium design with clear information, CTA flows, login/account options and the ability to grow into a customer portal or SaaS product.",
+    demoTitle: "Example: growing B2B company with future portal needs",
+    demoText:
+      "A polished website with clear sales sections, feature explanations, account/login actions and an architecture that can later support dashboards, integrations and customer workflows.",
+    exampleStructure: [
+      "Modern hero with business CTA",
+      "Services and solution pages",
+      "Login/create account option",
+      "Portal-ready navigation",
+      "Integration and dashboard foundation",
+    ],
+    growthPath: ["Business website", "Lead engine", "Customer portal", "Operations dashboard"],
     fits: [
       "Growing companies",
       "B2B companies",
@@ -324,6 +363,29 @@ export const websiteStyles = [
       "Scalable foundation",
     ],
     cta: "I want the hybrid style",
+  },
+];
+
+export const homepageProof = [
+  {
+    value: "01",
+    title: "Website first, system later",
+    text: "The website can be built as the first layer of a future portal, dashboard or SaaS product.",
+  },
+  {
+    value: "02",
+    title: "Real product thinking",
+    text: "Div3rsa works with platforms such as Gridex, Coordiqo, Bovaro and DealFlowIQ.",
+  },
+  {
+    value: "03",
+    title: "Design and function together",
+    text: "The visual identity, user flow and technical foundation are planned as one product experience.",
+  },
+  {
+    value: "04",
+    title: "Automation-ready foundation",
+    text: "Portals, dashboards, APIs, payments and AI workflows can be added as the company grows.",
   },
 ];
 
