@@ -36,7 +36,7 @@ export function HomeHero() {
             </div>
             <div className="dashboard-metric">
               <strong>Digital Product</strong>
-              <span>Website -> Portal -> SaaS</span>
+              <span>{"Website -> Portal -> SaaS"}</span>
             </div>
             <div className="dashboard-bars">
               <i />
