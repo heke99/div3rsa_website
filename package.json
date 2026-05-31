@@ -1,0 +1,40 @@
+{
+  "name": "div3rsa-website",
+  "version": "1.0.0",
+  "description": "Professional company website for Div3rsa AB.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heke99/div3rsa_website.git"
+  },
+  "keywords": [
+    "Div3rsa AB",
+    "system development",
+    "website development",
+    "SaaS development"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/heke99/div3rsa_website/issues"
+  },
+  "homepage": "https://github.com/heke99/div3rsa_website#readme",
+  "dependencies": {
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.6",
+    "typescript": "^6.0.3"
+  },
+  "private": true
+}
