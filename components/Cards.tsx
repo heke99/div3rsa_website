@@ -19,7 +19,6 @@ export function TextCard({ title, text, kicker }: TextCardProps) {
 
 type PackageCardProps = {
   item: {
-    slug: string;
     title: string;
     subtitle: string;
     includes: string[];
@@ -96,6 +95,7 @@ export function CaseCard({ item }: CaseCardProps) {
 
 type StyleCardProps = {
   item: {
+    slug: string;
     title: string;
     href: string;
     description: string;
