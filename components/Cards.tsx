@@ -19,6 +19,7 @@ export function TextCard({ title, text, kicker }: TextCardProps) {
 
 type PackageCardProps = {
   item: {
+    slug: string;
     title: string;
     subtitle: string;
     includes: string[];
@@ -106,8 +107,8 @@ type StyleCardProps = {
 
 export function StyleCard({ item }: StyleCardProps) {
   return (
-    <article className="style-card reveal">
-      <div className="style-visual">
+    <article className={"style-card reveal style-card-" + item.slug}>
+      <div className={"style-visual style-visual-" + item.slug}>
         <span />
         <span />
         <span />

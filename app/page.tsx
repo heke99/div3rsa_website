@@ -10,6 +10,7 @@ import {
   company,
   faqs,
   growthSteps,
+  homepageProof,
   industries,
   processSteps,
   services,
@@ -23,6 +24,28 @@ export default function Home() {
   return (
     <>
       <HomeHero />
+
+      <section className="studio-proof-section">
+        <div className="container studio-proof-grid reveal">
+          <div className="studio-proof-intro">
+            <p className="eyebrow">Digital product studio</p>
+            <h2>Built to look premium and work like a real system.</h2>
+            <p>
+              Div3rsa combines strategy, design and development so the website is not just a brochure - it becomes the
+              first layer of a stronger digital business foundation.
+            </p>
+          </div>
+          <div className="proof-card-grid">
+            {homepageProof.map((item) => (
+              <article className="proof-card" key={item.title}>
+                <span>{item.value}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <Section
         id="growth"
