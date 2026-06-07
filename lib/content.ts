@@ -1,3 +1,4 @@
+//lib/content.ts
 export const locale = "sv" as const;
 
 export const company = {
