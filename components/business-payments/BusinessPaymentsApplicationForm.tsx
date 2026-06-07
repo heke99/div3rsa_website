@@ -45,11 +45,8 @@ export function BusinessPaymentsApplicationForm() {
     return (
       <div className="application-success reveal">
         <span className="success-mark">✓</span>
-        <h2>Ansökan mottagen</h2>
-        <p>{state.message}</p>
-        <p className="muted-copy">
-          Du får även en bekräftelse via e-post. Div3rsa kontaktar dig när ansökan har granskats.
-        </p>
+        <h2>Vi har tagit emot din ansökan.</h2>
+        <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
       </div>
     );
   }
@@ -81,27 +78,27 @@ export function BusinessPaymentsApplicationForm() {
         <div className="form-grid">
           <label>
             Företagsnamn
-            <input name="company_name" type="text" autoComplete="organization" />
+            <input name="company_name" type="text" autoComplete="organization" required />
           </label>
           <label>
             Organisationsnummer
-            <input name="org_number" type="text" inputMode="numeric" />
+            <input name="org_number" type="text" inputMode="numeric" placeholder="559416-7149" required />
           </label>
           <label>
             Kontaktperson
-            <input name="contact_name" type="text" autoComplete="name" />
+            <input name="contact_name" type="text" autoComplete="name" required />
           </label>
           <label>
             E-post
-            <input name="email" type="email" autoComplete="email" />
+            <input name="email" type="email" autoComplete="email" required />
           </label>
           <label>
             Telefon
-            <input name="phone" type="tel" autoComplete="tel" />
+            <input name="phone" type="tel" autoComplete="tel" placeholder="070-000 00 00" />
           </label>
           <label>
             Bransch
-            <input name="industry" type="text" />
+            <input name="industry" type="text" placeholder="Ex. konsult, bygg, e-handel" required />
           </label>
           <label className="full-span">
             Hemsida
@@ -110,7 +107,7 @@ export function BusinessPaymentsApplicationForm() {
         </div>
         <label>
           Kort verksamhetsbeskrivning
-          <textarea name="business_description" rows={4} />
+          <textarea name="business_description" rows={4} placeholder="Beskriv kort vad företaget gör och varför ni behöver betalningsflöde." required />
         </label>
         <div className="form-grid">
           <FormSelect name="has_swedish_business_account" label="Har företaget svenskt företagskonto idag?" />
@@ -128,7 +125,7 @@ export function BusinessPaymentsApplicationForm() {
         <div className="form-grid">
           <label>
             Kundtyp
-            <select name="customer_type" defaultValue="">
+            <select name="customer_type" defaultValue="" required>
               <option value="" disabled>
                 Välj kundtyp
               </option>
@@ -203,11 +200,11 @@ export function BusinessPaymentsApplicationForm() {
         </div>
         <div className="consent-panel">
           <label className="checkbox-card wide">
-            <input name="consent_contact" type="checkbox" />
+            <input name="consent_contact" type="checkbox" required />
             <span>Div3rsa får granska ansökan och kontakta mig om nästa steg.</span>
           </label>
           <label className="checkbox-card wide">
-            <input name="consent_partner_forwarding" type="checkbox" />
+            <input name="consent_partner_forwarding" type="checkbox" required />
             <span>
               Div3rsa får vidarebefordra nödvändiga uppgifter till relevant betalnings- eller finansaktör för fortsatt
               onboarding när det krävs.
@@ -220,6 +217,8 @@ export function BusinessPaymentsApplicationForm() {
           </div>
         </div>
       </section>
+
+      <p className="form-security-note">Vi samlar inte in KYC-dokument i webbansökan. Nästa steg hanteras först efter granskning.</p>
 
       <div className="form-actions">
         {step > 1 && (

@@ -274,7 +274,6 @@ export async function submitBusinessPaymentsApplication(
   return {
     ok: true,
     applicationId: application.id,
-    message:
-      "Tack! Vi har tagit emot din ansökan. Div3rsa granskar uppgifterna och återkommer med nästa steg.",
+    message: "Vi har tagit emot din ansökan.",
   };
 }

@@ -238,6 +238,12 @@ textarea {
   color: var(--muted-strong);
 }
 
+.button-ghost:hover {
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.055);
+}
+
 .header-cta {
   min-height: 42px;
   padding-inline: 16px;
@@ -373,11 +379,42 @@ h4 {
   margin-top: 28px;
 }
 
+.hero-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.hero-proof div {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.hero-proof strong,
+.hero-proof span {
+  display: block;
+}
+
+.hero-proof strong {
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+
+.hero-proof span {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
 .trust-strip {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 34px;
+  margin-top: 24px;
 }
 
 .trust-strip span,
@@ -1121,6 +1158,10 @@ textarea {
     width: 100%;
   }
 
+  .hero-proof {
+    grid-template-columns: 1fr;
+  }
+
   .hero-visual {
     min-height: 360px;
   }
@@ -1362,11 +1403,29 @@ textarea {
   background: rgba(255, 79, 216, 0.08);
 }
 
+.form-security-note {
+  margin: 20px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.94rem;
+}
+
 .application-success {
   display: grid;
   place-items: start;
   gap: 12px;
   padding: 36px;
+}
+
+.application-success h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.8rem, 4vw, 3.1rem);
+}
+
+.application-success p {
+  color: var(--muted-strong);
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
 .success-mark {

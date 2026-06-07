@@ -8,17 +8,34 @@ export function HomeHero() {
       <div className="aurora aurora-two" />
       <div className="container hero-grid">
         <div className="hero-copy reveal">
-          <p className="eyebrow">Swedish tech studio for serious digital products</p>
-          <h1>We build systems, apps and websites that companies actually use.</h1>
+          <p className="eyebrow">Div3rsa AB · Digitala system, webbappar och portaler</p>
+          <h1>Vi bygger digitala lösningar som ser seriösa ut och fungerar i verkligheten.</h1>
           <p className="hero-subheadline">
-            Div3rsa develops modern digital solutions - from SaaS platforms and customer portals to apps,
-            automation flows and premium websites.
+            Div3rsa utvecklar moderna hemsidor, webbappar, kundportaler, interna system och automatiserade flöden för
+            företag som vill växa med en stark teknisk grund.
           </p>
           <div className="hero-actions">
-            <ButtonLink href="/contact">Contact us</ButtonLink>
+            <ButtonLink href="/contact">Starta ett projekt</ButtonLink>
             <ButtonLink href="/systems" variant="secondary">
-              View our projects
+              Se våra projekt
             </ButtonLink>
+            <ButtonLink href="/foretagsbetalningar-bankgiro" variant="ghost">
+              Företagsbetalningar & Bankgiro
+            </ButtonLink>
+          </div>
+          <div className="hero-proof" aria-label="Div3rsa proof points">
+            <div>
+              <strong>Webb</strong>
+              <span>Premium hemsidor och landningssidor</span>
+            </div>
+            <div>
+              <strong>System</strong>
+              <span>Portaler, dashboards och SaaS</span>
+            </div>
+            <div>
+              <strong>Automation</strong>
+              <span>AI-ready flöden och integrationer</span>
+            </div>
           </div>
           <div className="trust-strip" aria-label="Div3rsa capabilities">
             {trustIndicators.map((item) => (
@@ -35,8 +52,8 @@ export function HomeHero() {
               <span />
             </div>
             <div className="dashboard-metric">
-              <strong>Digital Product</strong>
-              <span>{"Website -> Portal -> SaaS"}</span>
+              <strong>Div3rsa Platform</strong>
+              <span>{"Website → Portal → SaaS"}</span>
             </div>
             <div className="dashboard-bars">
               <i />
