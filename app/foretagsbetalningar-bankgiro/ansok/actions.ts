@@ -36,6 +36,7 @@ export type BusinessApplicationState = {
   ok: boolean;
   message: string;
   applicationId?: string;
+  fieldErrors?: Record<string, string>;
 };
 
 const textValue = (formData: FormData, key: string) => String(formData.get(key) || "").trim();
@@ -87,25 +88,36 @@ async function logEmail(params: {
   });
 }
 
-function validate(formData: FormData) {
-  const required = [
-    ["company_name", "Företagsnamn saknas"],
-    ["org_number", "Organisationsnummer saknas"],
-    ["contact_name", "Kontaktperson saknas"],
-    ["email", "E-post saknas"],
-    ["industry", "Bransch saknas"],
-    ["business_description", "Kort verksamhetsbeskrivning saknas"],
-    ["customer_type", "Kundtyp saknas"],
+function validate(formData: FormData): BusinessApplicationState | null {
+  const fieldErrors: Record<string, string> = {};
+
+  const required: Array<[string, string]> = [
+    ["company_name", "Skriv företagsnamn."],
+    ["org_number", "Skriv organisationsnummer."],
+    ["contact_name", "Skriv kontaktperson."],
+    ["email", "Skriv e-post."],
+    ["industry", "Skriv bransch."],
+    ["business_description", "Beskriv kort verksamheten."],
+    ["customer_type", "Välj kundtyp."],
   ];
 
   for (const [key, message] of required) {
-    if (!textValue(formData, key)) {
-      return message;
-    }
+    if (!textValue(formData, key)) fieldErrors[key] = message;
   }
 
-  if (!boolValue(formData, "consent_contact") || !boolValue(formData, "consent_partner_forwarding")) {
-    return "Du behöver godkänna samtycken för att skicka ansökan.";
+  const email = textValue(formData, "email");
+  if (email && !email.includes("@")) fieldErrors.email = "Skriv en giltig e-postadress.";
+
+  if (!boolValue(formData, "consent_contact")) {
+    fieldErrors.consent_contact = "Du behöver godkänna att Div3rsa får kontakta dig.";
+  }
+
+  if (!boolValue(formData, "consent_partner_forwarding")) {
+    fieldErrors.consent_partner_forwarding = "Du behöver godkänna att uppgifter kan delas för fortsatt onboarding.";
+  }
+
+  if (Object.keys(fieldErrors).length > 0) {
+    return { ok: false, message: "Kontrollera fälten och försök igen.", fieldErrors };
   }
 
   return null;
@@ -117,7 +129,7 @@ export async function submitBusinessPaymentsApplication(
 ): Promise<BusinessApplicationState> {
   const validationError = validate(formData);
   if (validationError) {
-    return { ok: false, message: validationError };
+    return validationError;
   }
 
   const payload = {
@@ -165,14 +177,14 @@ export async function submitBusinessPaymentsApplication(
 
   await logApplicationEvent(application.id, "application_submitted", "Ansökan skickades in via Div3rsa Web.").catch(() => null);
 
-  const customerSubject = "Vi har tagit emot din ansökan – Div3rsa Företagsbetalningar & Bankgiro";
-  const customerText = `Hej ${application.contact_name},\n\nTack för din ansökan till Div3rsa Företagsbetalningar & Bankgiro.\n\nVi har tagit emot dina uppgifter och kommer att granska ansökan. Om vi behöver kompletterande information kontaktar vi dig.\n\nVänliga hälsningar,\nDiv3rsa AB`;
+  const customerSubject = "Vi har tagit emot din ansökan";
+  const customerText = `Hej ${application.contact_name},\n\nVi har tagit emot din ansökan.\n\nVi går igenom uppgifterna och återkommer med nästa steg.\n\nVänliga hälsningar,\nDiv3rsa AB`;
   const customerHtml = `
     <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
       <h2>Vi har tagit emot din ansökan</h2>
       <p>Hej ${application.contact_name},</p>
-      <p>Tack för din ansökan till <strong>Div3rsa Företagsbetalningar & Bankgiro</strong>.</p>
-      <p>Vi har tagit emot dina uppgifter och kommer att granska ansökan. Om vi behöver kompletterande information kontaktar vi dig.</p>
+      <p>Vi har tagit emot din ansökan.</p>
+      <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
       <p>Vänliga hälsningar,<br/>Div3rsa AB</p>
     </div>`;
 

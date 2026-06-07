@@ -5,8 +5,9 @@ import { Section } from "@/components/Section";
 import { caseStudies } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Our Systems",
-  description: "Selected products and platforms developed by Div3rsa, including Gridex, Coordiqo, Bovaro and DealFlowIQ.",
+  title: "Projekt",
+  description:
+    "Utvalda digitala produkter och plattformar utvecklade av Div3rsa, bland annat Gridex, Coordiqo, Bovaro och DealFlowIQ.",
 };
 
 export default function SystemsPage() {
@@ -15,11 +16,10 @@ export default function SystemsPage() {
       <section className="page-hero">
         <div className="aurora aurora-one" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Our Systems</p>
-          <h1>Selected digital products built by Div3rsa.</h1>
+          <p className="eyebrow">Projekt</p>
+          <h1>Digitala produkter byggda av Div3rsa.</h1>
           <p className="page-lead">
-            Examples of platforms, products and systems developed or operated by Div3rsa. Selected products and
-            platforms developed by Div3rsa are shown below.
+            Här visas exempel på plattformar, system och produktkoncept som Div3rsa bygger eller driver.
           </p>
         </div>
       </section>

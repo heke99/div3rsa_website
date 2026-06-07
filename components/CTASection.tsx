@@ -12,12 +12,12 @@ type CTASectionProps = {
 };
 
 export function CTASection({
-  eyebrow = "Start the conversation",
-  title = "Ready to build something serious?",
-  text = "Whether you need a clean company website, a premium digital presence or a full system, Div3rsa can help you build the right foundation.",
-  primaryLabel = "Start Project",
+  eyebrow = "Börja här",
+  title = "Redo att bygga något seriöst?",
+  text = "Oavsett om ni behöver en tydlig hemsida, en premiumwebb eller ett helt system kan Div3rsa hjälpa er bygga rätt grund.",
+  primaryLabel = "Starta projekt",
   primaryHref = "/contact",
-  secondaryLabel = "Email us",
+  secondaryLabel = "Maila oss",
   secondaryHref = "mailto:" + company.email,
 }: CTASectionProps) {
   return (

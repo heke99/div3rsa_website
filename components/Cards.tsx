@@ -30,7 +30,7 @@ type PackageCardProps = {
 export function PackageCard({ item }: PackageCardProps) {
   return (
     <article className={item.featured ? "package-card featured reveal" : "package-card reveal"}>
-      {item.featured && <span className="featured-pill">Popular foundation</span>}
+      {item.featured && <span className="featured-pill">Populär grund</span>}
       <h3>{item.title}</h3>
       <p>{item.subtitle}</p>
       <ul>
@@ -63,7 +63,7 @@ export function CaseCard({ item }: CaseCardProps) {
     <article className="case-card reveal">
       <div className="case-card-header">
         <div>
-          <span className="case-label">Selected platform</span>
+          <span className="case-label">Utvald plattform</span>
           <h3>{item.title}</h3>
         </div>
         <a href={item.href} className="case-url">
@@ -73,11 +73,11 @@ export function CaseCard({ item }: CaseCardProps) {
       <p className="case-description">{item.description}</p>
       <div className="case-columns">
         <div>
-          <h4>Problem</h4>
+          <h4>Utmaning</h4>
           <p>{item.problem}</p>
         </div>
         <div>
-          <h4>Solution</h4>
+          <h4>Lösning</h4>
           <p>{item.solution}</p>
         </div>
       </div>
@@ -115,11 +115,11 @@ export function StyleCard({ item }: StyleCardProps) {
       <h3>{item.title}</h3>
       <p>{item.description}</p>
       <div className="mini-list">
-        <strong>Fits</strong>
+        <strong>Passar för</strong>
         <span>{item.fits.slice(0, 3).join(" / ")}</span>
       </div>
       <Link className="text-link" href={item.href}>
-        Learn about this style
+        Läs om stilen
       </Link>
       <ButtonLink href="/contact" variant="secondary">
         {item.cta}

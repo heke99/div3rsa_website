@@ -5,8 +5,9 @@ import { CTASection } from "@/components/CTASection";
 import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact Div3rsa AB to discuss a website, web app, customer portal, SaaS platform, automation workflow or digital system.",
+  title: "Kontakt",
+  description:
+    "Kontakta Div3rsa AB för hemsida, webbapp, kundportal, SaaS-plattform, automation eller digitalt system.",
 };
 
 export default function ContactPage() {
@@ -15,11 +16,10 @@ export default function ContactPage() {
       <section className="page-hero">
         <div className="aurora aurora-one" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Contact</p>
-          <h1>Contact us</h1>
+          <p className="eyebrow">Kontakt</p>
+          <h1>Berätta vad du vill bygga.</h1>
           <p className="page-lead">
-            Do you want to build a website, app, portal or a complete system? Send us an email and we will review your
-            needs.
+            Skicka en kort beskrivning så återkommer vi med nästa steg. Du behöver inte ha allt klart från början.
           </p>
         </div>
       </section>
@@ -27,11 +27,11 @@ export default function ContactPage() {
       <section className="section">
         <div className="container two-column contact-layout">
           <div className="contact-info reveal">
-            <h2>Talk to Div3rsa</h2>
+            <h2>Kontakta Div3rsa</h2>
             <p>Email: <a href={"mailto:" + company.email}>{company.email}</a></p>
-            <p>Company: {company.name}</p>
-            <p>Organization number: {company.orgNumber}</p>
-            <ButtonLink href={"mailto:" + company.email}>Email Div3rsa</ButtonLink>
+            <p>Bolag: {company.name}</p>
+            <p>Org.nr: {company.orgNumber}</p>
+            <ButtonLink href={"mailto:" + company.email}>Maila Div3rsa</ButtonLink>
           </div>
           <ContactForm />
         </div>

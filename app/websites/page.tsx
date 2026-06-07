@@ -6,8 +6,9 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { growthSteps, websiteStyles } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Website Styles",
-  description: "Choose between Premium 3D, Simple Information Website and Hybrid Modern Business website styles by Div3rsa AB.",
+  title: "Hemsidor",
+  description:
+    "Välj mellan premium 3D, enkel informationssida eller modern företagshemsida byggd av Div3rsa AB.",
 };
 
 export default function WebsitesPage() {
@@ -16,9 +17,9 @@ export default function WebsitesPage() {
       <section className="page-hero">
         <div className="aurora aurora-two" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Website Styles</p>
-          <h1>What type of website do you want?</h1>
-          <p className="page-lead">Choose a direction that matches your company, brand and growth plans.</p>
+          <p className="eyebrow">Hemsidor</p>
+          <h1>Vilken typ av hemsida vill du ha?</h1>
+          <p className="page-lead">Välj en riktning som passar företagets varumärke, budget och nästa steg.</p>
         </div>
       </section>
 
@@ -31,9 +32,9 @@ export default function WebsitesPage() {
       </Section>
 
       <Section
-        eyebrow="Growth foundation"
-        title="Start with a website. Grow into a system."
-        intro="Div3rsa can build the website as the first step in a wider digital product foundation."
+        eyebrow="Skalbar grund"
+        title="Börja med hemsida. Bygg vidare till system."
+        intro="Div3rsa kan bygga hemsidan som första steget i en större digital grund med portal, dashboard eller SaaS senare."
       >
         <div className="growth-panel reveal">
           {growthSteps.map((step, index) => (
@@ -44,7 +45,7 @@ export default function WebsitesPage() {
           ))}
         </div>
         <div className="center-actions">
-          <ButtonLink href="/contact">Start your digital project</ButtonLink>
+          <ButtonLink href="/contact">Starta digitalt projekt</ButtonLink>
         </div>
       </Section>
 

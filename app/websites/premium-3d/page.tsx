@@ -6,8 +6,8 @@ import { websiteStyles } from "@/lib/content";
 const style = websiteStyles.find((item) => item.slug === "premium-3d");
 
 export const metadata: Metadata = {
-  title: "Premium 3D / Wow Website",
-  description: "Premium 3D website style with animations, glassmorphism, strong hero sections and a modern brand experience by Div3rsa AB.",
+  title: "Premium 3D / Wow-hemsida",
+  description: "Premium 3D-hemsida med animationer, stark hero och modern varumärkeskänsla av Div3rsa AB.",
 };
 
 export default function Page() {

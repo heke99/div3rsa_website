@@ -15,7 +15,7 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" href="/" onClick={closeMenu} aria-label="Div3rsa home">
+        <Link className="brand" href="/" onClick={closeMenu} aria-label="Div3rsa startsida">
           <span className="brand-mark">D3</span>
           <span>Div3rsa</span>
         </Link>
@@ -23,7 +23,7 @@ export function Header() {
         <button
           className="menu-toggle"
           type="button"
-          aria-label="Toggle navigation"
+          aria-label="Öppna eller stäng meny"
           aria-expanded={open}
           aria-controls="site-navigation"
           onClick={() => setOpen(!open)}
@@ -33,7 +33,7 @@ export function Header() {
           <span />
         </button>
 
-        <nav id="site-navigation" className={open ? "site-nav open" : "site-nav"} aria-label="Primary navigation">
+        <nav id="site-navigation" className={open ? "site-nav open" : "site-nav"} aria-label="Huvudnavigation">
           {navItems.map((item) => {
             if (item.href === "/websites") {
               return (
@@ -45,8 +45,8 @@ export function Header() {
                   >
                     {item.label}
                   </Link>
-                  <div className="dropdown-panel" aria-label="Website style links">
-                    <p>What type of website do you want?</p>
+                  <div className="dropdown-panel" aria-label="Länkar till hemsidestilar">
+                    <p>Vilken typ av hemsida vill du ha?</p>
                     {websiteStyleLinks.map((style) => (
                       <Link key={style.href} href={style.href} onClick={closeMenu}>
                         {style.label}
@@ -68,7 +68,7 @@ export function Header() {
               </Link>
             );
           })}
-          <ButtonLink href={process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.div3rsa.com"} className="header-cta" ariaLabel="Open Div3rsa Portal">
+          <ButtonLink href={process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.div3rsa.com"} className="header-cta" ariaLabel="Öppna Div3rsa Portal">
             Portal
           </ButtonLink>
         </nav>

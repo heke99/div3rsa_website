@@ -120,7 +120,7 @@ export default function BusinessPaymentsPage() {
         </div>
       </Section>
 
-      <Section id="faq" eyebrow="FAQ" title="Vanliga frågor">
+      <Section id="faq" eyebrow="Vanliga frågor" title="Vanliga frågor">
         <div className="faq-list">
           {businessPaymentFaqs.map((faq) => (
             <FAQItem key={faq.question} {...faq} />

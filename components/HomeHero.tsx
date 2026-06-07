@@ -53,7 +53,7 @@ export function HomeHero() {
             </div>
             <div className="dashboard-metric">
               <strong>Div3rsa Platform</strong>
-              <span>{"Website → Portal → SaaS"}</span>
+              <span>{"Hemsida → Portal → SaaS"}</span>
             </div>
             <div className="dashboard-bars">
               <i />

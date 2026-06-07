@@ -27,9 +27,9 @@ export default function Home() {
 
       <Section
         id="growth"
-        eyebrow="Scalable foundation"
-        title="Start with a website. Grow into a system."
-        intro="Many companies start with a simple website. With Div3rsa, the same digital foundation can later grow into a customer portal, app, booking system, dashboard or complete SaaS platform."
+        eyebrow="Skalbar grund"
+        title="Börja med hemsida. Väx till system."
+        intro="Många företag börjar med en hemsida. Med Div3rsa kan samma grund senare växa till kundportal, app, dashboard eller SaaS-plattform."
       >
         <div className="growth-panel reveal">
           {growthSteps.map((step, index) => (
@@ -40,11 +40,11 @@ export default function Home() {
           ))}
         </div>
         <div className="center-actions">
-          <ButtonLink href="/contact">Start your digital project</ButtonLink>
+          <ButtonLink href="/contact">Starta digitalt projekt</ButtonLink>
         </div>
       </Section>
 
-      <Section id="services" eyebrow="Services" title="From idea to finished digital product.">
+      <Section id="services" eyebrow="Tjänster" title="Från idé till färdig digital lösning.">
         <div className="card-grid three">
           {services.map((service, index) => (
             <TextCard key={service.title} kicker={(index + 1).toString().padStart(2, "0")} {...service} />
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="why" eyebrow="Why Div3rsa" title="Why choose Div3rsa?">
+      <Section id="why" eyebrow="Varför Div3rsa" title="Varför välja Div3rsa?">
         <div className="card-grid three">
           {whyChoose.map((item) => (
             <TextCard key={item.title} {...item} />
@@ -62,9 +62,9 @@ export default function Home() {
 
       <Section
         id="industries"
-        eyebrow="Industries"
-        title="Industries we help"
-        intro="We build industry-flexible digital solutions that can be adapted to different business models, workflows and operational needs."
+        eyebrow="Branscher"
+        title="Branscher vi hjälper"
+        intro="Vi bygger branschflexibla lösningar som kan anpassas efter affärsmodell, arbetsflöde och daglig drift."
       >
         <div className="industry-grid reveal">
           {industries.map((industry) => (
@@ -73,7 +73,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="packages" eyebrow="Typical solutions" title="Typical solutions we build">
+      <Section id="packages" eyebrow="Lösningar" title="Vanliga lösningar vi bygger">
         <div className="package-grid">
           {solutionPackages.map((item) => (
             <PackageCard key={item.title} item={item} />
@@ -83,9 +83,9 @@ export default function Home() {
 
       <Section
         id="systems"
-        eyebrow="Our systems"
-        title="Selected digital products built by Div3rsa."
-        intro="Examples of platforms, products and systems developed or operated by Div3rsa. Selected products and platforms developed by Div3rsa are shown below."
+        eyebrow="Våra projekt"
+        title="Digitala produkter byggda av Div3rsa."
+        intro="Exempel på plattformar, system och produktkoncept som Div3rsa bygger eller driver."
       >
         <div className="case-grid">
           {caseStudies.map((item) => (
@@ -98,23 +98,23 @@ export default function Home() {
       <Section
         id="business-payments"
         eyebrow="Företagsbetalningar & Bankgiro"
-        title="For companies that need bankgiro-based payment flows."
-        intro="Div3rsa now also helps companies that struggle with bankgiro, invoicing and business payment flows by creating a structured application, admin and portal journey."
+        title="För företag som behöver bankgirobaserade betalningsflöden."
+        intro="Vi samlar ansökan, uppföljning och nästa steg i ett tydligt flöde – utan att kunden behöver lösa allt själv."
       >
         <div className="two-column">
           <div className="rich-copy reveal">
             <p>
-              Many companies get stuck when they cannot access a Swedish bankgiro or a working business payment flow.
-              Div3rsa gives them one clear place to apply, follow the process and continue onboarding through a portal.
+              Många företag fastnar när bankgiro, fakturering eller kundinbetalningar inte fungerar smidigt.
+              Div3rsa ger dem ett tydligt ställe att ansöka, följa status och gå vidare i processen.
             </p>
             <p>
-              Div3rsa is not presented as a bank and we do not guarantee approval. The service is built around
-              application handling, portal status, support and partner onboarding where required.
+              Vi är tydliga med att Div3rsa inte är en bank och att godkännande kräver granskning. Det gör tjänsten
+              tryggare, seriösare och lättare att förstå.
             </p>
-            <ButtonLink href="/foretagsbetalningar-bankgiro">Read about Företagsbetalningar & Bankgiro</ButtonLink>
+            <ButtonLink href="/foretagsbetalningar-bankgiro">Läs om Företagsbetalningar & Bankgiro</ButtonLink>
           </div>
           <div className="company-card reveal">
-            <h3>What the flow includes</h3>
+            <h3>Vad flödet innehåller</h3>
             <div className="feature-tags">
               {businessPaymentIncluded.slice(0, 6).map((item) => (
                 <span key={item}>{item}</span>
@@ -126,9 +126,9 @@ export default function Home() {
 
       <Section
         id="website-styles"
-        eyebrow="Website Styles"
-        title="What type of website do you want?"
-        intro="Choose a direction that matches your company, brand and growth plans."
+        eyebrow="Hemsidestilar"
+        title="Vilken typ av hemsida vill du ha?"
+        intro="Välj en riktning som passar företaget, varumärket och nästa steg."
       >
         <div className="card-grid three">
           {websiteStyles.map((style) => (
@@ -137,7 +137,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="process" eyebrow="Process" title="How we work.">
+      <Section id="process" eyebrow="Process" title="Så arbetar vi.">
         <div className="process-grid">
           {processSteps.map((step, index) => (
             <article className="process-step reveal" key={step.title}>
@@ -148,15 +148,15 @@ export default function Home() {
           ))}
         </div>
         <div className="center-actions">
-          <ButtonLink href="/contact">Book a project discussion</ButtonLink>
+          <ButtonLink href="/contact">Boka projektgenomgång</ButtonLink>
         </div>
       </Section>
 
       <Section
         id="technology"
-        eyebrow="Technology"
-        title="Modern technology behind every solution"
-        intro="Our solutions are built with modern web technology and a structure that can grow with your business. We keep the technical foundation strong while keeping the conversation business-friendly."
+        eyebrow="Teknik"
+        title="Modern teknik bakom varje lösning"
+        intro="Vi bygger med modern teknik, men håller samtalet affärsnära och begripligt."
       >
         <div className="tech-cloud reveal">
           {techItems.map((item) => (
@@ -165,7 +165,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="faq" eyebrow="FAQ" title="Frequently asked questions">
+      <Section id="faq" eyebrow="Vanliga frågor" title="Frågor vi ofta får">
         <div className="faq-list">
           {faqs.map((faq) => (
             <FAQItem key={faq.question} {...faq} />
@@ -173,20 +173,19 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section id="about" eyebrow="About Div3rsa" title="We build digital solutions with the business in focus.">
+      <Section id="about" eyebrow="Om Div3rsa" title="Vi bygger digitala lösningar med affären i fokus.">
         <div className="two-column">
           <div className="rich-copy reveal">
             <p>
-              Div3rsa AB is a Swedish development company that builds modern websites, web apps, internal systems and
-              SaaS platforms. We combine technical development with business understanding to create solutions that do
-              not only look good, but help companies sell more, work smarter and grow faster.
+              Div3rsa AB är ett svenskt utvecklingsbolag som bygger hemsidor, webbappar, interna system och
+              SaaS-plattformar för företag som vill ha en seriös digital grund.
             </p>
             <p>
-              We work with everything from simple company websites to advanced systems with customer portals, admin
-              dashboards, automation, payments, databases and integrations.
+              Vi bygger från enkla hemsidor till avancerade kundportaler, adminpaneler, automation, betalflöden,
+              databaser och integrationer.
             </p>
             <ButtonLink href="/about" variant="secondary">
-              Learn more about Div3rsa
+              Läs mer om Div3rsa
             </ButtonLink>
           </div>
           <div className="company-card reveal">
@@ -204,17 +203,17 @@ export default function Home() {
 
       <Section
         id="contact"
-        eyebrow="Contact"
-        title="Contact us"
-        intro="Do you want to build a website, app, portal or a complete system? Send us an email and we will review your needs."
+        eyebrow="Kontakt"
+        title="Kontakta oss"
+        intro="Vill du bygga hemsida, app, portal eller ett komplett system? Skicka en kort beskrivning så återkommer vi."
       >
         <div className="two-column contact-layout">
           <div className="contact-info reveal">
-            <h3>Project discussion</h3>
+            <h3>Projektgenomgång</h3>
             <p>Email: <a href={"mailto:" + company.email}>{company.email}</a></p>
-            <p>Company: {company.name}</p>
-            <p>Organization number: {company.orgNumber}</p>
-            <ButtonLink href={"mailto:" + company.email}>Email Div3rsa</ButtonLink>
+            <p>Bolag: {company.name}</p>
+            <p>Org.nr: {company.orgNumber}</p>
+            <ButtonLink href={"mailto:" + company.email}>Maila Div3rsa</ButtonLink>
           </div>
           <ContactForm />
         </div>

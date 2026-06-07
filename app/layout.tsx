@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   publisher: company.name,
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "sv_SE",
     url: company.url,
     siteName: company.name,
     title: siteMeta.homeTitle,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="sv">
       <body>
         <Header />
         <main>{children}</main>

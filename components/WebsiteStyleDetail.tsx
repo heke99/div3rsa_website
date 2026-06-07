@@ -16,13 +16,13 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
       <div className="aurora aurora-one" />
       <div className="container two-column">
         <div className="reveal">
-          <p className="eyebrow">Website style</p>
+          <p className="eyebrow">Hemsidestil</p>
           <h1>{style.title}</h1>
           <p className="page-lead">{style.description}</p>
           <div className="hero-actions">
             <ButtonLink href="/contact">{style.cta}</ButtonLink>
             <ButtonLink href="/websites" variant="secondary">
-              Compare website styles
+              Jämför stilar
             </ButtonLink>
           </div>
         </div>
@@ -32,16 +32,15 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
             <span />
             <span />
           </div>
-          <h2>Designed to support growth</h2>
+          <h2>Byggd för att kunna växa</h2>
           <p>
-            Div3rsa can start with this direction and later expand the same foundation into a portal, dashboard, app or
-            SaaS product.
+            Div3rsa kan börja med denna riktning och senare bygga vidare till portal, dashboard, app eller SaaS-produkt.
           </p>
         </div>
       </div>
       <div className="container style-detail-grid">
         <article className="glass-card reveal">
-          <h2>Fits</h2>
+          <h2>Passar för</h2>
           <div className="feature-tags">
             {style.fits.map((item) => (
               <span key={item}>{item}</span>
@@ -49,7 +48,7 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
           </div>
         </article>
         <article className="glass-card reveal">
-          <h2>Features</h2>
+          <h2>Funktioner</h2>
           <div className="feature-tags">
             {style.features.map((item) => (
               <span key={item}>{item}</span>

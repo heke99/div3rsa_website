@@ -6,8 +6,8 @@ import { websiteStyles } from "@/lib/content";
 const style = websiteStyles.find((item) => item.slug === "hybrid-business");
 
 export const metadata: Metadata = {
-  title: "Hybrid / Modern Business Website",
-  description: "Hybrid modern business website style with premium design, clear information and portal-ready growth by Div3rsa AB.",
+  title: "Modern företagshemsida",
+  description: "Modern företagshemsida med premiumdesign, tydlig information och möjlighet att växa till kundportal.",
 };
 
 export default function Page() {

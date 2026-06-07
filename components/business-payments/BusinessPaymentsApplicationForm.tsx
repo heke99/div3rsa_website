@@ -1,7 +1,10 @@
 "use client";
 
 import { useActionState, useMemo, useState } from "react";
-import { submitBusinessPaymentsApplication, type BusinessApplicationState } from "@/app/foretagsbetalningar-bankgiro/ansok/actions";
+import {
+  submitBusinessPaymentsApplication,
+  type BusinessApplicationState,
+} from "@/app/foretagsbetalningar-bankgiro/ansok/actions";
 import { businessPaymentCustomerTypes, businessPaymentUrgencies } from "@/lib/business-payments";
 
 const initialState: BusinessApplicationState = { ok: false, message: "" };
@@ -12,6 +15,11 @@ const yesNoOptions = [
   { label: "Nej", value: "no" },
   { label: "Osäker", value: "unknown" },
 ];
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return <span className="field-error">{message}</span>;
+}
 
 function FormSelect({ name, label }: { name: string; label: string }) {
   return (
@@ -28,9 +36,16 @@ function FormSelect({ name, label }: { name: string; label: string }) {
   );
 }
 
+const getFieldValue = (form: HTMLFormElement, name: string) => {
+  const data = new FormData(form);
+  return String(data.get(name) || "").trim();
+};
+
 export function BusinessPaymentsApplicationForm() {
   const [step, setStep] = useState(1);
+  const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
   const [state, formAction, isPending] = useActionState(submitBusinessPaymentsApplication, initialState);
+  const errors = { ...(state.fieldErrors || {}), ...clientErrors };
 
   const steps = useMemo(
     () => [
@@ -40,6 +55,42 @@ export function BusinessPaymentsApplicationForm() {
     ],
     [],
   );
+
+  function validateStep(nextStep: number) {
+    const form = document.querySelector<HTMLFormElement>(".application-form");
+    if (!form) return true;
+
+    const nextErrors: Record<string, string> = {};
+
+    if (step === 1) {
+      const required: Array<[string, string]> = [
+        ["company_name", "Skriv företagsnamn."],
+        ["org_number", "Skriv organisationsnummer."],
+        ["contact_name", "Skriv kontaktperson."],
+        ["email", "Skriv e-post."],
+        ["industry", "Skriv bransch."],
+        ["business_description", "Beskriv kort verksamheten."],
+      ];
+      required.forEach(([name, message]) => {
+        if (!getFieldValue(form, name)) nextErrors[name] = message;
+      });
+      const email = getFieldValue(form, "email");
+      if (email && !email.includes("@")) nextErrors.email = "Skriv en giltig e-postadress.";
+    }
+
+    if (step === 2 && !getFieldValue(form, "customer_type")) {
+      nextErrors.customer_type = "Välj kundtyp.";
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setClientErrors(nextErrors);
+      return false;
+    }
+
+    setClientErrors({});
+    setStep(nextStep);
+    return true;
+  }
 
   if (state.ok) {
     return (
@@ -52,13 +103,16 @@ export function BusinessPaymentsApplicationForm() {
   }
 
   return (
-    <form className="application-form reveal" action={formAction}>
+    <form className="application-form reveal" action={formAction} noValidate>
       <div className="stepper" aria-label="Ansökningssteg">
         {steps.map((item) => (
           <button
             className={item.number === step ? "step-pill active" : item.number < step ? "step-pill done" : "step-pill"}
             key={item.number}
-            onClick={() => setStep(item.number)}
+            onClick={() => {
+              if (item.number <= step) setStep(item.number);
+              else validateStep(item.number);
+            }}
             type="button"
           >
             <span>{item.number}</span>
@@ -79,18 +133,22 @@ export function BusinessPaymentsApplicationForm() {
           <label>
             Företagsnamn
             <input name="company_name" type="text" autoComplete="organization" required />
+            <FieldError message={errors.company_name} />
           </label>
           <label>
             Organisationsnummer
             <input name="org_number" type="text" inputMode="numeric" placeholder="559416-7149" required />
+            <FieldError message={errors.org_number} />
           </label>
           <label>
             Kontaktperson
             <input name="contact_name" type="text" autoComplete="name" required />
+            <FieldError message={errors.contact_name} />
           </label>
           <label>
             E-post
             <input name="email" type="email" autoComplete="email" required />
+            <FieldError message={errors.email} />
           </label>
           <label>
             Telefon
@@ -99,6 +157,7 @@ export function BusinessPaymentsApplicationForm() {
           <label>
             Bransch
             <input name="industry" type="text" placeholder="Ex. konsult, bygg, e-handel" required />
+            <FieldError message={errors.industry} />
           </label>
           <label className="full-span">
             Hemsida
@@ -108,6 +167,7 @@ export function BusinessPaymentsApplicationForm() {
         <label>
           Kort verksamhetsbeskrivning
           <textarea name="business_description" rows={4} placeholder="Beskriv kort vad företaget gör och varför ni behöver betalningsflöde." required />
+          <FieldError message={errors.business_description} />
         </label>
         <div className="form-grid">
           <FormSelect name="has_swedish_business_account" label="Har företaget svenskt företagskonto idag?" />
@@ -135,6 +195,7 @@ export function BusinessPaymentsApplicationForm() {
                 </option>
               ))}
             </select>
+            <FieldError message={errors.customer_type} />
           </label>
           <label>
             Uppskattad månadsvolym
@@ -188,7 +249,7 @@ export function BusinessPaymentsApplicationForm() {
         </div>
         <label>
           Övrig kommentar
-          <textarea name="other_comment" rows={4} />
+          <textarea name="other_comment" rows={4} placeholder="Skriv sådant som hjälper oss förstå behovet." />
         </label>
       </section>
 
@@ -203,6 +264,7 @@ export function BusinessPaymentsApplicationForm() {
             <input name="consent_contact" type="checkbox" required />
             <span>Div3rsa får granska ansökan och kontakta mig om nästa steg.</span>
           </label>
+          <FieldError message={errors.consent_contact} />
           <label className="checkbox-card wide">
             <input name="consent_partner_forwarding" type="checkbox" required />
             <span>
@@ -210,6 +272,7 @@ export function BusinessPaymentsApplicationForm() {
               onboarding när det krävs.
             </span>
           </label>
+          <FieldError message={errors.consent_partner_forwarding} />
           <div className="form-note">
             KYC/AML och eventuell dokumentinsamling hanteras av relevant betalnings-/finansaktör när det krävs.
             Tjänsten kräver godkänd ansökan och onboarding. Bankgiro eller företagsbetalningar garanteras inte innan
@@ -227,12 +290,12 @@ export function BusinessPaymentsApplicationForm() {
           </button>
         )}
         {step < 3 ? (
-          <button className="button button-primary" type="button" onClick={() => setStep((current) => current + 1)}>
+          <button className="button button-primary" type="button" onClick={() => validateStep(step + 1)}>
             Nästa steg
           </button>
         ) : (
           <button className="button button-primary" type="submit" disabled={isPending}>
-            {isPending ? "Skickar ansökan..." : "Skicka ansökan"}
+            {isPending ? "Skickar..." : "Skicka ansökan"}
           </button>
         )}
       </div>

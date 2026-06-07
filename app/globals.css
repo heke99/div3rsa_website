@@ -1458,3 +1458,110 @@ textarea {
     width: 100%;
   }
 }
+
+/* UI/UX polish: friendlier copy density, clearer forms and calmer cards */
+.page-lead,
+.hero-subheadline,
+.section-intro,
+.rich-copy p,
+.glass-card p,
+.package-card p,
+.case-description,
+.case-columns p,
+.faq-item p {
+  max-width: 72ch;
+}
+
+.glass-card,
+.package-card,
+.case-card,
+.style-card,
+.contact-form,
+.contact-info,
+.business-portal-card {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.glass-card:hover,
+.package-card:hover,
+.case-card:hover,
+.style-card:hover {
+  border-color: rgba(45, 226, 230, 0.3);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035));
+}
+
+.nav-link {
+  white-space: nowrap;
+}
+
+.field-error {
+  color: #ffd6f5;
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: rgba(255, 79, 216, 0.55);
+}
+
+.compact-note {
+  margin-bottom: 16px;
+}
+
+.contact-success {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.contact-success h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+}
+
+.contact-success p {
+  color: var(--muted-strong);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.legal-page .glass-card p {
+  line-height: 1.75;
+}
+
+.application-form textarea,
+.contact-form textarea {
+  margin: 0;
+}
+
+.form-step-heading h2,
+.contact-info h2 {
+  font-size: clamp(1.7rem, 4vw, 2.35rem);
+}
+
+@media (min-width: 1041px) {
+  .site-nav {
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding-inline: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .page-lead,
+  .hero-subheadline {
+    font-size: 1.02rem;
+  }
+
+  .contact-form,
+  .contact-info,
+  .application-success {
+    padding: 22px;
+  }
+}

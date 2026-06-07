@@ -5,8 +5,9 @@ import { Section } from "@/components/Section";
 import { aboutValues, company } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "Learn about Div3rsa AB, a Swedish development company building websites, systems, apps and SaaS platforms.",
+  title: "Om Div3rsa",
+  description:
+    "Div3rsa AB är ett svenskt utvecklingsbolag som bygger hemsidor, webbappar, kundportaler, system och SaaS-plattformar.",
 };
 
 export default function AboutPage() {
@@ -15,11 +16,10 @@ export default function AboutPage() {
       <section className="page-hero">
         <div className="aurora aurora-one" />
         <div className="container narrow reveal">
-          <p className="eyebrow">About Div3rsa</p>
-          <h1>We build digital solutions with the business in focus.</h1>
+          <p className="eyebrow">Om Div3rsa</p>
+          <h1>Vi bygger digitala lösningar med affären i fokus.</h1>
           <p className="page-lead">
-            Div3rsa AB is a Swedish development company that builds modern websites, web apps, internal systems and SaaS
-            platforms.
+            Div3rsa AB hjälper företag att gå från idé till fungerande digital produkt: hemsida, portal, system eller SaaS.
           </p>
         </div>
       </section>
@@ -28,14 +28,14 @@ export default function AboutPage() {
         <div className="two-column">
           <div className="rich-copy reveal">
             <p>
-              We combine technical development with business understanding to create solutions that do not only look
-              good, but help companies sell more, work smarter and grow faster.
+              Vi kombinerar teknisk utveckling med affärsförståelse. Målet är inte bara att bygga något snyggt, utan
+              något som hjälper företaget sälja mer, arbeta smartare och växa på en stabil grund.
             </p>
             <p>
-              We work with everything from simple company websites to advanced systems with customer portals, admin
-              dashboards, automation, payments, databases and integrations.
+              Vi arbetar med allt från tydliga företagshemsidor till avancerade system med kundportaler, adminpaneler,
+              automation, betalflöden, databaser och integrationer.
             </p>
-            <ButtonLink href="/contact">Start a project discussion</ButtonLink>
+            <ButtonLink href="/contact">Starta en projektgenomgång</ButtonLink>
           </div>
           <div className="company-card reveal">
             <h2>{company.name}</h2>
@@ -45,14 +45,14 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Values" title="How we think about digital products">
+      <Section eyebrow="Vårt sätt att tänka" title="Digitala produkter ska vara tydliga, trygga och skalbara">
         <div className="card-grid three">
           {aboutValues.map((value) => (
             <article className="glass-card reveal" key={value}>
               <h3>{value}</h3>
               <p>
-                Every solution should have a clear purpose, a reliable technical foundation and a user experience that
-                supports real work.
+                Varje lösning ska ha ett tydligt syfte, en stabil teknisk grund och en användarupplevelse som stödjer
+                verkligt arbete.
               </p>
             </article>
           ))}

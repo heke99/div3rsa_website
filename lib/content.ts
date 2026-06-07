@@ -1,4 +1,4 @@
-export const locale = "en" as const;
+export const locale = "sv" as const;
 
 export const company = {
   name: "Div3rsa AB",
@@ -10,174 +10,168 @@ export const company = {
 };
 
 export const siteMeta = {
-  homeTitle: "Div3rsa AB - Systems, Websites, Apps & SaaS Development",
+  homeTitle: "Div3rsa AB - System, hemsidor, webbappar och kundportaler",
   homeDescription:
-    "Div3rsa AB builds modern websites, web apps, customer portals, SaaS platforms, automation workflows and digital systems for companies.",
+    "Div3rsa AB bygger professionella hemsidor, webbappar, kundportaler, interna system, SaaS-plattformar och automatiserade flöden för företag.",
   keywords: [
-    "system development",
-    "website development",
-    "app development",
-    "SaaS development",
-    "customer portals",
-    "web apps",
+    "systemutveckling",
+    "hemsida företag",
+    "webbapp",
+    "SaaS utveckling",
+    "kundportal",
+    "adminsystem",
     "automation",
     "AI workflows",
-    "dashboards",
+    "företagsbetalningar",
+    "bankgiro",
     "Div3rsa AB",
   ],
 };
 
 export const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Företagsbetalningar & Bankgiro", href: "/foretagsbetalningar-bankgiro" },
-  { label: "Our Systems", href: "/systems" },
-  { label: "Website Styles", href: "/websites" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Hem", href: "/" },
+  { label: "Tjänster", href: "/services" },
+  { label: "Bankgiro", href: "/foretagsbetalningar-bankgiro", fullLabel: "Företagsbetalningar & Bankgiro" },
+  { label: "Projekt", href: "/systems" },
+  { label: "Hemsidor", href: "/websites" },
+  { label: "Om oss", href: "/about" },
+  { label: "Kontakt", href: "/contact" },
 ];
 
 export const websiteStyleLinks = [
   { label: "Premium 3D / Wow", href: "/websites/premium-3d" },
-  { label: "Simple Information Website", href: "/websites/simple-info" },
-  { label: "Hybrid / Modern Business", href: "/websites/hybrid-business" },
+  { label: "Enkel informationssida", href: "/websites/simple-info" },
+  { label: "Modern företagshemsida", href: "/websites/hybrid-business" },
 ];
 
 export const trustIndicators = [
-  "System Development",
-  "SaaS Platforms",
-  "Websites",
-  "Apps",
+  "Systemutveckling",
+  "SaaS-plattformar",
+  "Hemsidor",
+  "Webbappar",
   "Automation",
-  "AI Workflows",
+  "Kundportaler",
   "Företagsbetalningar",
 ];
 
-export const heroProductCards = [
-  "SaaS Platform",
-  "Web App",
-  "Customer Portal",
-  "Automation",
-  "Mobile App",
-  "Dashboard",
-];
+export const heroProductCards = ["SaaS", "Webbapp", "Kundportal", "Automation", "Admin", "Dashboard"];
 
-export const growthSteps = ["Website", "Portal", "Automation", "SaaS Platform"];
+export const growthSteps = ["Hemsida", "Portal", "Automation", "SaaS"];
 
 export const services = [
   {
-    title: "System Development",
-    text: "Admin portals, customer systems, internal tools, operations systems and SaaS platforms.",
+    title: "Systemutveckling",
+    text: "Vi bygger adminpaneler, kundsystem, interna verktyg, operationssystem och SaaS-plattformar.",
   },
   {
-    title: "Websites",
-    text: "Modern, responsive and conversion-focused websites for companies that want to look serious online.",
+    title: "Hemsidor",
+    text: "Moderna och mobilanpassade hemsidor som bygger förtroende och hjälper företaget få fler kunder.",
   },
   {
-    title: "Apps & Web Apps",
-    text: "Mobile-friendly apps, dashboards, booking flows, customer portals and user systems.",
+    title: "Webbappar & portaler",
+    text: "Inloggning, dashboards, bokningsflöden, kundportaler och användarsystem som fungerar i vardagen.",
   },
   {
     title: "Automation & AI",
-    text: "Automated workflows, AI assistants, data handling and smarter business processes.",
+    text: "Automatiserade flöden, AI-stöd, datahantering och integrationer som minskar manuellt arbete.",
   },
   {
-    title: "Customer Portals",
-    text: "Secure portals where customers, partners or staff can log in, manage data, view status and interact with your business.",
+    title: "Kundportaler",
+    text: "Säkra portaler där kunder, personal eller partners kan logga in, följa status och hantera uppgifter.",
   },
   {
     title: "Företagsbetalningar & Bankgiro",
-    text: "A structured application and portal flow for companies that need invoicing, customer payments and bankgiro-based payment flows.",
+    text: "Ett strukturerat ansöknings- och portalflöde för företag som behöver fakturering, kundinbetalningar och bankgirobaserade betalningsflöden.",
   },
   {
-    title: "Dashboards & Admin Panels",
-    text: "Internal tools that help teams manage customers, operations, tasks, documents, payments and business workflows.",
+    title: "Dashboards & adminsystem",
+    text: "Interna verktyg för kunder, ärenden, uppdrag, dokument, priser, rapporter och affärsflöden.",
   },
 ];
 
 export const whyChoose = [
   {
-    title: "We build both design and functionality",
-    text: "A good website should not only look good. It should support your business, your sales and your internal processes.",
+    title: "Design och funktion i samma lösning",
+    text: "En bra digital lösning ska både se seriös ut och göra arbetet enklare för kunder, personal och ledning.",
   },
   {
-    title: "Business-first development",
-    text: "We think about sales, operations, scalability and real usage from the beginning.",
+    title: "Affären först",
+    text: "Vi tänker på försäljning, drift, användarflöden och skalbarhet från början – inte bara på kod.",
   },
   {
-    title: "Start small, scale later",
-    text: "We can start with a website and later expand it into a customer portal, app or SaaS platform.",
+    title: "Börja enkelt, bygg vidare",
+    text: "Ni kan börja med en hemsida och senare växa in i portal, app, automation eller SaaS-produkt.",
   },
   {
-    title: "Experience from real products",
-    text: "Div3rsa works on digital platforms and products such as Gridex, Coordiqo, Bovaro and DealFlowIQ.",
+    title: "Erfarenhet från riktiga produkter",
+    text: "Div3rsa arbetar med egna plattformar och produkter som Gridex, Coordiqo, Bovaro och DealFlowIQ.",
   },
   {
-    title: "Modern systems and automation",
-    text: "We build with databases, dashboards, automation, APIs, payments and AI-ready workflows.",
+    title: "Modern teknisk grund",
+    text: "Vi bygger med databaser, API:er, autentisering, automation, betalflöden och AI-redo struktur.",
   },
 ];
 
 export const industries = [
-  "Service companies",
-  "Energy and electricity trading",
-  "Real estate",
-  "Healthcare and care operations",
-  "Construction and field service",
-  "Consulting companies",
+  "Serviceföretag",
+  "Elhandel och energi",
+  "Fastighet",
+  "Vård och omsorg",
+  "Bygg och fältservice",
+  "Konsultbolag",
   "Startups",
-  "Local businesses",
-  "SaaS and tech companies",
-  "Logistics and delivery operations",
-  "Municipal and public-sector operations",
-  "Sales organizations",
+  "Lokala företag",
+  "SaaS och tech",
+  "Logistik och leverans",
+  "Kommunala verksamheter",
+  "Säljorganisationer",
 ];
 
 export const solutionPackages = [
   {
-    title: "Start Website",
-    subtitle: "For companies that need a professional website quickly.",
+    title: "Starthemsida",
+    subtitle: "För företag som behöver en professionell hemsida snabbt.",
     includes: [
-      "Homepage",
-      "About",
-      "Services",
-      "Contact",
-      "Mobile responsive design",
-      "Basic SEO structure",
-      "Professional company presentation",
+      "Startsida",
+      "Om företaget",
+      "Tjänster",
+      "Kontakt",
+      "Mobilanpassad design",
+      "Grundläggande SEO",
+      "Professionell presentation",
     ],
-    cta: "Ask about Start Website",
+    cta: "Fråga om starthemsida",
   },
   {
-    title: "Business Website",
-    subtitle: "For companies that want stronger sales, better design and a more premium feeling.",
+    title: "Företagshemsida",
+    subtitle: "För företag som vill ha tydligare säljflöde, bättre design och mer premiumkänsla.",
     includes: [
-      "Multiple pages",
-      "CTA flows",
-      "Contact form",
-      "Premium design",
-      "Tracking-ready structure",
-      "Blog/news possibility",
-      "Login/customer portal possibility later",
+      "Flera sidor",
+      "CTA-flöden",
+      "Kontaktformulär",
+      "Premiumdesign",
+      "SEO- och tracking-redo struktur",
+      "Möjlighet till blogg/nyheter",
+      "Redo för framtida portal",
     ],
-    cta: "Ask about Business Website",
+    cta: "Bygg företagshemsida",
     featured: true,
   },
   {
-    title: "Custom System / SaaS",
-    subtitle: "For companies that need a real digital system.",
+    title: "Anpassat system / SaaS",
+    subtitle: "För företag som behöver ett riktigt digitalt system.",
     includes: [
-      "Admin dashboard",
-      "Customer portal",
-      "Database",
-      "Roles and permissions",
-      "Payments",
+      "Adminpanel",
+      "Kundportal",
+      "Databas",
+      "Roller och behörigheter",
+      "Betalflöden",
       "Automation",
-      "Integrations",
-      "Reporting and analytics",
-      "Scalable system architecture",
+      "Integrationer",
+      "Rapporter och analys",
+      "Skalbar arkitektur",
     ],
-    cta: "Discuss a custom system",
+    cta: "Diskutera system",
   },
 ];
 
@@ -187,78 +181,50 @@ export const caseStudies = [
     displayUrl: "app.gridex.se",
     href: "https://app.gridex.se",
     description:
-      "A platform for electricity trading operations, Ediel flows, customer management, onboarding, powers of attorney and operational workflows.",
+      "En operationsplattform för elhandel, kundonboarding, fullmakter, Ediel-flöden och processkontroll.",
     problem:
-      "Electricity companies need structured systems for customer onboarding, metering points, powers of attorney, Ediel messages and operational follow-up.",
+      "Elbolag behöver struktur för kunder, anläggningar, fullmakter, mätpunkter, meddelanden och daglig uppföljning.",
     solution:
-      "Gridex is built as an operations platform for electricity trading workflows, customer administration, Ediel handling and process control.",
-    features: [
-      "Customer management",
-      "Metering point handling",
-      "Ediel message flows",
-      "Powers of attorney",
-      "Admin workflows",
-      "Operational control",
-    ],
-    cta: "View Gridex",
+      "Gridex byggs som ett driftssystem där administration, Ediel, kundflöden och uppföljning samlas i en plattform.",
+    features: ["Kundregister", "Mätpunkter", "Ediel-flöden", "Fullmakter", "Admin", "Driftöversikt"],
+    cta: "Öppna Gridex",
   },
   {
     title: "Coordiqo",
     displayUrl: "coordiqo.com",
     href: "https://coordiqo.com",
     description:
-      "A planning and operations system for companies that manage staff, assignments, resources, schedules and routes.",
+      "Ett planerings- och operationssystem för företag som hanterar personal, uppdrag, resurser, scheman och rutter.",
     problem:
-      "Many companies struggle to coordinate staff, assignments, resources, availability, routes and daily operational changes.",
+      "Många verksamheter tappar tid när personal, uppdrag, resurser och ändringar hanteras i flera separata verktyg.",
     solution:
-      "Coordiqo is designed as a planning and operations platform that helps companies manage schedules, tasks, resources and route-based work.",
-    features: [
-      "Staff planning",
-      "Assignments",
-      "Resource tracking",
-      "Scheduling",
-      "Route planning",
-      "Operational overview",
-    ],
-    cta: "View Coordiqo",
+      "Coordiqo samlar planering, uppdrag, resurser och daglig drift i ett tydligt system.",
+    features: ["Personalplanering", "Uppdrag", "Resurser", "Scheman", "Rutter", "Driftöversikt"],
+    cta: "Öppna Coordiqo",
   },
   {
     title: "Bovaro",
     displayUrl: "bovaro.se",
     href: "https://bovaro.se",
-    description: "A digital product for property, housing or marketplace workflows.",
+    description: "Ett digitalt produktkoncept för fastighet, bostad och marknadsplatsflöden.",
     problem:
-      "Property and housing workflows often require better structure, digital presentation, search, customer flows and marketplace logic.",
+      "Fastighets- och bostadsflöden kräver tydlig presentation, sök, filtrering, leads och kundflöden.",
     solution:
-      "Bovaro is developed as a digital product concept for property, housing or marketplace-based workflows.",
-    features: [
-      "Property/housing workflows",
-      "Marketplace structure",
-      "Digital presentation",
-      "Search and filtering",
-      "Lead/contact flow",
-      "Scalable product foundation",
-    ],
-    cta: "View Bovaro",
+      "Bovaro byggs som en digital grund för presentation, sök, leads och marknadsplatslogik.",
+    features: ["Objektflöden", "Marknadsplats", "Presentation", "Sök/filter", "Leadflöde", "Skalbar grund"],
+    cta: "Öppna Bovaro",
   },
   {
     title: "DealFlowIQ",
     displayUrl: "dealfloowiq.com",
     href: "https://dealfloowiq.com",
-    description: "A deal intelligence and analysis platform for real estate, investors and business workflows.",
+    description: "En analys- och deal intelligence-plattform för fastighet, investerare och affärsflöden.",
     problem:
-      "Investors and real estate teams need better ways to analyze deals, compare opportunities and structure decision-making.",
+      "Investerare och fastighetsteam behöver bättre sätt att analysera, jämföra och strukturera affärsmöjligheter.",
     solution:
-      "DealFlowIQ is built as a deal analysis and intelligence platform for real estate and investment workflows.",
-    features: [
-      "Deal analysis",
-      "Real estate intelligence",
-      "Investment workflows",
-      "Dashboard structure",
-      "Buyer/investor workflows",
-      "Data-driven decision support",
-    ],
-    cta: "View DealFlowIQ",
+      "DealFlowIQ byggs för dealanalys, beslutsstöd och strukturerad uppföljning.",
+    features: ["Dealanalys", "Fastighetsdata", "Investerarflöden", "Dashboard", "CRM", "Beslutsstöd"],
+    cta: "Öppna DealFlowIQ",
   },
 ];
 
@@ -268,222 +234,160 @@ export const websiteStyles = [
     title: "Premium 3D / Wow",
     href: "/websites/premium-3d",
     description:
-      "For companies that want to stand out immediately. A visual premium website with 3D feeling, animations, strong hero sections, modern effects and an exclusive brand experience.",
-    fits: ["Tech companies", "SaaS", "Consulting firms", "Finance", "Startups", "Premium brands"],
-    features: [
-      "3D hero",
-      "Animations",
-      "Glassmorphism",
-      "Login button",
-      "Customer portal link",
-      "Strong CTA",
-      "Premium design",
-      "Advanced visual identity",
-    ],
-    cta: "I want this style",
+      "För företag som vill sticka ut direkt med en modern, visuell och premiumkänsla.",
+    fits: ["Techbolag", "SaaS", "Konsultbolag", "Finans", "Startups", "Premiumvarumärken"],
+    features: ["3D hero", "Animationer", "Glassmorphism", "Login-knapp", "Portal-länk", "Stark CTA", "Premiumdesign", "Visuell identitet"],
+    cta: "Jag vill ha denna stil",
   },
   {
     slug: "simple-info",
-    title: "Simple Information Website",
+    title: "Enkel informationssida",
     href: "/websites/simple-info",
     description:
-      "A clean and clear website for companies that want to present their services, build trust and get more customers without unnecessary complexity.",
-    fits: [
-      "Local businesses",
-      "Consultants",
-      "Construction/service companies",
-      "Accounting firms",
-      "Smaller businesses",
-      "Companies that need a fast launch",
-    ],
-    features: [
-      "Clear homepage",
-      "Service section",
-      "About section",
-      "Contact form",
-      "Create account button if needed",
-      "Mobile responsive design",
-      "Simple SEO structure",
-    ],
-    cta: "I want a simple website",
+      "För företag som vill presentera tjänster, bygga förtroende och få in kontaktförfrågningar utan onödig komplexitet.",
+    fits: ["Lokala företag", "Konsulter", "Servicebolag", "Redovisning", "Mindre företag", "Snabb lansering"],
+    features: ["Tydlig startsida", "Tjänstesektion", "Om oss", "Kontaktformulär", "Mobilanpassning", "SEO-grund", "Snabb struktur"],
+    cta: "Jag vill ha en enkel hemsida",
   },
   {
     slug: "hybrid-business",
-    title: "Hybrid / Modern Business",
+    title: "Modern företagshemsida",
     href: "/websites/hybrid-business",
     description:
-      "A balanced website that combines premium design with clear information, CTA flows, login/account options and the ability to grow into a customer portal or SaaS product.",
-    fits: [
-      "Growing companies",
-      "B2B companies",
-      "Service businesses",
-      "Platforms",
-      "Companies that want to start simple but build further later",
-    ],
-    features: [
-      "Modern hero",
-      "Service pages",
-      "Login/create account",
-      "Contact CTA",
-      "Integration-ready structure",
-      "Dashboard/customer portal possibility",
-      "Scalable foundation",
-    ],
-    cta: "I want the hybrid style",
+      "En balanserad hemsida med premiumkänsla, tydlig information, CTA-flöden och möjlighet att växa till kundportal.",
+    fits: ["Växande företag", "B2B", "Servicebolag", "Plattformar", "Bolag som vill växa"],
+    features: ["Modern hero", "Tjänstesidor", "Login/portal", "Kontakt CTA", "Integrationsredo", "Kundportal senare", "Skalbar grund"],
+    cta: "Jag vill ha modern företagshemsida",
   },
 ];
 
 export const processSteps = [
   {
-    title: "Understand the need",
-    text: "We go through what the company needs: website, app, system, portal or automation.",
+    title: "Förstå behovet",
+    text: "Vi går igenom vad ni vill bygga, varför det behövs och vad resultatet ska bli.",
   },
   {
-    title: "Structure and design",
-    text: "We define the flow, pages, features and design direction.",
+    title: "Struktur och design",
+    text: "Vi sätter sidor, flöden, funktioner och designriktning innan utvecklingen går för långt.",
   },
   {
-    title: "Build the solution",
-    text: "We develop using modern technology, responsive design and scalable structure.",
+    title: "Bygga lösningen",
+    text: "Vi utvecklar med modern teknik, tydlig kodstruktur och mobilanpassad design.",
   },
   {
-    title: "Launch and improve",
-    text: "We help with launch, adjustments and further development.",
+    title: "Lansera och förbättra",
+    text: "Vi hjälper med lansering, justeringar och nästa steg när lösningen börjar användas.",
   },
 ];
 
 export const techItems = [
-  "Web apps",
-  "Databases",
-  "Payments",
-  "API integrations",
+  "Webbappar",
+  "Databaser",
+  "Betalflöden",
+  "API-integrationer",
   "Automation",
-  "AI workflows",
-  "Admin dashboards",
-  "Roles and permissions",
-  "Customer portals",
-  "Hosting and deployment",
-  "Analytics and reporting",
-  "Secure authentication",
+  "AI-flöden",
+  "Adminpaneler",
+  "Roller och behörigheter",
+  "Kundportaler",
+  "Hosting och deployment",
+  "Rapporter",
+  "Säker inloggning",
 ];
 
 export const faqs = [
   {
-    question: "Do you only build websites or also systems?",
-    answer:
-      "We build both. Div3rsa can create simple company websites, premium websites, web apps, internal systems, customer portals and full SaaS platforms.",
+    question: "Bygger ni bara hemsidor eller även system?",
+    answer: "Vi bygger båda. Div3rsa kan skapa enkla hemsidor, premiumhemsidor, webbappar, interna system, kundportaler och SaaS-plattformar.",
   },
   {
-    question: "Can you build a customer portal or admin dashboard?",
-    answer:
-      "Yes. We can build login areas, customer portals, dashboards, admin panels, role-based access and internal workflows.",
+    question: "Kan ni bygga kundportal eller adminpanel?",
+    answer: "Ja. Vi kan bygga inloggning, kundportaler, dashboards, adminpaneler, rollstyrning och interna arbetsflöden.",
   },
   {
-    question: "Can you help with design?",
-    answer: "Yes. We can help with layout, user experience, visual direction and modern interface design.",
+    question: "Kan ni hjälpa med design och UX?",
+    answer: "Ja. Vi hjälper med struktur, layout, användarflöden, visuell riktning och modern gränssnittsdesign.",
   },
   {
-    question: "Can you build on an existing website?",
-    answer:
-      "Yes. Depending on the current setup, we can either improve the existing website or rebuild it with a stronger foundation.",
+    question: "Kan en enkel hemsida senare bli ett system?",
+    answer: "Ja. Det är ofta smartast. Vi kan bygga grunden så den senare kan växa till portal, app, dashboard eller SaaS-produkt.",
   },
   {
-    question: "Can you create login and user accounts?",
-    answer: "Yes. We can build authentication, user accounts, roles and protected pages.",
+    question: "Kan ni koppla betalningar?",
+    answer: "Ja. Vi kan bygga betalflöden, abonnemang, checkout, fakturaflöden och kundportaler beroende på projektets behov.",
   },
   {
-    question: "Can you connect payments?",
-    answer:
-      "Yes. We can connect payment flows, subscriptions, checkout pages and customer billing portals depending on the project.",
-  },
-  {
-    question: "Can you help with automation and AI?",
-    answer:
-      "Yes. We can build automated workflows, AI-assisted processes, internal tools and integrations that reduce manual work.",
-  },
-  {
-    question: "How does a project start?",
-    answer:
-      "A project usually starts with a short discussion about your business, what you want to build, your current situation and what result you want.",
-  },
-  {
-    question: "Do you work with both small and larger companies?",
-    answer:
-      "Yes. We can help smaller companies with professional websites and larger companies with more advanced systems, portals and operations tools.",
-  },
-  {
-    question: "Can a simple website later become a system?",
-    answer:
-      "Yes. That is one of the main advantages of working with Div3rsa. We can build the foundation so it can later grow into a portal, app, dashboard or SaaS product.",
+    question: "Hur startar ett projekt?",
+    answer: "Oftast börjar vi med en kort genomgång av bolaget, målet, nuvarande läge och vilken lösning som ger mest värde först.",
   },
 ];
 
 export const aboutValues = [
-  "Business-focused development",
-  "Scalable digital products",
-  "Clean design and strong user experience",
-  "Long-term technical foundation",
-  "Automation and AI-ready workflows",
+  "Affärsfokuserad utveckling",
+  "Skalbara digitala produkter",
+  "Ren design och tydlig användarupplevelse",
+  "Långsiktig teknisk grund",
+  "Automation och AI-redo flöden",
 ];
 
 export const projectTypes = [
-  "Website",
-  "Web app",
-  "Mobile app",
-  "Customer portal",
-  "Admin dashboard",
-  "SaaS platform",
-  "Automation / AI workflow",
-  "Existing system improvement",
-  "Not sure yet",
+  "Hemsida",
+  "Webbapp",
+  "Mobilapp",
+  "Kundportal",
+  "Adminpanel",
+  "SaaS-plattform",
+  "Automation / AI-flöde",
+  "Förbättra befintligt system",
+  "Vet inte ännu",
 ];
 
 export const budgetRanges = [
-  "Under 25,000 SEK",
-  "25,000-75,000 SEK",
-  "75,000-150,000 SEK",
-  "150,000+ SEK",
-  "Not sure yet",
+  "Under 25 000 kr",
+  "25 000-75 000 kr",
+  "75 000-150 000 kr",
+  "150 000+ kr",
+  "Vet inte ännu",
 ];
 
 export const privacySections = [
   {
-    title: "Data we may collect",
-    text: "When you contact Div3rsa AB through email or a contact form, we may collect your name, company name, email address, phone number, project type, budget range and message content.",
+    title: "Uppgifter vi kan samla in",
+    text: "När du kontaktar Div3rsa eller skickar en ansökan kan vi behandla namn, företag, e-post, telefon, organisationsnummer, bransch, projektbehov och meddelanden.",
   },
   {
-    title: "Purpose of contact data",
-    text: "We use contact data to answer your request, understand your business needs, prepare project discussions and provide relevant information about our services.",
+    title: "Varför vi använder uppgifter",
+    text: "Vi använder uppgifter för att besvara frågor, hantera ansökningar, följa upp kunddialog och administrera våra tjänster.",
   },
   {
-    title: "Email communication",
-    text: "If you email us or submit a contact request, we may reply by email and keep the conversation for follow-up and business administration.",
+    title: "Delning med relevant aktör",
+    text: "Vid ansökan om Företagsbetalningar & Bankgiro kan nödvändiga uppgifter delas med relevant betalnings- eller finansaktör när det krävs och när samtycke lämnats.",
   },
   {
-    title: "No unnecessary sale of personal data",
-    text: "Div3rsa AB does not sell personal data. We only process information needed to communicate with you and manage business relationships.",
+    title: "Vi säljer inte personuppgifter",
+    text: "Div3rsa AB säljer inte personuppgifter. Vi behandlar uppgifter för kontakt, ansökan, administration och kundrelationer.",
   },
   {
-    title: "Privacy questions",
-    text: "For privacy-related questions, contact us at info@div3rsa.com.",
+    title: "Frågor om integritet",
+    text: "Kontakta info@div3rsa.com vid frågor om personuppgifter.",
   },
 ];
 
 export const cookieSections = [
   {
-    title: "What cookies are",
-    text: "Cookies are small text files stored by your browser. They can help websites remember settings, measure usage and improve the visitor experience.",
+    title: "Vad cookies är",
+    text: "Cookies är små filer som sparas i webbläsaren och kan användas för funktion, säkerhet, inställningar och statistik.",
   },
   {
-    title: "Current use",
-    text: "This first version of the Div3rsa website is built as a static company site and does not require unnecessary tracking cookies to function.",
+    title: "Nuvarande användning",
+    text: "Denna version av Div3rsa Web kräver endast nödvändig funktionalitet för att webbplatsen ska fungera.",
   },
   {
-    title: "Analytics may be added later",
-    text: "Analytics or tracking tools may be added later to understand website performance and improve content. If that happens, this page should be updated with clear information.",
+    title: "Analys kan läggas till senare",
+    text: "Om analys- eller spårningsverktyg aktiveras senare ska cookieinformationen uppdateras tydligt.",
   },
   {
-    title: "Cookie questions",
-    text: "For cookie-related questions, contact us at info@div3rsa.com.",
+    title: "Frågor om cookies",
+    text: "Kontakta info@div3rsa.com vid frågor om cookies.",
   },
 ];

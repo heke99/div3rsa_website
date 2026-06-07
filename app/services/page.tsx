@@ -6,8 +6,9 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { processSteps, services, solutionPackages, techItems } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: "System development, websites, web apps, customer portals, SaaS platforms, automation and AI workflows by Div3rsa AB.",
+  title: "Tjänster",
+  description:
+    "Div3rsa AB bygger hemsidor, webbappar, kundportaler, adminsystem, SaaS-plattformar, automation och AI-redo flöden.",
 };
 
 export default function ServicesPage() {
@@ -16,13 +17,13 @@ export default function ServicesPage() {
       <section className="page-hero">
         <div className="aurora aurora-two" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Services</p>
-          <h1>From idea to finished digital product.</h1>
+          <p className="eyebrow">Tjänster</p>
+          <h1>Från idé till färdig digital lösning.</h1>
           <p className="page-lead">
-            Div3rsa builds websites, systems, apps, portals, SaaS products and automation workflows for companies that
-            want a serious digital foundation.
+            Vi hjälper företag bygga hemsidor, webbappar, portaler, adminsystem och automation som känns professionella
+            och går att växa med.
           </p>
-          <ButtonLink href="/contact">Start Project</ButtonLink>
+          <ButtonLink href="/contact">Starta projekt</ButtonLink>
         </div>
       </section>
 
@@ -34,7 +35,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Solution packages" title="Typical solutions we build">
+      <Section eyebrow="Paket" title="Vanliga lösningar vi bygger">
         <div className="package-grid">
           {solutionPackages.map((item) => (
             <PackageCard key={item.title} item={item} />
@@ -42,7 +43,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Process" title="How we work.">
+      <Section eyebrow="Process" title="Så arbetar vi">
         <div className="process-grid">
           {processSteps.map((step, index) => (
             <article className="process-step reveal" key={step.title}>
@@ -55,9 +56,9 @@ export default function ServicesPage() {
       </Section>
 
       <Section
-        eyebrow="Technology"
-        title="Modern technology behind every solution"
-        intro="Our solutions are built with modern web technology and a structure that can grow with your business."
+        eyebrow="Teknik"
+        title="Modern grund bakom varje lösning"
+        intro="Vi bygger med en teknisk struktur som kan växa när företaget får fler kunder, fler användare eller fler processer."
       >
         <div className="tech-cloud reveal">
           {techItems.map((item) => (
