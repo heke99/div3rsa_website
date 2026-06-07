@@ -7,7 +7,7 @@ const style = websiteStyles.find((item) => item.slug === "premium-3d");
 
 export const metadata: Metadata = {
   title: "Premium 3D / Wow-hemsida",
-  description: "Premium 3D-hemsida med animationer, stark hero och modern varumärkeskänsla av Div3rsa AB.",
+  description: "Premium 3D-hemsida med wow-känsla, animationer, stark hero och modern varumärkesdesign av Div3rsa AB.",
 };
 
 export default function Page() {

@@ -6,8 +6,8 @@ import { websiteStyles } from "@/lib/content";
 const style = websiteStyles.find((item) => item.slug === "simple-info");
 
 export const metadata: Metadata = {
-  title: "Enkel informationssida",
-  description: "Enkel företagshemsida för tydliga tjänster, förtroende och kontaktflöden av Div3rsa AB.",
+  title: "Simple / Information hemsida",
+  description: "Simple-hemsida för företag som vill ha en ren, tydlig och snabb informationssida med kontaktflöde.",
 };
 
 export default function Page() {

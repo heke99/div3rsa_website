@@ -18,13 +18,27 @@ export default function WebsitesPage() {
         <div className="aurora aurora-two" />
         <div className="container narrow reveal">
           <p className="eyebrow">Hemsidor</p>
-          <h1>Vilken typ av hemsida vill du ha?</h1>
-          <p className="page-lead">Välj en riktning som passar företagets varumärke, budget och nästa steg.</p>
+          <h1>Tre hemsidestilar. En tydlig väg framåt.</h1>
+          <p className="page-lead">Jämför 3D / Wow, Business och Simple så blir det enklare att välja rätt nivå för varumärke, budget och mål.</p>
         </div>
       </section>
 
       <Section>
-        <div className="card-grid three">
+        <div className="style-intro-panel reveal">
+          <div>
+            <strong>3D / Wow</strong>
+            <span>Visuell, premium och minnesvärd.</span>
+          </div>
+          <div>
+            <strong>Business</strong>
+            <span>Modern, seriös och säljande.</span>
+          </div>
+          <div>
+            <strong>Simple</strong>
+            <span>Ren, snabb och lätt att förstå.</span>
+          </div>
+        </div>
+        <div className="card-grid three style-comparison-grid">
           {websiteStyles.map((style) => (
             <StyleCard key={style.title} item={style} />
           ))}

@@ -66,10 +66,24 @@ export default function Home() {
       <Section
         id="websites"
         eyebrow="Hemsidor"
-        title="Tre tydliga riktningar."
-        intro="Välj enkel, modern eller mer premium. Vi kan börja litet och bygga vidare senare."
+        title="Välj rätt känsla från början."
+        intro="Alla företag behöver inte samma hemsida. Därför visar vi tre tydliga riktningar: 3D / Wow, Business och Simple."
       >
-        <div className="card-grid three">
+        <div className="style-intro-panel reveal">
+          <div>
+            <strong>3D / Wow</strong>
+            <span>För starkt första intryck och premiumkänsla.</span>
+          </div>
+          <div>
+            <strong>Business</strong>
+            <span>För seriös B2B, tjänster och tydliga CTA-flöden.</span>
+          </div>
+          <div>
+            <strong>Simple</strong>
+            <span>För snabb, ren och trygg informationssida.</span>
+          </div>
+        </div>
+        <div className="card-grid three style-comparison-grid">
           {websiteStyles.map((style) => (
             <StyleCard key={style.title} item={style} />
           ))}

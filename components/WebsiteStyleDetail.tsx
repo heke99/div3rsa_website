@@ -2,8 +2,13 @@ import { ButtonLink } from "./ButtonLink";
 
 type WebsiteStyleDetailProps = {
   style: {
+    slug: string;
     title: string;
+    shortTitle?: string;
+    badge?: string;
     description: string;
+    summary?: string;
+    bestFor?: string;
     fits: string[];
     features: string[];
     cta: string;
@@ -16,7 +21,7 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
       <div className="aurora aurora-one" />
       <div className="container two-column">
         <div className="reveal">
-          <p className="eyebrow">Hemsidestil</p>
+          <p className="eyebrow">Hemsidestil · {style.shortTitle || style.title}</p>
           <h1>{style.title}</h1>
           <p className="page-lead">{style.description}</p>
           <div className="hero-actions">
@@ -27,15 +32,15 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
           </div>
         </div>
         <div className="style-detail-card reveal">
-          <div className="style-visual large">
+          <div className={`style-visual large style-visual-${style.slug}`} aria-hidden="true">
             <span />
             <span />
             <span />
+            <i />
           </div>
-          <h2>Byggd för att kunna växa</h2>
-          <p>
-            Div3rsa kan börja med denna riktning och senare bygga vidare till portal, dashboard, app eller SaaS-produkt.
-          </p>
+          <span className="style-badge">{style.badge}</span>
+          <h2>{style.summary}</h2>
+          <p>{style.bestFor}</p>
         </div>
       </div>
       <div className="container style-detail-grid">
@@ -48,7 +53,7 @@ export function WebsiteStyleDetail({ style }: WebsiteStyleDetailProps) {
           </div>
         </article>
         <article className="glass-card reveal">
-          <h2>Funktioner</h2>
+          <h2>Det ingår ofta</h2>
           <div className="feature-tags">
             {style.features.map((item) => (
               <span key={item}>{item}</span>

@@ -42,9 +42,9 @@ export const websiteStyleLinks = [
   { label: "Modern företagshemsida", href: "/websites/hybrid-business" },
 ];
 
-export const trustIndicators = ["Hemsidor", "Webbappar", "Kundportaler", "Automation", "SaaS", "Bankgiroflöden"];
+export const trustIndicators = ["Premiumdesign", "Hemsidor", "Webbappar", "Kundportaler", "Automation", "Bankgiroflöden"];
 
-export const heroProductCards = ["Hemsida", "Portal", "System", "Automation", "Dashboard"];
+export const heroProductCards = ["Hero", "CTA", "Portal", "System", "Automation"];
 
 export const growthSteps = ["Hemsida", "Portal", "Automation", "Skala upp"];
 
@@ -174,32 +174,44 @@ export const websiteStyles = [
   {
     slug: "premium-3d",
     title: "Premium 3D / Wow",
+    shortTitle: "3D / Wow",
     href: "/websites/premium-3d",
+    badge: "Mest visuellt",
     description:
-      "För företag som vill sticka ut direkt med en modern, visuell och premiumkänsla.",
+      "För bolag som vill skapa ett starkt första intryck med 3D-känsla, animationer och premiumdesign.",
+    summary: "Hög wow-faktor, stark hero och visuell identitet.",
+    bestFor: "Tech, SaaS, finans, premiumvarumärken och företag som vill sticka ut.",
     fits: ["Techbolag", "SaaS", "Konsultbolag", "Finans", "Startups", "Premiumvarumärken"],
     features: ["3D hero", "Animationer", "Glassmorphism", "Login-knapp", "Portal-länk", "Stark CTA", "Premiumdesign", "Visuell identitet"],
-    cta: "Jag vill ha denna stil",
-  },
-  {
-    slug: "simple-info",
-    title: "Enkel informationssida",
-    href: "/websites/simple-info",
-    description:
-      "För företag som vill presentera tjänster, bygga förtroende och få in kontaktförfrågningar utan onödig komplexitet.",
-    fits: ["Lokala företag", "Konsulter", "Servicebolag", "Redovisning", "Mindre företag", "Snabb lansering"],
-    features: ["Tydlig startsida", "Tjänstesektion", "Om oss", "Kontaktformulär", "Mobilanpassning", "SEO-grund", "Snabb struktur"],
-    cta: "Jag vill ha en enkel hemsida",
+    cta: "Jag vill ha 3D / Wow",
   },
   {
     slug: "hybrid-business",
-    title: "Modern företagshemsida",
+    title: "Business / Modern",
+    shortTitle: "Business",
     href: "/websites/hybrid-business",
+    badge: "Bäst för B2B",
     description:
-      "En balanserad hemsida med premiumkänsla, tydlig information, CTA-flöden och möjlighet att växa till kundportal.",
+      "För företag som vill ha en seriös, modern hemsida med tydliga tjänster, CTA-flöden och plats för portal senare.",
+    summary: "Professionell B2B-känsla med balans mellan design och tydlig information.",
+    bestFor: "Växande företag, konsulter, servicebolag och B2B-verksamheter.",
     fits: ["Växande företag", "B2B", "Servicebolag", "Plattformar", "Bolag som vill växa"],
     features: ["Modern hero", "Tjänstesidor", "Login/portal", "Kontakt CTA", "Integrationsredo", "Kundportal senare", "Skalbar grund"],
-    cta: "Jag vill ha modern företagshemsida",
+    cta: "Jag vill ha Business",
+  },
+  {
+    slug: "simple-info",
+    title: "Simple / Information",
+    shortTitle: "Simple",
+    href: "/websites/simple-info",
+    badge: "Snabbast att lansera",
+    description:
+      "För företag som behöver en ren informationssida som förklarar tjänsterna och gör det lätt att ta kontakt.",
+    summary: "Tydligt, snabbt, prisvärt och lätt för kunden att förstå.",
+    bestFor: "Lokala företag, mindre bolag, konsulter och verksamheter som vill komma igång snabbt.",
+    fits: ["Lokala företag", "Konsulter", "Servicebolag", "Redovisning", "Mindre företag", "Snabb lansering"],
+    features: ["Tydlig startsida", "Tjänstesektion", "Om oss", "Kontaktformulär", "Mobilanpassning", "SEO-grund", "Snabb struktur"],
+    cta: "Jag vill ha Simple",
   },
 ];
 

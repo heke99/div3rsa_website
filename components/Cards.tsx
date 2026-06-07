@@ -85,9 +85,14 @@ export function CaseCard({ item }: CaseCardProps) {
 
 type StyleCardProps = {
   item: {
+    slug: string;
     title: string;
+    shortTitle?: string;
     href: string;
+    badge?: string;
     description: string;
+    summary?: string;
+    bestFor?: string;
     fits: string[];
     features: string[];
     cta: string;
@@ -96,21 +101,35 @@ type StyleCardProps = {
 
 export function StyleCard({ item }: StyleCardProps) {
   return (
-    <article className="style-card reveal">
-      <div className="style-visual">
+    <article className={`style-card style-card-${item.slug} reveal`}>
+      <div className="style-card-head">
+        <span className="style-badge">{item.badge}</span>
+        <strong>{item.shortTitle || item.title}</strong>
+      </div>
+      <div className={`style-visual style-visual-${item.slug}`} aria-hidden="true">
         <span />
         <span />
         <span />
+        <i />
       </div>
       <h3>{item.title}</h3>
       <p>{item.description}</p>
+      <div className="style-summary-box">
+        <strong>Känsla</strong>
+        <span>{item.summary}</span>
+      </div>
       <div className="mini-list">
-        <strong>Passar för</strong>
-        <span>{item.fits.slice(0, 3).join(" / ")}</span>
+        <strong>Passar bäst för</strong>
+        <span>{item.bestFor || item.fits.slice(0, 3).join(" / ")}</span>
+      </div>
+      <div className="feature-tags style-feature-preview">
+        {item.features.slice(0, 4).map((feature) => (
+          <span key={feature}>{feature}</span>
+        ))}
       </div>
       <div className="style-actions">
         <Link className="text-link" href={item.href}>
-          Läs mer
+          Se exempel
         </Link>
         <ButtonLink href="/contact" variant="secondary">
           {item.cta}
