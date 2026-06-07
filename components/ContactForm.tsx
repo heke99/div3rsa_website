@@ -1,49 +1,53 @@
 "use client";
 
-import { useActionState } from "react";
-import { budgetRanges, projectTypes } from "@/lib/content";
-import { submitContactRequest, type ContactFormState } from "@/app/contact/actions";
-
-const initialState: ContactFormState = { ok: false, message: "" };
-
-function FieldError({ message }: { message?: string }) {
-  if (!message) return null;
-  return <span className="field-error">{message}</span>;
-}
+import { FormEvent } from "react";
+import { budgetRanges, company, projectTypes } from "@/lib/content";
 
 export function ContactForm() {
-  const [state, formAction, isPending] = useActionState(submitContactRequest, initialState);
-
-  if (state.ok) {
-    return (
-      <div className="contact-form contact-success reveal">
-        <span className="success-mark">✓</span>
-        <h2>Vi har tagit emot din förfrågan.</h2>
-        <p>Vi går igenom meddelandet och återkommer med nästa steg.</p>
-      </div>
-    );
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const value = (key: string) => String(data.get(key) || "").trim();
+    const body = [
+      "Namn: " + value("name"),
+      "Företag: " + value("company"),
+      "E-post: " + value("email"),
+      "Telefon: " + value("phone"),
+      "Project type: " + value("projectType"),
+      "Budget range: " + value("budget"),
+      "",
+      "Meddelande:",
+      value("message"),
+    ].join("\n");
+    const subjectNamn = value("company") || value("name") || "website visitor";
+    const mailto =
+      "mailto:" +
+      company.email +
+      "?subject=" +
+      encodeURIComponent("Project request from " + subjectNamn) +
+      "&body=" +
+      encodeURIComponent(body);
+    window.location.href = mailto;
   }
 
   return (
-    <form className="contact-form reveal" action={formAction} noValidate>
-      <div className="form-note compact-note">
-        Skriv kort vad du vill bygga. Meddelandet skickas direkt till Div3rsa.
+    <form className="contact-form reveal" onSubmit={handleSubmit}>
+      <div className="form-note">
+        Formuläret öppnar ditt e-postprogram med ett färdigt meddelande till Div3rsa.
       </div>
-      {state.message && <div className="form-error">{state.message}</div>}
       <div className="form-grid">
         <label>
           Namn
           <input name="name" type="text" autoComplete="name" required />
-          <FieldError message={state.fieldErrors?.name} />
         </label>
         <label>
-          Bolag
+          Företag
           <input name="company" type="text" autoComplete="organization" />
         </label>
         <label>
           E-post
           <input name="email" type="email" autoComplete="email" required />
-          <FieldError message={state.fieldErrors?.email} />
         </label>
         <label>
           Telefon
@@ -61,11 +65,10 @@ export function ContactForm() {
               </option>
             ))}
           </select>
-          <FieldError message={state.fieldErrors?.projectType} />
         </label>
         <label>
-          Budget ungefär
-          <select name="budget" defaultValue="Vet inte ännu">
+          Budget, om du vet
+          <select name="budget" defaultValue="Not sure yet">
             {budgetRanges.map((range) => (
               <option key={range} value={range}>
                 {range}
@@ -76,11 +79,10 @@ export function ContactForm() {
       </div>
       <label>
         Meddelande
-        <textarea name="message" rows={5} placeholder="Berätta kort vad ni behöver hjälp med." required />
-        <FieldError message={state.fieldErrors?.message} />
+        <textarea name="message" rows={6} required />
       </label>
-      <button className="button button-primary" type="submit" disabled={isPending}>
-        {isPending ? "Skickar..." : "Skicka förfrågan"}
+      <button className="button button-primary" type="submit">
+        Öppna e-postutkast
       </button>
     </form>
   );

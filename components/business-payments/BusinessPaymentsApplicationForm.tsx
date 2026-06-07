@@ -1,300 +1,276 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useMemo, useState } from "react";
-import {
-  submitBusinessPaymentsApplication,
-  type BusinessApplicationState,
-} from "@/app/foretagsbetalningar-bankgiro/ansok/actions";
-import { businessPaymentCustomerTypes, businessPaymentUrgencies } from "@/lib/business-payments";
+import { submitBusinessPaymentApplication } from "@/app/foretagsbetalningar-bankgiro/ansok/actions";
 
-const initialState: BusinessApplicationState = { ok: false, message: "" };
+type FormState = {
+  ok: boolean;
+  message: string;
+  errors?: Record<string, string>;
+};
 
-const yesNoOptions = [
-  { label: "Välj", value: "" },
-  { label: "Ja", value: "yes" },
-  { label: "Nej", value: "no" },
-  { label: "Osäker", value: "unknown" },
-];
+const initialState: FormState = { ok: false, message: "" };
+const steps = ["Företag", "Behov", "Bekräfta"];
 
-function FieldError({ message }: { message?: string }) {
-  if (!message) return null;
-  return <span className="field-error">{message}</span>;
+const requiredByStep: Record<number, string[]> = {
+  0: ["company_name", "org_number", "contact_name", "email", "phone", "industry", "business_description"],
+  1: ["customer_type", "monthly_volume_estimate", "invoice_count_estimate", "average_invoice_amount", "urgency"],
+  2: ["consent_contact", "consent_partner_forwarding"],
+};
+
+function getLabel(name: string) {
+  const labels: Record<string, string> = {
+    company_name: "Företagsnamn",
+    org_number: "Organisationsnummer",
+    contact_name: "Kontaktperson",
+    email: "E-post",
+    phone: "Telefon",
+    industry: "Bransch",
+    business_description: "Kort verksamhetsbeskrivning",
+    customer_type: "Kundtyp",
+    monthly_volume_estimate: "Uppskattad månadsvolym",
+    invoice_count_estimate: "Antal fakturor per månad",
+    average_invoice_amount: "Genomsnittligt fakturabelopp",
+    urgency: "Hur snabbt behöver ni komma igång?",
+    consent_contact: "Samtycke kontakt",
+    consent_partner_forwarding: "Samtycke onboarding",
+  };
+  return labels[name] || name;
 }
 
-function FormSelect({ name, label }: { name: string; label: string }) {
+function Field({
+  name,
+  label,
+  type = "text",
+  placeholder,
+  errors,
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  placeholder?: string;
+  errors: Record<string, string>;
+}) {
+  return (
+    <label>
+      {label}
+      <input name={name} type={type} placeholder={placeholder} autoComplete="off" />
+      {errors[name] ? <span className="field-error">{errors[name]}</span> : null}
+    </label>
+  );
+}
+
+function SelectField({
+  name,
+  label,
+  children,
+  errors,
+}: {
+  name: string;
+  label: string;
+  children: React.ReactNode;
+  errors: Record<string, string>;
+}) {
   return (
     <label>
       {label}
       <select name={name} defaultValue="">
-        {yesNoOptions.map((option) => (
-          <option key={option.value || "empty"} value={option.value} disabled={option.value === ""}>
-            {option.label}
-          </option>
-        ))}
+        {children}
+      </select>
+      {errors[name] ? <span className="field-error">{errors[name]}</span> : null}
+    </label>
+  );
+}
+
+function YesNoField({ name, label }: { name: string; label: string }) {
+  return (
+    <label>
+      {label}
+      <select name={name} defaultValue="">
+        <option value="">Välj</option>
+        <option value="yes">Ja</option>
+        <option value="no">Nej</option>
       </select>
     </label>
   );
 }
 
-const getFieldValue = (form: HTMLFormElement, name: string) => {
-  const data = new FormData(form);
-  return String(data.get(name) || "").trim();
-};
+function CheckboxField({ name, label, errors }: { name: string; label: string; errors: Record<string, string> }) {
+  return (
+    <label className="checkbox-card">
+      <input name={name} type="checkbox" />
+      <span>{label}</span>
+      {errors[name] ? <strong className="field-error">{errors[name]}</strong> : null}
+    </label>
+  );
+}
 
 export function BusinessPaymentsApplicationForm() {
-  const [step, setStep] = useState(1);
+  const [state, formAction, pending] = useActionState(submitBusinessPaymentApplication, initialState);
+  const [step, setStep] = useState(0);
   const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
-  const [state, formAction, isPending] = useActionState(submitBusinessPaymentsApplication, initialState);
-  const errors = { ...(state.fieldErrors || {}), ...clientErrors };
+  const mergedErrors = useMemo(() => ({ ...(state.errors || {}), ...clientErrors }), [state.errors, clientErrors]);
 
-  const steps = useMemo(
-    () => [
-      { number: 1, title: "Företag" },
-      { number: 2, title: "Behov" },
-      { number: 3, title: "Bekräfta" },
-    ],
-    [],
-  );
-
-  function validateStep(nextStep: number) {
-    const form = document.querySelector<HTMLFormElement>(".application-form");
+  function validateStep(currentStep: number) {
+    const form = document.querySelector<HTMLFormElement>("#business-payment-application-form");
     if (!form) return true;
-
+    const data = new FormData(form);
     const nextErrors: Record<string, string> = {};
 
-    if (step === 1) {
-      const required: Array<[string, string]> = [
-        ["company_name", "Skriv företagsnamn."],
-        ["org_number", "Skriv organisationsnummer."],
-        ["contact_name", "Skriv kontaktperson."],
-        ["email", "Skriv e-post."],
-        ["industry", "Skriv bransch."],
-        ["business_description", "Beskriv kort verksamheten."],
-      ];
-      required.forEach(([name, message]) => {
-        if (!getFieldValue(form, name)) nextErrors[name] = message;
-      });
-      const email = getFieldValue(form, "email");
-      if (email && !email.includes("@")) nextErrors.email = "Skriv en giltig e-postadress.";
+    for (const field of requiredByStep[currentStep]) {
+      const raw = data.get(field);
+      const isCheckbox = field.startsWith("consent_");
+      const isEmpty = isCheckbox ? raw !== "on" : !String(raw || "").trim();
+      if (isEmpty) nextErrors[field] = `${getLabel(field)} behöver fyllas i.`;
     }
 
-    if (step === 2 && !getFieldValue(form, "customer_type")) {
-      nextErrors.customer_type = "Välj kundtyp.";
+    const email = String(data.get("email") || "").trim();
+    if (currentStep === 0 && email && !email.includes("@")) {
+      nextErrors.email = "Skriv en giltig e-postadress.";
     }
 
+    setClientErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
-      setClientErrors(nextErrors);
+      setTimeout(() => document.querySelector(".field-error")?.scrollIntoView({ behavior: "smooth", block: "center" }), 30);
       return false;
     }
-
-    setClientErrors({});
-    setStep(nextStep);
     return true;
+  }
+
+  function nextStep() {
+    if (!validateStep(step)) return;
+    setStep((current) => Math.min(current + 1, steps.length - 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function previousStep() {
+    setClientErrors({});
+    setStep((current) => Math.max(current - 1, 0));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    if (!validateStep(2)) event.preventDefault();
   }
 
   if (state.ok) {
     return (
-      <div className="application-success reveal">
-        <span className="success-mark">✓</span>
+      <div className="success-card reveal" role="status">
+        <div className="success-icon">✓</div>
         <h2>Vi har tagit emot din ansökan.</h2>
         <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
+        <Link className="button button-primary" href="/">
+          Tillbaka till Div3rsa
+        </Link>
       </div>
     );
   }
 
   return (
-    <form className="application-form reveal" action={formAction} noValidate>
-      <div className="stepper" aria-label="Ansökningssteg">
-        {steps.map((item) => (
+    <form id="business-payment-application-form" className="application-form reveal" action={formAction} onSubmit={onSubmit}>
+      <div className="step-indicator" aria-label="Ansökningssteg">
+        {steps.map((label, index) => (
           <button
-            className={item.number === step ? "step-pill active" : item.number < step ? "step-pill done" : "step-pill"}
-            key={item.number}
-            onClick={() => {
-              if (item.number <= step) setStep(item.number);
-              else validateStep(item.number);
-            }}
+            key={label}
             type="button"
+            className={index === step ? "step-pill active" : index < step ? "step-pill done" : "step-pill"}
+            onClick={() => {
+              if (index <= step || validateStep(step)) setStep(index);
+            }}
           >
-            <span>{item.number}</span>
-            {item.title}
+            <span>{index + 1}</span>
+            {label}
           </button>
         ))}
       </div>
 
-      {state.message && <div className="form-error">{state.message}</div>}
+      {state.message && !state.ok ? <p className="form-alert">{state.message}</p> : null}
 
-      <section className={step === 1 ? "form-step active" : "form-step"} aria-hidden={step !== 1}>
+      <div className={step === 0 ? "form-step active" : "form-step"} aria-hidden={step !== 0}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 1</p>
           <h2>Företaget</h2>
-          <p>Fyll i det viktigaste. Inga KYC-dokument behövs här.</p>
+          <p>Fyll i grunduppgifter. Inga KYC-dokument behövs i webbansökan.</p>
         </div>
         <div className="form-grid">
-          <label>
-            Företagsnamn
-            <input name="company_name" type="text" autoComplete="organization" required />
-            <FieldError message={errors.company_name} />
-          </label>
-          <label>
-            Organisationsnummer
-            <input name="org_number" type="text" inputMode="numeric" placeholder="559416-7149" required />
-            <FieldError message={errors.org_number} />
-          </label>
-          <label>
-            Kontaktperson
-            <input name="contact_name" type="text" autoComplete="name" required />
-            <FieldError message={errors.contact_name} />
-          </label>
-          <label>
-            E-post
-            <input name="email" type="email" autoComplete="email" required />
-            <FieldError message={errors.email} />
-          </label>
-          <label>
-            Telefon
-            <input name="phone" type="tel" autoComplete="tel" placeholder="070-000 00 00" />
-          </label>
-          <label>
-            Bransch
-            <input name="industry" type="text" placeholder="Ex. konsult, bygg, e-handel" required />
-            <FieldError message={errors.industry} />
-          </label>
-          <label className="full-span">
-            Hemsida
-            <input name="website" type="url" placeholder="https://" />
-          </label>
+          <Field name="company_name" label="Företagsnamn" placeholder="Ex. ABC Consulting AB" errors={mergedErrors} />
+          <Field name="org_number" label="Organisationsnummer" placeholder="559416-7149" errors={mergedErrors} />
+          <Field name="contact_name" label="Kontaktperson" placeholder="För- och efternamn" errors={mergedErrors} />
+          <Field name="email" label="E-post" type="email" placeholder="namn@foretag.se" errors={mergedErrors} />
+          <Field name="phone" label="Telefon" type="tel" placeholder="+46 70 000 00 00" errors={mergedErrors} />
+          <Field name="industry" label="Bransch" placeholder="Ex. e-handel, konsult, bygg" errors={mergedErrors} />
+          <Field name="website" label="Hemsida" placeholder="https://..." errors={mergedErrors} />
+          <YesNoField name="has_swedish_business_account" label="Har företaget svenskt företagskonto idag?" />
+          <YesNoField name="has_bankgiro" label="Har företaget bankgiro idag?" />
+          <YesNoField name="was_denied_bank_services" label="Har företaget blivit nekat bankkonto/bankgiro?" />
         </div>
         <label>
-          Kort beskrivning
-          <textarea name="business_description" rows={3} placeholder="Vad gör företaget och vilket betalningsproblem vill ni lösa?" required />
-          <FieldError message={errors.business_description} />
+          Kort verksamhetsbeskrivning
+          <textarea name="business_description" rows={4} placeholder="Beskriv kort vad företaget gör och varför ni behöver företagsbetalningar eller bankgiro." />
+          {mergedErrors.business_description ? <span className="field-error">{mergedErrors.business_description}</span> : null}
         </label>
-        <div className="form-grid">
-          <FormSelect name="has_swedish_business_account" label="Har företaget svenskt företagskonto idag?" />
-          <FormSelect name="has_bankgiro" label="Har företaget bankgiro idag?" />
-          <FormSelect name="was_denied_bank_services" label="Har företaget blivit nekat företagskonto eller bankgiro?" />
-        </div>
-      </section>
+      </div>
 
-      <section className={step === 2 ? "form-step active" : "form-step"} aria-hidden={step !== 2}>
+      <div className={step === 1 ? "form-step active" : "form-step"} aria-hidden={step !== 1}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 2</p>
           <h2>Behovet</h2>
           <p>Välj det som stämmer bäst. Det behöver inte vara perfekt.</p>
         </div>
         <div className="form-grid">
-          <label>
-            Kundtyp
-            <select name="customer_type" defaultValue="" required>
-              <option value="" disabled>
-                Välj kundtyp
-              </option>
-              {businessPaymentCustomerTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-            <FieldError message={errors.customer_type} />
-          </label>
-          <label>
-            Uppskattad månadsvolym
-            <input name="monthly_volume_estimate" type="text" placeholder="Ex. 250 000 kr/mån" />
-          </label>
-          <label>
-            Antal fakturor per månad
-            <input name="invoice_count_estimate" type="text" placeholder="Ex. 50" />
-          </label>
-          <label>
-            Genomsnittligt fakturabelopp
-            <input name="average_invoice_amount" type="text" placeholder="Ex. 5 000 kr" />
-          </label>
-          <label>
-            Befintligt fakturasystem
-            <input name="current_invoice_system" type="text" placeholder="Ex. Fortnox, Visma, inget" />
-          </label>
-          <label>
-            Hur snabbt behöver ni komma igång?
-            <select name="urgency" defaultValue="">
-              <option value="">Välj</option>
-              {businessPaymentUrgencies.map((urgency) => (
-                <option key={urgency} value={urgency}>
-                  {urgency}
-                </option>
-              ))}
-            </select>
-          </label>
+          <SelectField name="customer_type" label="Vilka kunder fakturerar ni?" errors={mergedErrors}>
+            <option value="" disabled>Välj kundtyp</option>
+            <option value="B2B">Företag</option>
+            <option value="B2C">Privatpersoner</option>
+            <option value="both">Både företag och privatpersoner</option>
+          </SelectField>
+          <Field name="monthly_volume_estimate" label="Uppskattad månadsvolym" placeholder="Ex. 250000" errors={mergedErrors} />
+          <Field name="invoice_count_estimate" label="Antal fakturor per månad" type="number" placeholder="Ex. 80" errors={mergedErrors} />
+          <Field name="average_invoice_amount" label="Genomsnittligt fakturabelopp" placeholder="Ex. 3000" errors={mergedErrors} />
+          <Field name="current_invoice_system" label="Befintligt fakturasystem" placeholder="Ex. Fortnox, Dooer, Excel eller inget" errors={mergedErrors} />
+          <SelectField name="urgency" label="Hur snabbt behöver ni komma igång?" errors={mergedErrors}>
+            <option value="" disabled>Välj</option>
+            <option value="asap">Så snart som möjligt</option>
+            <option value="1-2 weeks">Inom 1–2 veckor</option>
+            <option value="this month">Denna månad</option>
+            <option value="planning">Vi planerar framåt</option>
+          </SelectField>
         </div>
         <div className="checkbox-grid">
-          <label className="checkbox-card">
-            <input name="needs_invoicing" type="checkbox" />
-            <span>Behöver fakturering</span>
-          </label>
-          <label className="checkbox-card">
-            <input name="needs_customer_payments" type="checkbox" />
-            <span>Behöver ta emot kundinbetalningar</span>
-          </label>
-          <label className="checkbox-card">
-            <input name="needs_bankgiro_flow" type="checkbox" />
-            <span>Behöver bankgirobaserat betalflöde</span>
-          </label>
-          <label className="checkbox-card">
-            <input name="needs_invoice_financing" type="checkbox" />
-            <span>Behöver fakturaköp/förskottsutbetalning</span>
-          </label>
-          <label className="checkbox-card">
-            <input name="needs_api" type="checkbox" />
-            <span>Behöver API eller integration</span>
-          </label>
+          <label className="checkbox-card"><input name="needs_invoicing" type="checkbox" defaultChecked /> <span>Fakturering</span></label>
+          <label className="checkbox-card"><input name="needs_customer_payments" type="checkbox" defaultChecked /> <span>Ta emot kundinbetalningar</span></label>
+          <label className="checkbox-card"><input name="needs_bankgiro_flow" type="checkbox" defaultChecked /> <span>Bankgirobaserat betalflöde</span></label>
+          <label className="checkbox-card"><input name="needs_invoice_financing" type="checkbox" /> <span>Fakturaköp/förskottsutbetalning</span></label>
+          <label className="checkbox-card"><input name="needs_api" type="checkbox" /> <span>API eller integration senare</span></label>
         </div>
         <label>
           Övrig kommentar
-          <textarea name="other_comment" rows={4} placeholder="Skriv sådant som hjälper oss förstå behovet." />
+          <textarea name="other_comment" rows={4} placeholder="Skriv något mer som kan hjälpa oss förstå behovet." />
         </label>
-      </section>
+      </div>
 
-      <section className={step === 3 ? "form-step active" : "form-step"} aria-hidden={step !== 3}>
+      <div className={step === 2 ? "form-step active" : "form-step"} aria-hidden={step !== 2}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 3</p>
           <h2>Bekräfta</h2>
-          <p>Kontrollera samtycken och skicka in ansökan.</p>
+          <p>Granska uppgifterna och godkänn villkoren för att skicka ansökan.</p>
         </div>
-        <div className="consent-panel">
-          <label className="checkbox-card wide">
-            <input name="consent_contact" type="checkbox" required />
-            <span>Div3rsa får granska ansökan och kontakta mig om nästa steg.</span>
-          </label>
-          <FieldError message={errors.consent_contact} />
-          <label className="checkbox-card wide">
-            <input name="consent_partner_forwarding" type="checkbox" required />
-            <span>
-              Div3rsa får vidarebefordra nödvändiga uppgifter till relevant betalnings- eller finansaktör för fortsatt
-              onboarding när det krävs.
-            </span>
-          </label>
-          <FieldError message={errors.consent_partner_forwarding} />
-          <div className="form-note">
-            Div3rsa är inte en bank. KYC/AML hanteras först senare av relevant aktör när det krävs. Bankgiro och företagsbetalningar kräver godkännande.
-          </div>
+        <div className="consent-box">
+          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag godkänner att Div3rsa får granska ansökan och kontakta mig om nästa steg." />
+          <CheckboxField name="consent_partner_forwarding" errors={mergedErrors} label="Jag godkänner att nödvändiga uppgifter kan skickas vidare till relevant betalnings- eller finansaktör för fortsatt onboarding när det krävs." />
+          <p>
+            Div3rsa är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs.
+          </p>
         </div>
-      </section>
+      </div>
 
-      <p className="form-security-note">Ingen dokumentuppladdning i detta steg. Div3rsa återkommer med nästa steg efter granskning.</p>
-
-      <div className="form-actions">
-        {step > 1 && (
-          <button className="button button-secondary" type="button" onClick={() => setStep((current) => current - 1)}>
-            Tillbaka
-          </button>
-        )}
-        {step < 3 ? (
-          <button className="button button-primary" type="button" onClick={() => validateStep(step + 1)}>
-            Nästa steg
-          </button>
+      <div className="form-actions-sticky">
+        {step > 0 ? <button className="button button-secondary" type="button" onClick={previousStep}>Tillbaka</button> : <span />}
+        {step < steps.length - 1 ? (
+          <button className="button button-primary" type="button" onClick={nextStep}>Nästa steg</button>
         ) : (
-          <button className="button button-primary" type="submit" disabled={isPending}>
-            {isPending ? "Skickar..." : "Skicka ansökan"}
-          </button>
+          <button className="button button-primary" type="submit" disabled={pending}>{pending ? "Skickar..." : "Skicka ansökan"}</button>
         )}
       </div>
     </form>
