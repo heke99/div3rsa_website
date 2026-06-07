@@ -29,12 +29,10 @@ export const siteMeta = {
 };
 
 export const navItems = [
-  { label: "Hem", href: "/" },
   { label: "Tjänster", href: "/services" },
+  { label: "Hemsidor", href: "/websites" },
   { label: "Bankgiro", href: "/foretagsbetalningar-bankgiro", fullLabel: "Företagsbetalningar & Bankgiro" },
   { label: "Projekt", href: "/systems" },
-  { label: "Hemsidor", href: "/websites" },
-  { label: "Om oss", href: "/about" },
   { label: "Kontakt", href: "/contact" },
 ];
 
@@ -44,71 +42,51 @@ export const websiteStyleLinks = [
   { label: "Modern företagshemsida", href: "/websites/hybrid-business" },
 ];
 
-export const trustIndicators = [
-  "Systemutveckling",
-  "SaaS-plattformar",
-  "Hemsidor",
-  "Webbappar",
-  "Automation",
-  "Kundportaler",
-  "Företagsbetalningar",
-];
+export const trustIndicators = ["Hemsidor", "Webbappar", "Kundportaler", "Automation", "SaaS", "Bankgiroflöden"];
 
-export const heroProductCards = ["SaaS", "Webbapp", "Kundportal", "Automation", "Admin", "Dashboard"];
+export const heroProductCards = ["Hemsida", "Portal", "System", "Automation", "Dashboard"];
 
-export const growthSteps = ["Hemsida", "Portal", "Automation", "SaaS"];
+export const growthSteps = ["Hemsida", "Portal", "Automation", "Skala upp"];
 
 export const services = [
   {
-    title: "Systemutveckling",
-    text: "Vi bygger adminpaneler, kundsystem, interna verktyg, operationssystem och SaaS-plattformar.",
-  },
-  {
     title: "Hemsidor",
-    text: "Moderna och mobilanpassade hemsidor som bygger förtroende och hjälper företaget få fler kunder.",
+    text: "Tydliga, snabba och moderna hemsidor som skapar förtroende och leder kunden vidare.",
   },
   {
     title: "Webbappar & portaler",
-    text: "Inloggning, dashboards, bokningsflöden, kundportaler och användarsystem som fungerar i vardagen.",
+    text: "Inloggning, dashboards, kundportaler och arbetsflöden som fungerar i vardagen.",
+  },
+  {
+    title: "Systemutveckling",
+    text: "Adminpaneler, interna verktyg och SaaS-grunder byggda för att kunna växa.",
   },
   {
     title: "Automation & AI",
-    text: "Automatiserade flöden, AI-stöd, datahantering och integrationer som minskar manuellt arbete.",
-  },
-  {
-    title: "Kundportaler",
-    text: "Säkra portaler där kunder, personal eller partners kan logga in, följa status och hantera uppgifter.",
+    text: "Smartare flöden, integrationer och AI-stöd som minskar manuellt arbete.",
   },
   {
     title: "Företagsbetalningar & Bankgiro",
-    text: "Ett strukturerat ansöknings- och portalflöde för företag som behöver fakturering, kundinbetalningar och bankgirobaserade betalningsflöden.",
+    text: "Ett ansöknings- och portalflöde för företag som behöver fakturering och bankgirobaserade betalningar.",
   },
   {
-    title: "Dashboards & adminsystem",
-    text: "Interna verktyg för kunder, ärenden, uppdrag, dokument, priser, rapporter och affärsflöden.",
+    title: "Dashboards & admin",
+    text: "Översikt, ärenden, kunder, priser och rapporter samlat i rena interna vyer.",
   },
 ];
 
 export const whyChoose = [
   {
-    title: "Design och funktion i samma lösning",
-    text: "En bra digital lösning ska både se seriös ut och göra arbetet enklare för kunder, personal och ledning.",
+    title: "Snyggt nog att sälja",
+    text: "Designen ska kännas seriös direkt – på mobil, desktop och i kundens första klick.",
   },
   {
-    title: "Affären först",
-    text: "Vi tänker på försäljning, drift, användarflöden och skalbarhet från början – inte bara på kod.",
+    title: "Byggt för verklig drift",
+    text: "Vi tänker på admin, data, flöden och nästa steg från början.",
   },
   {
-    title: "Börja enkelt, bygg vidare",
-    text: "Ni kan börja med en hemsida och senare växa in i portal, app, automation eller SaaS-produkt.",
-  },
-  {
-    title: "Erfarenhet från riktiga produkter",
-    text: "Div3rsa arbetar med egna plattformar och produkter som Gridex, Coordiqo, Bovaro och DealFlowIQ.",
-  },
-  {
-    title: "Modern teknisk grund",
-    text: "Vi bygger med databaser, API:er, autentisering, automation, betalflöden och AI-redo struktur.",
+    title: "En grund som kan växa",
+    text: "Börja med webb. Lägg till portal, automation eller SaaS när affären kräver det.",
   },
 ];
 
@@ -131,46 +109,20 @@ export const solutionPackages = [
   {
     title: "Starthemsida",
     subtitle: "För företag som behöver en professionell hemsida snabbt.",
-    includes: [
-      "Startsida",
-      "Om företaget",
-      "Tjänster",
-      "Kontakt",
-      "Mobilanpassad design",
-      "Grundläggande SEO",
-      "Professionell presentation",
-    ],
+    includes: ["Startsida", "Tjänster", "Kontakt", "Mobilanpassad", "SEO-grund"],
     cta: "Fråga om starthemsida",
   },
   {
     title: "Företagshemsida",
     subtitle: "För företag som vill ha tydligare säljflöde, bättre design och mer premiumkänsla.",
-    includes: [
-      "Flera sidor",
-      "CTA-flöden",
-      "Kontaktformulär",
-      "Premiumdesign",
-      "SEO- och tracking-redo struktur",
-      "Möjlighet till blogg/nyheter",
-      "Redo för framtida portal",
-    ],
+    includes: ["Flera sidor", "CTA-flöden", "Kontaktformulär", "Premiumdesign", "Portal-redo"],
     cta: "Bygg företagshemsida",
     featured: true,
   },
   {
     title: "Anpassat system / SaaS",
     subtitle: "För företag som behöver ett riktigt digitalt system.",
-    includes: [
-      "Adminpanel",
-      "Kundportal",
-      "Databas",
-      "Roller och behörigheter",
-      "Betalflöden",
-      "Automation",
-      "Integrationer",
-      "Rapporter och analys",
-      "Skalbar arkitektur",
-    ],
+    includes: ["Adminpanel", "Kundportal", "Databas", "Roller", "Automation", "Integrationer"],
     cta: "Diskutera system",
   },
 ];
@@ -180,12 +132,9 @@ export const caseStudies = [
     title: "Gridex",
     displayUrl: "app.gridex.se",
     href: "https://app.gridex.se",
-    description:
-      "En operationsplattform för elhandel, kundonboarding, fullmakter, Ediel-flöden och processkontroll.",
-    problem:
-      "Elbolag behöver struktur för kunder, anläggningar, fullmakter, mätpunkter, meddelanden och daglig uppföljning.",
-    solution:
-      "Gridex byggs som ett driftssystem där administration, Ediel, kundflöden och uppföljning samlas i en plattform.",
+    description: "Operationsplattform för elhandel, onboarding, fullmakter och processkontroll.",
+    problem: "Elbolag behöver samla kunder, anläggningar, meddelanden och uppföljning.",
+    solution: "Gridex samlar drift, kundflöden och kontroll i en tydlig plattform.",
     features: ["Kundregister", "Mätpunkter", "Ediel-flöden", "Fullmakter", "Admin", "Driftöversikt"],
     cta: "Öppna Gridex",
   },
@@ -193,12 +142,9 @@ export const caseStudies = [
     title: "Coordiqo",
     displayUrl: "coordiqo.com",
     href: "https://coordiqo.com",
-    description:
-      "Ett planerings- och operationssystem för företag som hanterar personal, uppdrag, resurser, scheman och rutter.",
-    problem:
-      "Många verksamheter tappar tid när personal, uppdrag, resurser och ändringar hanteras i flera separata verktyg.",
-    solution:
-      "Coordiqo samlar planering, uppdrag, resurser och daglig drift i ett tydligt system.",
+    description: "Planeringssystem för personal, uppdrag, resurser, scheman och rutter.",
+    problem: "Drift blir rörig när planering, resurser och ändringar ligger i flera verktyg.",
+    solution: "Coordiqo samlar planering och daglig drift i ett tydligt system.",
     features: ["Personalplanering", "Uppdrag", "Resurser", "Scheman", "Rutter", "Driftöversikt"],
     cta: "Öppna Coordiqo",
   },
@@ -206,11 +152,9 @@ export const caseStudies = [
     title: "Bovaro",
     displayUrl: "bovaro.se",
     href: "https://bovaro.se",
-    description: "Ett digitalt produktkoncept för fastighet, bostad och marknadsplatsflöden.",
-    problem:
-      "Fastighets- och bostadsflöden kräver tydlig presentation, sök, filtrering, leads och kundflöden.",
-    solution:
-      "Bovaro byggs som en digital grund för presentation, sök, leads och marknadsplatslogik.",
+    description: "Digitalt produktkoncept för fastighet, bostad och marknadsplatsflöden.",
+    problem: "Objekt, leads och presentation behöver kännas enkelt och trovärdigt.",
+    solution: "Bovaro byggs som en ren grund för sök, presentation och leadflöden.",
     features: ["Objektflöden", "Marknadsplats", "Presentation", "Sök/filter", "Leadflöde", "Skalbar grund"],
     cta: "Öppna Bovaro",
   },
@@ -218,11 +162,9 @@ export const caseStudies = [
     title: "DealFlowIQ",
     displayUrl: "dealfloowiq.com",
     href: "https://dealfloowiq.com",
-    description: "En analys- och deal intelligence-plattform för fastighet, investerare och affärsflöden.",
-    problem:
-      "Investerare och fastighetsteam behöver bättre sätt att analysera, jämföra och strukturera affärsmöjligheter.",
-    solution:
-      "DealFlowIQ byggs för dealanalys, beslutsstöd och strukturerad uppföljning.",
+    description: "Analys- och deal intelligence-plattform för fastighet och investerare.",
+    problem: "Affärsmöjligheter behöver analyseras snabbare och mer strukturerat.",
+    solution: "DealFlowIQ byggs för dealanalys, beslutsstöd och uppföljning.",
     features: ["Dealanalys", "Fastighetsdata", "Investerarflöden", "Dashboard", "CRM", "Beslutsstöd"],
     cta: "Öppna DealFlowIQ",
   },

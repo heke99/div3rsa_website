@@ -60,7 +60,7 @@ export function Header() {
             return (
               <Link
                 key={item.href}
-                className={pathname === item.href ? "nav-link active" : "nav-link"}
+                className={pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href + "/")) ? "nav-link active" : "nav-link"}
                 href={item.href}
                 onClick={closeMenu}
               >

@@ -63,30 +63,20 @@ export function CaseCard({ item }: CaseCardProps) {
     <article className="case-card reveal">
       <div className="case-card-header">
         <div>
-          <span className="case-label">Utvald plattform</span>
+          <span className="case-label">Plattform</span>
           <h3>{item.title}</h3>
         </div>
-        <a href={item.href} className="case-url">
+        <a href={item.href} className="case-url" target="_blank" rel="noreferrer">
           {item.displayUrl}
         </a>
       </div>
       <p className="case-description">{item.description}</p>
-      <div className="case-columns">
-        <div>
-          <h4>Utmaning</h4>
-          <p>{item.problem}</p>
-        </div>
-        <div>
-          <h4>Lösning</h4>
-          <p>{item.solution}</p>
-        </div>
-      </div>
       <div className="feature-tags">
-        {item.features.map((feature) => (
+        {item.features.slice(0, 4).map((feature) => (
           <span key={feature}>{feature}</span>
         ))}
       </div>
-      <a className="case-cta" href={item.href}>
+      <a className="case-cta" href={item.href} target="_blank" rel="noreferrer">
         {item.cta}
       </a>
     </article>
@@ -118,12 +108,14 @@ export function StyleCard({ item }: StyleCardProps) {
         <strong>Passar för</strong>
         <span>{item.fits.slice(0, 3).join(" / ")}</span>
       </div>
-      <Link className="text-link" href={item.href}>
-        Läs om stilen
-      </Link>
-      <ButtonLink href="/contact" variant="secondary">
-        {item.cta}
-      </ButtonLink>
+      <div className="style-actions">
+        <Link className="text-link" href={item.href}>
+          Läs mer
+        </Link>
+        <ButtonLink href="/contact" variant="secondary">
+          {item.cta}
+        </ButtonLink>
+      </div>
     </article>
   );
 }

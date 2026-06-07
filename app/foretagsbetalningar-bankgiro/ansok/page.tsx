@@ -16,8 +16,7 @@ export default function ApplyBusinessPaymentsPage() {
           <p className="eyebrow">Ansökan</p>
           <h1>Ansök om Företagsbetalningar & Bankgiro</h1>
           <p className="page-lead">
-            Fyll i grunduppgifter och betalningsbehov. Alla som ansöker får inte automatiskt portalaccess — Div3rsa
-            granskar ansökan först och återkommer med nästa steg.
+            En kort ansökan med företagsuppgifter och betalningsbehov. Div3rsa granskar och återkommer med nästa steg.
           </p>
         </div>
       </section>

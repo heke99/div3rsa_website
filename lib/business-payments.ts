@@ -1,37 +1,37 @@
 export const businessPaymentFit = [
-  "Nystartade aktiebolag som behöver ett seriöst betalflöde",
-  "Företag som saknar bankgiro eller väntar på banklösning",
-  "Bolag med svenska kunder men svagt eller ofullständigt betalflöde",
-  "Företag som fakturerar B2B, B2C eller båda",
-  "Team som vill samla ansökan, status och support i en portal",
+  "Saknar bankgiro",
+  "Väntar på företagskonto",
+  "Fakturerar B2B eller B2C",
+  "Vill ha tydlig betalstatus",
+  "Behöver en portal och support",
 ];
 
 export const businessPaymentIncluded = [
   "Ansökan via Div3rsa",
-  "Granskning av företags- och betalningsbehov",
-  "Digital onboardingstatus",
-  "Fakturering och kundinbetalningar som flöde",
-  "Bankgirobaserade betalningsflöden där det kan sättas upp",
-  "Portalaccess efter godkännande",
-  "Support och uppföljning via Div3rsa",
+  "Behovsgranskning",
+  "Digital status",
+  "Kundinbetalningar",
+  "Bankgirobaserat flöde",
+  "Portal efter godkännande",
+  "Support via Div3rsa",
 ];
 
 export const businessPaymentSteps = [
   {
-    title: "Ansök via Div3rsa",
-    text: "Företaget skickar in grunduppgifter och beskriver behovet av företagsbetalningar, fakturering och bankgirobaserat betalflöde.",
+    title: "Ansök",
+    text: "Skicka in företagsuppgifter och beskriv vilket betalflöde ni behöver.",
   },
   {
-    title: "Vi granskar behovet",
-    text: "Div3rsa går igenom ansökan, kontaktar er vid behov och bedömer nästa steg innan eventuell onboarding startas.",
+    title: "Granskning",
+    text: "Div3rsa går igenom ärendet och återkommer med nästa steg.",
   },
   {
-    title: "Partner-onboarding vid behov",
-    text: "KYC/AML och eventuell dokumentinsamling hanteras av relevant betalnings- eller finansaktör när det krävs.",
+    title: "Onboarding",
+    text: "KYC/AML hanteras av relevant betalnings- eller finansaktör när det krävs.",
   },
   {
-    title: "Portal och uppföljning",
-    text: "När kunden godkänns skapas portalaccess där företaget kan följa status, nästa steg, prisprofil och support.",
+    title: "Portal",
+    text: "Efter godkännande får kunden portalaccess för status, support och uppföljning.",
   },
 ];
 
@@ -39,12 +39,12 @@ export const businessPaymentFaqs = [
   {
     question: "Är Div3rsa en bank?",
     answer:
-      "Nej. Div3rsa tillhandahåller teknik, onboarding, portal, support och kundflöde. Betalnings- och finansmoment kan kräva relevant betalnings- eller finansaktör.",
+      "Nej. Div3rsa tillhandahåller teknik, onboardingflöde, portal och support. Betalnings- och finansmoment kan kräva relevant aktör.",
   },
   {
-    question: "Garanterar ni bankgiro?",
+    question: "Garanteras bankgiro?",
     answer:
-      "Nej. Bankgiro och företagsbetalningar kräver godkänd ansökan och onboarding. Vi hjälper företag att komma vidare genom ett strukturerat flöde, men garanterar inte godkännande innan granskning är klar.",
+      "Nej. Bankgiro och företagsbetalningar kräver godkänd ansökan och onboarding. Vi hjälper företaget vidare på ett strukturerat sätt.",
   },
   {
     question: "Gör Div3rsa KYC/AML?",
@@ -52,9 +52,9 @@ export const businessPaymentFaqs = [
       "Inte i webbansökan. KYC/AML och eventuell dokumentinsamling hanteras av relevant betalnings- eller finansaktör när det krävs.",
   },
   {
-    question: "Får alla som ansöker ett konto i portalen?",
+    question: "Får alla ett portalkonto?",
     answer:
-      "Nej. Först skickas ansökan in, sedan granskar Div3rsa ärendet. Portalaccess skapas först efter att ansökan kvalificerats eller godkänts.",
+      "Nej. Konto skapas först när ansökan har granskats och kvalificerats.",
   },
 ];
 

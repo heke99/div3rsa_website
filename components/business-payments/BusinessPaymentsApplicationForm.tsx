@@ -126,8 +126,8 @@ export function BusinessPaymentsApplicationForm() {
       <section className={step === 1 ? "form-step active" : "form-step"} aria-hidden={step !== 1}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 1</p>
-          <h2>Företagsuppgifter</h2>
-          <p>Vi börjar med grunduppgifter om företaget och situationen kring företagskonto och bankgiro.</p>
+          <h2>Företaget</h2>
+          <p>Fyll i det viktigaste. Inga KYC-dokument behövs här.</p>
         </div>
         <div className="form-grid">
           <label>
@@ -165,8 +165,8 @@ export function BusinessPaymentsApplicationForm() {
           </label>
         </div>
         <label>
-          Kort verksamhetsbeskrivning
-          <textarea name="business_description" rows={4} placeholder="Beskriv kort vad företaget gör och varför ni behöver betalningsflöde." required />
+          Kort beskrivning
+          <textarea name="business_description" rows={3} placeholder="Vad gör företaget och vilket betalningsproblem vill ni lösa?" required />
           <FieldError message={errors.business_description} />
         </label>
         <div className="form-grid">
@@ -179,8 +179,8 @@ export function BusinessPaymentsApplicationForm() {
       <section className={step === 2 ? "form-step active" : "form-step"} aria-hidden={step !== 2}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 2</p>
-          <h2>Betalningsbehov</h2>
-          <p>Beskriv vad företaget behöver så att Div3rsa kan bedöma rätt nästa steg.</p>
+          <h2>Behovet</h2>
+          <p>Välj det som stämmer bäst. Det behöver inte vara perfekt.</p>
         </div>
         <div className="form-grid">
           <label>
@@ -256,8 +256,8 @@ export function BusinessPaymentsApplicationForm() {
       <section className={step === 3 ? "form-step active" : "form-step"} aria-hidden={step !== 3}>
         <div className="form-step-heading">
           <p className="eyebrow">Steg 3</p>
-          <h2>Bekräfta och skicka</h2>
-          <p>Div3rsa samlar endast in grunduppgifter och betalningsbehov i detta steg. KYC/AML görs inte i webbansökan.</p>
+          <h2>Bekräfta</h2>
+          <p>Kontrollera samtycken och skicka in ansökan.</p>
         </div>
         <div className="consent-panel">
           <label className="checkbox-card wide">
@@ -274,14 +274,12 @@ export function BusinessPaymentsApplicationForm() {
           </label>
           <FieldError message={errors.consent_partner_forwarding} />
           <div className="form-note">
-            KYC/AML och eventuell dokumentinsamling hanteras av relevant betalnings-/finansaktör när det krävs.
-            Tjänsten kräver godkänd ansökan och onboarding. Bankgiro eller företagsbetalningar garanteras inte innan
-            godkännande.
+            Div3rsa är inte en bank. KYC/AML hanteras först senare av relevant aktör när det krävs. Bankgiro och företagsbetalningar kräver godkännande.
           </div>
         </div>
       </section>
 
-      <p className="form-security-note">Vi samlar inte in KYC-dokument i webbansökan. Nästa steg hanteras först efter granskning.</p>
+      <p className="form-security-note">Ingen dokumentuppladdning i detta steg. Div3rsa återkommer med nästa steg efter granskning.</p>
 
       <div className="form-actions">
         {step > 1 && (

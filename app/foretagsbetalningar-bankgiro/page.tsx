@@ -13,22 +13,20 @@ import {
 export const metadata: Metadata = {
   title: "Företagsbetalningar & Bankgiro",
   description:
-    "Div3rsa hjälper företag med fakturering, kundinbetalningar och bankgirobaserade betalningsflöden via en digital portal.",
+    "Ansök om ett tydligt flöde för fakturering, kundinbetalningar och bankgirobaserade företagsbetalningar via Div3rsa.",
 };
 
 export default function BusinessPaymentsPage() {
   return (
     <>
-      <section className="page-hero business-hero">
+      <section className="page-hero business-hero compact-hero">
         <div className="aurora aurora-one" />
-        <div className="aurora aurora-two" />
         <div className="container hero-grid">
           <div className="reveal">
             <p className="eyebrow">Företagsbetalningar & Bankgiro</p>
-            <h1>Saknar ditt företag bankgiro eller fungerande företagsbetalningar?</h1>
+            <h1>Saknar företaget bankgiro eller ett fungerande betalflöde?</h1>
             <p className="page-lead">
-              Div3rsa hjälper företag att komma igång med fakturering, kundinbetalningar och bankgirobaserade
-              betalningsflöden via en enkel digital portal.
+              Ansök via Div3rsa. Vi samlar behov, status och nästa steg i ett tydligt flöde.
             </p>
             <div className="hero-actions">
               <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Ansök nu</ButtonLink>
@@ -38,47 +36,51 @@ export default function BusinessPaymentsPage() {
             </div>
           </div>
           <div className="business-portal-card reveal">
-            <span className="case-label">Div3rsa Portal</span>
+            <span className="case-label">Så fungerar det</span>
             <h3>Ansökan → granskning → portal</h3>
             <div className="portal-status-list">
-              <span>Ansökan mottagen</span>
-              <span>Under granskning</span>
-              <span>Partner-onboarding vid behov</span>
-              <span>Portalaccess efter godkännande</span>
+              <span>Ansökan skickas in</span>
+              <span>Div3rsa granskar</span>
+              <span>Onboarding vid behov</span>
+              <span>Portal efter godkännande</span>
             </div>
-            <p>
-              Kunden ska inte behöva leta efter lösningen själv. Div3rsa samlar ansökan, status, support och nästa steg
-              i ett tydligt flöde.
-            </p>
+            <p>Div3rsa är inte en bank och bankgiro garanteras inte innan godkännande.</p>
           </div>
         </div>
       </section>
 
       <Section
         eyebrow="Problemet"
-        title="När bankgiro och företagsbetalningar stoppar verksamheten."
-        intro="Många företag fastnar när de saknar svenskt bankgiro, väntar på företagskonto eller inte har ett professionellt sätt att fakturera och ta emot kundbetalningar."
+        title="När bankgiro stoppar affären."
+        intro="Många företag kan sälja – men fastnar när fakturering, kundinbetalningar eller bankgiro inte fungerar smidigt."
       >
-        <div className="card-grid three">
-          <TextCard title="Svårt att ta betalt" text="Utan fungerande betalflöde blir det svårt att fakturera kunder, följa betalningar och driva verksamheten professionellt." />
-          <TextCard title="Långa processer" text="Banker och betalaktörer kan ha långa onboardingflöden. Div3rsa strukturerar ansökan och nästa steg." />
-          <TextCard title="Otydlig status" text="Kunden behöver veta vad som händer. Därför byggs flödet mot en separat portal med status och support." />
+        <div className="card-grid three compact-cards">
+          <TextCard title="Svårt att ta betalt" text="Utan rätt betalflöde blir fakturering och uppföljning onödigt tungt." />
+          <TextCard title="Otydliga steg" text="Kunden behöver veta vad som händer, vad som saknas och vem som tar nästa steg." />
+          <TextCard title="Ingen egen lösning" text="Företagaren ska inte behöva pussla ihop bank, faktura och portal själv." />
         </div>
       </Section>
 
       <Section
         eyebrow="Lösningen"
-        title="En samlad väg in via Div3rsa."
-        intro="Div3rsa äger kundupplevelsen: ansökan, kontakt, portal, support och status. KYC/AML hanteras av relevant betalnings- eller finansaktör när det krävs."
+        title="Ett samlat flöde via Div3rsa."
+        intro="Vi håller webbansökan enkel. KYC/AML och dokument hanteras först senare av relevant aktör när det krävs."
       >
-        <div className="card-grid three">
-          {businessPaymentIncluded.map((item) => (
-            <TextCard key={item} title={item} text="Ingår i flödet för att göra processen tydligare, tryggare och mer professionell för företaget." />
-          ))}
+        <div className="split-panel reveal">
+          <div>
+            <h3>Det kunden får</h3>
+            <p>En enkel ansökan, tydlig uppföljning och portalaccess efter godkännande.</p>
+            <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Starta ansökan</ButtonLink>
+          </div>
+          <div className="feature-tags clean-tags">
+            {businessPaymentIncluded.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section eyebrow="Så fungerar det" title="Från ansökan till portalaccess.">
+      <Section eyebrow="Process" title="Fyra enkla steg">
         <div className="process-grid">
           {businessPaymentSteps.map((step, index) => (
             <article className="process-step reveal" key={step.title}>
@@ -90,37 +92,15 @@ export default function BusinessPaymentsPage() {
         </div>
       </Section>
 
-      <Section eyebrow="För vem?" title="Tjänsten passar företag som behöver ett tydligare betalflöde.">
+      <Section eyebrow="Passar för" title="Företag som behöver komma vidare.">
         <div className="industry-grid reveal">
           {businessPaymentFit.map((item) => (
             <span key={item}>{item}</span>
           ))}
         </div>
-        <div className="center-actions">
-          <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Starta ansökan</ButtonLink>
-        </div>
       </Section>
 
-      <Section eyebrow="Viktigt" title="Vi är tydliga med vad tjänsten är — och inte är.">
-        <div className="two-column">
-          <div className="glass-card reveal">
-            <h3>Div3rsa är kundens portal och process</h3>
-            <p>
-              Vi hjälper företag att samla ansökan, behov, status, kontakt och portalaccess i ett professionellt flöde.
-              Det gör att kunden slipper försöka pussla ihop en lösning själv.
-            </p>
-          </div>
-          <div className="glass-card reveal">
-            <h3>Ingen garanti innan godkännande</h3>
-            <p>
-              Bankgiro, företagsbetalningar och eventuella finansmoment kräver godkänd ansökan och onboarding. Div3rsa
-              ska inte framstå som bank eller lova garanterat godkännande.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section id="faq" eyebrow="Vanliga frågor" title="Vanliga frågor">
+      <Section id="faq" eyebrow="Frågor" title="Viktigt att känna till">
         <div className="faq-list">
           {businessPaymentFaqs.map((faq) => (
             <FAQItem key={faq.question} {...faq} />
@@ -129,8 +109,8 @@ export default function BusinessPaymentsPage() {
       </Section>
 
       <CTASection
-        title="Vill du komma igång med Företagsbetalningar & Bankgiro?"
-        text="Skicka in ansökan så granskar Div3rsa uppgifterna och återkommer med nästa steg."
+        title="Vill du ansöka?"
+        text="Skicka in uppgifterna så går Div3rsa igenom ärendet och återkommer med nästa steg."
         primaryLabel="Ansök nu"
         primaryHref="/foretagsbetalningar-bankgiro/ansok"
         secondaryLabel="Kontakta oss"
