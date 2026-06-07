@@ -66,21 +66,21 @@ export default function Home() {
       <Section
         id="websites"
         eyebrow="Hemsidor"
-        title="Välj rätt känsla från början."
-        intro="Alla företag behöver inte samma hemsida. Därför visar vi tre tydliga riktningar: 3D / Wow, Business och Simple."
+        title="Tre tydliga stilar. Välj känslan kunden ska få."
+        intro="Vi visar skillnaden visuellt – från premium 3D till seriös Business och snabb Simple. Då blir det lättare att välja rätt nivå från start."
       >
         <div className="style-intro-panel reveal">
           <div>
             <strong>3D / Wow</strong>
-            <span>För starkt första intryck och premiumkänsla.</span>
+            <span>Stor hero, 3D-känsla, glow och premiumeffekt. För bolag som vill imponera direkt.</span>
           </div>
           <div>
             <strong>Business</strong>
-            <span>För seriös B2B, tjänster och tydliga CTA-flöden.</span>
+            <span>Ren B2B-layout med tjänster, case och tydliga CTA. För företag som vill sälja tryggt.</span>
           </div>
           <div>
             <strong>Simple</strong>
-            <span>För snabb, ren och trygg informationssida.</span>
+            <span>Minimal, snabb och lätt att förstå. För företag som vill komma igång utan onödigt brus.</span>
           </div>
         </div>
         <div className="card-grid three style-comparison-grid">

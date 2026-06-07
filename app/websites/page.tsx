@@ -6,36 +6,56 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { growthSteps, websiteStyles } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Hemsidor",
+  title: "Hemsidestilar - 3D, Business och Simple",
   description:
-    "Välj mellan premium 3D, enkel informationssida eller modern företagshemsida byggd av Div3rsa AB.",
+    "Jämför tre tydliga hemsidestilar från Div3rsa AB: Premium 3D / Wow, Business / Modern och Simple / Information.",
 };
 
 export default function WebsitesPage() {
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero websites-hero">
         <div className="aurora aurora-two" />
-        <div className="container narrow reveal">
-          <p className="eyebrow">Hemsidor</p>
-          <h1>Tre hemsidestilar. En tydlig väg framåt.</h1>
-          <p className="page-lead">Jämför 3D / Wow, Business och Simple så blir det enklare att välja rätt nivå för varumärke, budget och mål.</p>
+        <div className="container two-column">
+          <div className="reveal">
+            <p className="eyebrow">Hemsidestilar</p>
+            <h1>Tre stilar. Tre olika första intryck.</h1>
+            <p className="page-lead">
+              Välj om sidan ska kännas premium och visuell, seriös och B2B, eller enkel och snabb. Vi visar exempel direkt så beslutet blir enklare.
+            </p>
+            <div className="hero-actions">
+              <ButtonLink href="/contact">Få rekommendation</ButtonLink>
+              <ButtonLink href="#styles" variant="secondary">
+                Jämför stilar
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="website-style-stack reveal" aria-label="Exempel på tre hemsidestilar">
+            {websiteStyles.map((style) => (
+              <div className={`website-style-strip website-style-strip-${style.slug}`} key={style.slug}>
+                <span>{style.shortTitle}</span>
+                <strong>{style.exampleTitle}</strong>
+                <i />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <Section>
+      <Section id="styles" eyebrow="Jämförelse" title="Välj känslan som passar ditt företag." intro="Alla cards visar en förenklad preview av hur stilen kan se ut. Innehållet anpassas sedan efter ditt företag.">
         <div className="style-intro-panel reveal">
           <div>
             <strong>3D / Wow</strong>
-            <span>Visuell, premium och minnesvärd.</span>
+            <span>Premium, visuell och minnesvärd. För starkt första intryck.</span>
           </div>
           <div>
             <strong>Business</strong>
-            <span>Modern, seriös och säljande.</span>
+            <span>Modern, seriös och säljande. För B2B och tjänsteföretag.</span>
           </div>
           <div>
             <strong>Simple</strong>
-            <span>Ren, snabb och lätt att förstå.</span>
+            <span>Ren, snabb och trygg. För enkel information och kontakt.</span>
           </div>
         </div>
         <div className="card-grid three style-comparison-grid">

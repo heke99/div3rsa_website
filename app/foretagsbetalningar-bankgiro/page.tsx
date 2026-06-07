@@ -26,7 +26,7 @@ export default function BusinessPaymentsPage() {
             <p className="eyebrow">Företagsbetalningar & Bankgiro</p>
             <h1>Saknar företaget bankgiro eller ett fungerande betalflöde?</h1>
             <p className="page-lead">
-              Ansök via Div3rsa. Vi samlar behov, status och nästa steg i ett tydligt flöde.
+              För företag som behöver fakturera svenska kunder, ta emot betalningar via svenskt bankgirobaserat flöde och få utbetalning även när banken inte är löst ännu.
             </p>
             <div className="hero-actions">
               <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Ansök nu</ButtonLink>
@@ -44,10 +44,34 @@ export default function BusinessPaymentsPage() {
               <span>Onboarding vid behov</span>
               <span>Portal efter godkännande</span>
             </div>
-            <p>Div3rsa är inte en bank och bankgiro garanteras inte innan godkännande.</p>
+            <p>Kunden kan betala till ett svenskt bankgirobaserat flöde när upplägget är godkänt. Div3rsa är inte en bank.</p>
           </div>
         </div>
       </section>
+
+
+      <Section
+        eyebrow="Vanligaste frågan"
+        title="Kan kunden betala till ett svenskt bankgiro?"
+        intro="Ja, det kan gå med rätt upplägg. Det är just därför flödet finns."
+      >
+        <div className="bankgiro-answer-panel reveal">
+          <div>
+            <span className="case-label">Kort svar</span>
+            <h3>Ja – kunden kan betala till ett svenskt bankgirobaserat betalningsflöde.</h3>
+            <p>
+              Ni kan få utbetalning även om företaget använder ett utländskt bankkonto, förutsatt att ansökan och onboarding godkänns. Vi går igenom behovet och visar nästa steg.
+            </p>
+          </div>
+          <div className="bankgiro-mini-flow" aria-label="Bankgiroflöde">
+            <span>Svensk kund</span>
+            <strong>→</strong>
+            <span>Bankgiroflöde</span>
+            <strong>→</strong>
+            <span>Utbetalning</span>
+          </div>
+        </div>
+      </Section>
 
       <Section
         eyebrow="Problemet"

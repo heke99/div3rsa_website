@@ -93,6 +93,9 @@ type StyleCardProps = {
     description: string;
     summary?: string;
     bestFor?: string;
+    exampleTitle?: string;
+    exampleText?: string;
+    previewSections?: string[];
     fits: string[];
     features: string[];
     cta: string;
@@ -106,14 +109,22 @@ export function StyleCard({ item }: StyleCardProps) {
         <span className="style-badge">{item.badge}</span>
         <strong>{item.shortTitle || item.title}</strong>
       </div>
-      <div className={`style-visual style-visual-${item.slug}`} aria-hidden="true">
+      <div className={`style-visual style-visual-${item.slug}`} aria-label={`Exempel på ${item.shortTitle || item.title}`}>
         <span />
         <span />
         <span />
         <i />
+        <div className="style-preview-copy">
+          <small>{item.exampleTitle}</small>
+          <b>{item.shortTitle || item.title}</b>
+        </div>
       </div>
       <h3>{item.title}</h3>
       <p>{item.description}</p>
+      <div className="style-example-box">
+        <strong>Så kan det se ut</strong>
+        <span>{item.exampleText}</span>
+      </div>
       <div className="style-summary-box">
         <strong>Känsla</strong>
         <span>{item.summary}</span>
