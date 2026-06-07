@@ -68,8 +68,8 @@ export function Header() {
               </Link>
             );
           })}
-          <ButtonLink href="/contact" className="header-cta" ariaLabel="Start a project with Div3rsa">
-            Start Project
+          <ButtonLink href={process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.div3rsa.com"} className="header-cta" ariaLabel="Open Div3rsa Portal">
+            Portal
           </ButtonLink>
         </nav>
       </div>

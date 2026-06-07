@@ -4,6 +4,7 @@ import { CTASection } from "@/components/CTASection";
 import { HomeHero } from "@/components/HomeHero";
 import { Section } from "@/components/Section";
 import { ButtonLink } from "@/components/ButtonLink";
+import { businessPaymentIncluded } from "@/lib/business-payments";
 import {
   aboutValues,
   caseStudies,
@@ -90,6 +91,36 @@ export default function Home() {
           {caseStudies.map((item) => (
             <CaseCard key={item.title} item={item} />
           ))}
+        </div>
+      </Section>
+
+
+      <Section
+        id="business-payments"
+        eyebrow="Företagsbetalningar & Bankgiro"
+        title="For companies that need bankgiro-based payment flows."
+        intro="Div3rsa now also helps companies that struggle with bankgiro, invoicing and business payment flows by creating a structured application, admin and portal journey."
+      >
+        <div className="two-column">
+          <div className="rich-copy reveal">
+            <p>
+              Many companies get stuck when they cannot access a Swedish bankgiro or a working business payment flow.
+              Div3rsa gives them one clear place to apply, follow the process and continue onboarding through a portal.
+            </p>
+            <p>
+              Div3rsa is not presented as a bank and we do not guarantee approval. The service is built around
+              application handling, portal status, support and partner onboarding where required.
+            </p>
+            <ButtonLink href="/foretagsbetalningar-bankgiro">Read about Företagsbetalningar & Bankgiro</ButtonLink>
+          </div>
+          <div className="company-card reveal">
+            <h3>What the flow includes</h3>
+            <div className="feature-tags">
+              {businessPaymentIncluded.slice(0, 6).map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 

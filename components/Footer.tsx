@@ -2,11 +2,11 @@ import Link from "next/link";
 import { company, websiteStyleLinks } from "@/lib/content";
 
 const serviceLinks = [
-  "System Development",
-  "Websites",
-  "Web Apps",
-  "Automation & AI",
-  "Customer Portals",
+  { label: "System Development", href: "/services" },
+  { label: "Websites", href: "/websites" },
+  { label: "Web Apps", href: "/services" },
+  { label: "Automation & AI", href: "/services" },
+  { label: "Företagsbetalningar & Bankgiro", href: "/foretagsbetalningar-bankgiro" },
 ];
 
 export function Footer() {
@@ -31,13 +31,14 @@ export function Footer() {
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/systems">Our Systems</Link>
+          <a href={process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.div3rsa.com"}>Portal</a>
         </div>
 
         <div>
           <h3>Services</h3>
           {serviceLinks.map((service) => (
-            <Link key={service} href="/services">
-              {service}
+            <Link key={service.label} href={service.href}>
+              {service.label}
             </Link>
           ))}
         </div>
@@ -53,8 +54,10 @@ export function Footer() {
 
         <div>
           <h3>Legal</h3>
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/cookies">Cookies</Link>
+          <Link href="/integritetspolicy">Integritetspolicy</Link>
+          <Link href="/anvandarvillkor">Användarvillkor</Link>
+          <Link href="/cookiepolicy">Cookiepolicy</Link>
+          <Link href="/foretagsbetalningar-bankgiro/villkor">Villkor Bankgiro</Link>
         </div>
       </div>
       <div className="container footer-bottom">

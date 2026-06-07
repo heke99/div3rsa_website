@@ -1194,3 +1194,208 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+.business-hero h1 {
+  max-width: 900px;
+}
+
+.business-portal-card,
+.application-form,
+.application-success {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(45, 226, 230, 0.13), transparent 34%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+    var(--panel-strong);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.business-portal-card {
+  padding: 30px;
+}
+
+.portal-status-list {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.portal-status-list span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--muted-strong);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.portal-status-list span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 18px rgba(140, 255, 210, 0.7);
+}
+
+.application-section {
+  padding-top: 34px;
+}
+
+.application-form {
+  padding: 28px;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.step-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 12px 14px;
+  color: var(--muted-strong);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.step-pill span {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-weight: 850;
+}
+
+.step-pill.active,
+.step-pill.done {
+  border-color: rgba(45, 226, 230, 0.4);
+  background: rgba(45, 226, 230, 0.1);
+  color: var(--text);
+}
+
+.form-step {
+  display: none;
+}
+
+.form-step.active {
+  display: block;
+}
+
+.form-step-heading {
+  margin-bottom: 22px;
+}
+
+.form-step-heading p:not(.eyebrow),
+.muted-copy,
+.business-portal-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.full-span {
+  grid-column: 1 / -1;
+}
+
+.checkbox-grid,
+.consent-panel {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.checkbox-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.checkbox-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--muted-strong);
+  line-height: 1.5;
+}
+
+.checkbox-card.wide {
+  width: 100%;
+}
+
+.checkbox-card input {
+  width: auto;
+  margin-top: 4px;
+  accent-color: var(--cyan);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.form-error {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 79, 216, 0.34);
+  border-radius: 16px;
+  color: #ffd6f5;
+  background: rgba(255, 79, 216, 0.08);
+}
+
+.application-success {
+  display: grid;
+  place-items: start;
+  gap: 12px;
+  padding: 36px;
+}
+
+.success-mark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: rgba(140, 255, 210, 0.12);
+  color: var(--green);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .stepper,
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application-form {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .button {
+    width: 100%;
+  }
+}

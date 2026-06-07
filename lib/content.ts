@@ -30,6 +30,7 @@ export const siteMeta = {
 export const navItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Företagsbetalningar & Bankgiro", href: "/foretagsbetalningar-bankgiro" },
   { label: "Our Systems", href: "/systems" },
   { label: "Website Styles", href: "/websites" },
   { label: "About", href: "/about" },
@@ -49,6 +50,7 @@ export const trustIndicators = [
   "Apps",
   "Automation",
   "AI Workflows",
+  "Företagsbetalningar",
 ];
 
 export const heroProductCards = [
@@ -82,6 +84,10 @@ export const services = [
   {
     title: "Customer Portals",
     text: "Secure portals where customers, partners or staff can log in, manage data, view status and interact with your business.",
+  },
+  {
+    title: "Företagsbetalningar & Bankgiro",
+    text: "A structured application and portal flow for companies that need invoicing, customer payments and bankgiro-based payment flows.",
   },
   {
     title: "Dashboards & Admin Panels",
