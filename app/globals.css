@@ -1409,6 +1409,12 @@ textarea {
   background: rgba(255, 79, 216, 0.08);
 }
 
+.form-alert-success {
+  color: var(--green);
+  border-color: rgba(140, 255, 210, 0.24);
+  background: rgba(140, 255, 210, 0.08);
+}
+
 .form-actions-sticky {
   display: flex;
   justify-content: space-between;

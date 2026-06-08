@@ -1,6 +1,7 @@
 "use server";
 
-import { sendEmail, renderRows } from "@/lib/server/business-payments-email";
+import { renderRows } from "@/lib/server/business-payments-email";
+import { sendSmtpMail } from "@/lib/email/smtp";
 import { supabaseInsert } from "@/lib/server/supabase-rest";
 
 export type ContactFormState = {
@@ -92,10 +93,15 @@ export async function submitContactRequest(_previousState: ContactFormState, for
     ["Meddelande", payload.message],
   ]);
 
-  const result = await sendEmail({
-    to: adminEmail,
-    subject,
-    text: [
+  console.info("Contact request saved", { submissionId, email: payload.email });
+  console.info("Sending contact request admin notification", { submissionId, recipient: adminEmail });
+
+  try {
+    const result = await sendSmtpMail({
+      to: adminEmail,
+      subject,
+      replyTo: payload.email,
+      text: [
       "Ny kontaktförfrågan från Div3rsa Web.",
       "",
       `Namn: ${payload.name}`,
@@ -107,29 +113,39 @@ export async function submitContactRequest(_previousState: ContactFormState, for
       "",
       payload.message,
     ].join("\n"),
-    html: `
-      <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
-        <h2>Ny kontaktförfrågan från Div3rsa Web</h2>
-        <table style="border-collapse:collapse;width:100%;max-width:720px;">${rows}</table>
-      </div>`,
-  });
+      html: `
+        <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
+          <h2>Ny kontaktförfrågan från Div3rsa Web</h2>
+          <table style="border-collapse:collapse;width:100%;max-width:720px;">${rows}</table>
+        </div>`,
+    });
 
-  await logEmail({
-    contactSubmissionId: submissionId,
-    emailType: "contact_request_admin_notification",
-    recipient: adminEmail,
-    subject,
-    status: result.ok ? "sent" : "failed",
-    providerMessageId: result.providerMessageId,
-    errorMessage: result.error,
-  }).catch(() => null);
+    await logEmail({
+      contactSubmissionId: submissionId,
+      emailType: "contact_request_admin_notification",
+      recipient: adminEmail,
+      subject,
+      status: "sent",
+      providerMessageId: result.messageId || undefined,
+    }).catch(() => null);
 
-  if (!result.ok) {
+    return { ok: true, message: "Vi har tagit emot din förfrågan." };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown SMTP email error";
+    console.error("Contact request admin notification failed", { submissionId, recipient: adminEmail, error });
+
+    await logEmail({
+      contactSubmissionId: submissionId,
+      emailType: "contact_request_admin_notification",
+      recipient: adminEmail,
+      subject,
+      status: "failed",
+      errorMessage: message,
+    }).catch(() => null);
+
     return {
       ok: true,
-      message: "Vi har tagit emot din förfrågan. Om du inte får svar, maila info@div3rsa.com direkt.",
+      message: "Vi har tagit emot din förfrågan. Intern mailnotis kunde inte skickas automatiskt.",
     };
   }
-
-  return { ok: true, message: "Vi har tagit emot din förfrågan." };
 }

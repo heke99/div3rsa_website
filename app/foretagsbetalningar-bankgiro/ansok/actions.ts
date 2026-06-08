@@ -86,6 +86,58 @@ function buildAdminEmail(payload: Record<string, unknown>) {
   return lines.join("\n");
 }
 
+function escapeHtml(value: unknown) {
+  return String(value ?? "-")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function buildAdminEmailHtml(payload: Record<string, unknown>) {
+  const portalUrl = process.env.PORTAL_ADMIN_URL || "https://portal.div3rsa.com/admin/payment-applications";
+  const rows: Array<[string, unknown]> = [
+    ["Företag", payload.company_name],
+    ["Org.nr", payload.org_number],
+    ["Kontaktperson", payload.contact_name],
+    ["E-post", payload.email],
+    ["Telefon", payload.phone],
+    ["Bransch", payload.industry],
+    ["Hemsida", payload.website || "-"],
+    ["Har svenskt företagskonto", payload.has_swedish_business_account === null ? "Ej valt" : payload.has_swedish_business_account ? "Ja" : "Nej"],
+    ["Har bankgiro", payload.has_bankgiro === null ? "Ej valt" : payload.has_bankgiro ? "Ja" : "Nej"],
+    ["Nekad banktjänst", payload.was_denied_bank_services === null ? "Ej valt" : payload.was_denied_bank_services ? "Ja" : "Nej"],
+    ["Kundtyp", payload.customer_type],
+    ["Uppskattad månadsvolym", payload.monthly_volume_estimate],
+    ["Antal fakturor/månad", payload.invoice_count_estimate],
+    ["Genomsnittligt fakturabelopp", payload.average_invoice_amount],
+    ["Befintligt fakturasystem", payload.current_invoice_system || "-"],
+    ["Behöver komma igång", payload.urgency],
+    ["Fakturering", payload.needs_invoicing ? "Ja" : "Nej"],
+    ["Kundinbetalningar", payload.needs_customer_payments ? "Ja" : "Nej"],
+    ["Bankgiroflöde", payload.needs_bankgiro_flow ? "Ja" : "Nej"],
+    ["Fakturaköp/förskott", payload.needs_invoice_financing ? "Ja" : "Nej"],
+    ["API/integration", payload.needs_api ? "Ja" : "Nej"],
+    ["Verksamhetsbeskrivning", payload.business_description || "-"],
+    ["Övrig kommentar", payload.other_comment || "-"],
+  ];
+
+  return `
+    <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
+      <h2>Ny ansökan – Företagsbetalningar & Bankgiro</h2>
+      <p>Ny ansökan har skickats in via Div3rsa.</p>
+      <table style="border-collapse:collapse;width:100%;max-width:760px;">
+        ${rows
+          .map(
+            ([label, value]) =>
+              `<tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-weight:700;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e5e7eb;white-space:pre-wrap;">${escapeHtml(value)}</td></tr>`,
+          )
+          .join("")}
+      </table>
+      <p><a href="${escapeHtml(portalUrl)}">Öppna admin</a></p>
+    </div>`;
+}
+
 export async function submitBusinessPaymentApplication(_: ActionState, formData: FormData): Promise<ActionState> {
   const errors: Record<string, string> = {};
 
@@ -146,6 +198,12 @@ export async function submitBusinessPaymentApplication(_: ActionState, formData:
     return { ok: false, message: "Ansökan kunde inte sparas. Försök igen eller kontakta info@div3rsa.com." };
   }
 
+  console.info("Business payment application saved", {
+    applicationId: data.id,
+    companyName: payload.company_name,
+    email: payload.email,
+  });
+
   await supabase.from("payment_application_events").insert({
     application_id: data.id,
     event_type: "application_submitted",
@@ -156,9 +214,21 @@ export async function submitBusinessPaymentApplication(_: ActionState, formData:
   const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || "info@div3rsa.com";
   const subject = "Ny ansökan – Företagsbetalningar & Bankgiro";
   const body = buildAdminEmail(payload);
+  const html = buildAdminEmailHtml(payload);
+
+  console.info("Sending business payment application admin notification", {
+    applicationId: data.id,
+    recipient,
+  });
 
   try {
-    const result = await sendSmtpMail({ to: recipient, subject, text: body });
+    const result = await sendSmtpMail({
+      to: recipient,
+      subject,
+      text: body,
+      html,
+      replyTo: payload.email,
+    });
     await supabase.from("email_logs").insert({
       application_id: data.id,
       email_type: "admin_new_application_notification",
@@ -178,8 +248,18 @@ export async function submitBusinessPaymentApplication(_: ActionState, formData:
       description: `Intern mailnotis skickades till ${recipient}.`,
       created_by: "system",
     });
+    console.info("Business payment application admin notification sent", {
+      applicationId: data.id,
+      recipient,
+      messageId: result.messageId || null,
+    });
   } catch (mailError) {
     const message = mailError instanceof Error ? mailError.message : "Unknown SMTP error";
+    console.error("Business payment application admin notification failed", {
+      applicationId: data.id,
+      recipient,
+      error: mailError,
+    });
     await supabase.from("email_logs").insert({
       application_id: data.id,
       email_type: "admin_new_application_notification",
