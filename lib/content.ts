@@ -2,18 +2,18 @@
 export const locale = "sv" as const;
 
 export const company = {
-  name: "Div3rsa AB",
-  shortName: "Div3rsa",
-  orgNumber: "559416-7149",
+  name: "Diversa Nordic AB",
+  shortName: "Diversa Nordic",
+  orgNumber: "556855-4884",
   email: "info@div3rsa.com",
   domain: "div3rsa.com",
   url: "https://div3rsa.com",
 };
 
 export const siteMeta = {
-  homeTitle: "Div3rsa Systems - SaaS, verksamhetssystem och digitala produkter",
+  homeTitle: "Diversa Nordic - digitala produkter och skräddarsydd utveckling",
   homeDescription:
-    "Div3rsa utvecklar SaaS-produkter, verksamhetssystem, kundportaler och integrationsbara digitala plattformar för företag och organisationer.",
+    "Diversa Nordic utvecklar SaaS-produkter, verksamhetssystem, kundportaler och integrationsbara digitala plattformar för företag och organisationer.",
   keywords: [
     "system development",
     "website development",
@@ -24,7 +24,7 @@ export const siteMeta = {
     "automation",
     "AI workflows",
     "dashboards",
-    "Div3rsa AB",
+    "Diversa Nordic AB",
   ],
 };
 
@@ -368,7 +368,7 @@ export const faqs = [
   {
     question: "Do you only build websites or also systems?",
     answer:
-      "We build both. Div3rsa can create simple company websites, premium websites, web apps, internal systems, customer portals and full SaaS platforms.",
+      "We build both. Diversa Nordic can create simple company websites, premium websites, web apps, internal systems, customer portals and full SaaS platforms.",
   },
   {
     question: "Can you build a customer portal or admin dashboard?",
@@ -411,7 +411,7 @@ export const faqs = [
   {
     question: "Can a simple website later become a system?",
     answer:
-      "Yes. That is one of the main advantages of working with Div3rsa. We can build the foundation so it can later grow into a portal, app, dashboard or SaaS product.",
+      "Yes. That is one of the main advantages of working with Diversa Nordic. We can build the foundation so it can later grow into a portal, app, dashboard or SaaS product.",
   },
 ];
 
@@ -448,7 +448,7 @@ export const budgetRanges = [
 export const privacySections = [
   {
     title: "Data we may collect",
-    text: "When you contact Div3rsa AB through email or a contact form, we may collect your name, company name, email address, phone number, project type, budget range and message content.",
+    text: "When you contact Diversa Nordic AB through email or a contact form, we may collect your name, company name, email address, phone number, project type, budget range and message content.",
   },
   {
     title: "Purpose of contact data",
@@ -460,7 +460,7 @@ export const privacySections = [
   },
   {
     title: "No unnecessary sale of personal data",
-    text: "Div3rsa AB does not sell personal data. We only process information needed to communicate with you and manage business relationships.",
+    text: "Diversa Nordic AB does not sell personal data. We only process information needed to communicate with you and manage business relationships.",
   },
   {
     title: "Privacy questions",
@@ -475,7 +475,7 @@ export const cookieSections = [
   },
   {
     title: "Current use",
-    text: "This first version of the Div3rsa website is built as a static company site and does not require unnecessary tracking cookies to function.",
+    text: "This first version of the Diversa Nordic website is built as a static company site and does not require unnecessary tracking cookies to function.",
   },
   {
     title: "Analytics may be added later",

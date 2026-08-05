@@ -48,7 +48,7 @@ function moneyToNumber(input: string) {
 function buildAdminEmail(payload: Record<string, unknown>) {
   const portalUrl = process.env.PORTAL_ADMIN_URL || "https://portal.div3rsa.com/admin/payment-applications";
   const lines = [
-    "Ny ansökan har skickats in via Div3rsa.",
+    "Ny ansökan har skickats in via Diversa Nordic.",
     "",
     `Företag: ${payload.company_name}`,
     `Org.nr: ${payload.org_number}`,
@@ -125,7 +125,7 @@ function buildAdminEmailHtml(payload: Record<string, unknown>) {
   return `
     <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
       <h2>Ny ansökan – Företagsbetalningar & Bankgiro</h2>
-      <p>Ny ansökan har skickats in via Div3rsa.</p>
+      <p>Ny ansökan har skickats in via Diversa Nordic.</p>
       <table style="border-collapse:collapse;width:100%;max-width:760px;">
         ${rows
           .map(
@@ -150,7 +150,7 @@ export async function submitBusinessPaymentApplication(_: ActionState, formData:
   }
 
   if (!boolValue(formData, "consent_contact")) {
-    errors.consent_contact = "Du behöver godkänna att Div3rsa får kontakta dig.";
+    errors.consent_contact = "Du behöver godkänna att Diversa Nordic får kontakta dig.";
   }
 
   if (!boolValue(formData, "consent_partner_forwarding")) {
@@ -207,7 +207,7 @@ export async function submitBusinessPaymentApplication(_: ActionState, formData:
   await supabase.from("payment_application_events").insert({
     application_id: data.id,
     event_type: "application_submitted",
-    description: "Ansökan skickades in via Div3rsa-webben.",
+    description: "Ansökan skickades in via Diversa Nordic-webben.",
     created_by: "public_form",
   });
 

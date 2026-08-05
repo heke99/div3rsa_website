@@ -7,7 +7,7 @@ import { company } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Kontakt",
   description:
-    "Kontakta Div3rsa AB för hemsida, webbapp, kundportal, SaaS-plattform, automation eller digitalt system.",
+    "Kontakta Diversa Nordic AB för hemsida, webbapp, kundportal, SaaS-plattform, automation eller digitalt system.",
 };
 
 export default function ContactPage() {
@@ -27,11 +27,11 @@ export default function ContactPage() {
       <section className="section">
         <div className="container two-column contact-layout">
           <div className="contact-info reveal">
-            <h2>Kontakta Div3rsa</h2>
+            <h2>Kontakta Diversa Nordic</h2>
             <p>Email: <a href={"mailto:" + company.email}>{company.email}</a></p>
             <p>Bolag: {company.name}</p>
             <p>Org.nr: {company.orgNumber}</p>
-            <ButtonLink href={"mailto:" + company.email}>Maila Div3rsa</ButtonLink>
+            <ButtonLink href={"mailto:" + company.email}>Maila Diversa Nordic</ButtonLink>
           </div>
           <ContactForm />
         </div>

@@ -102,7 +102,7 @@ export async function submitContactRequest(_previousState: ContactFormState, for
       subject,
       replyTo: payload.email,
       text: [
-      "Ny kontaktförfrågan från Div3rsa Web.",
+      "Ny kontaktförfrågan från Diversa Nordic Web.",
       "",
       `Namn: ${payload.name}`,
       `Bolag: ${payload.company_name || "-"}`,
@@ -115,7 +115,7 @@ export async function submitContactRequest(_previousState: ContactFormState, for
     ].join("\n"),
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
-          <h2>Ny kontaktförfrågan från Div3rsa Web</h2>
+          <h2>Ny kontaktförfrågan från Diversa Nordic Web</h2>
           <table style="border-collapse:collapse;width:100%;max-width:720px;">${rows}</table>
         </div>`,
     });
@@ -145,7 +145,7 @@ export async function submitContactRequest(_previousState: ContactFormState, for
 
     return {
       ok: true,
-      message: "Vi har tagit emot din förfrågan. Intern mailnotis kunde inte skickas automatiskt.",
+      message: "Vi har tagit emot din förfrågan och återkommer så snart vi kan.",
     };
   }
 }

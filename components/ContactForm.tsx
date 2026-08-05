@@ -15,10 +15,6 @@ export function ContactForm() {
 
   return (
     <form className="contact-form reveal" action={formAction}>
-      <div className="form-note">
-        Skicka din förfrågan direkt här. Div3rsa får en intern mailnotis via SMTP och återkommer med nästa steg.
-      </div>
-
       {state.message ? (
         <div className={state.ok ? "form-alert form-alert-success" : "form-alert"} role={state.ok ? "status" : "alert"}>
           {state.message}

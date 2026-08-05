@@ -3,7 +3,7 @@ import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Integritetspolicy",
-  description: "Integritetspolicy för Div3rsa AB, kontaktförfrågningar och ansökningar till Företagsbetalningar & Bankgiro.",
+  description: "Integritetspolicy för Diversa Nordic AB, kontaktförfrågningar och ansökningar till Företagsbetalningar & Bankgiro.",
 };
 
 export default function PrivacyPolicySwedishPage() {
@@ -18,7 +18,7 @@ export default function PrivacyPolicySwedishPage() {
         </p>
         <article className="glass-card">
           <h2>Personuppgiftsansvarig</h2>
-          <p>{company.name}, org.nr {company.orgNumber}, är personuppgiftsansvarig för uppgifter som samlas in via Div3rsa Web.</p>
+          <p>{company.name}, org.nr {company.orgNumber}, är personuppgiftsansvarig för uppgifter som samlas in via Diversa Nordic Web.</p>
         </article>
         <article className="glass-card">
           <h2>Uppgifter vi kan behandla</h2>
@@ -38,7 +38,7 @@ export default function PrivacyPolicySwedishPage() {
         </article>
         <article className="glass-card">
           <h2>Ingen försäljning av personuppgifter</h2>
-          <p>Div3rsa AB säljer inte personuppgifter. Vi använder uppgifter för att kunna hantera kontakt, ansökan och våra tjänster.</p>
+          <p>Diversa Nordic AB säljer inte personuppgifter. Vi använder uppgifter för att kunna hantera kontakt, ansökan och våra tjänster.</p>
         </article>
         <article className="glass-card">
           <h2>Kontakt</h2>

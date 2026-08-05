@@ -19,6 +19,7 @@ export type Product = {
   audience: string;
   status: "Produkt" | "Plattform" | "Under utveckling";
   href?: string;
+  displayDomain?: string;
   featured?: boolean;
 };
 
@@ -45,6 +46,8 @@ export const products: Product[] = [
     highlights: ["Löpande bokföring", "Bankavstämning", "Bokslut", "Rapportering"],
     audience: "Företag och redovisningsbyråer",
     status: "Produkt",
+    href: "https://nordklart.se",
+    displayDomain: "nordklart.se",
     featured: true,
   },
   {
@@ -60,6 +63,7 @@ export const products: Product[] = [
     audience: "Elhandelsbolag och energipartners",
     status: "Plattform",
     href: "https://app.gridex.se",
+    displayDomain: "app.gridex.se",
     featured: true,
   },
   {
@@ -74,6 +78,8 @@ export const products: Product[] = [
     highlights: ["BankID-signering", "Bevispaket", "Rollstyrning", "API & integrationer"],
     audience: "Kommuner, myndigheter och organisationer",
     status: "Produkt",
+    href: "https://kommunsign.se",
+    displayDomain: "kommunsign.se",
     featured: true,
   },
   {
@@ -88,6 +94,8 @@ export const products: Product[] = [
     highlights: ["CRM & leads", "Telefoni", "Teamstyrning", "Aktiviteter & KPI"],
     audience: "Säljorganisationer och kundcenter",
     status: "Plattform",
+    href: "https://kundexa.se",
+    displayDomain: "kundexa.se",
     featured: true,
   },
   {
@@ -103,6 +111,7 @@ export const products: Product[] = [
     audience: "Service-, omsorgs- och fältorganisationer",
     status: "Plattform",
     href: "https://coordiqo.com",
+    displayDomain: "coordiqo.com",
   },
   {
     slug: "trafexa",

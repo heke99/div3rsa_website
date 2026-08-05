@@ -56,7 +56,7 @@ export default function Home() {
 
       <Section
         id="why"
-        eyebrow="Varför Div3rsa"
+        eyebrow="Varför Diversa Nordic"
         title="Produktkänsla utan att tappa den tekniska grunden."
       >
         <div className="card-grid three compact-cards">

@@ -37,9 +37,9 @@ export const businessPaymentsFaqs = [
       "Ja. Du kan ansöka även om företaget tidigare haft svårt att få företagskonto, bankgiro eller betalningslösning. Varje ärende bedöms individuellt.",
   },
   {
-    question: "Är Div3rsa en bank?",
+    question: "Är Diversa Nordic en bank?",
     answer:
-      "Nej. Div3rsa är inte en bank. Vi tillhandahåller teknik, portal, onboarding och kundflöde. Betalnings- och finansmoment hanteras där det krävs genom relevant betalnings- eller finansaktör.",
+      "Nej. Diversa Nordic är inte en bank. Vi tillhandahåller teknik, portal, onboarding och kundflöde. Betalnings- och finansmoment hanteras där det krävs genom relevant betalnings- eller finansaktör.",
   },
   {
     question: "Garanteras bankgiro?",
@@ -47,7 +47,7 @@ export const businessPaymentsFaqs = [
       "Nej. Tjänsten kräver godkänd ansökan och onboarding. Vi är tydliga med vad som är möjligt först efter att vi gått igenom ert ärende.",
   },
   {
-    question: "Gör Div3rsa KYC/AML i webbansökan?",
+    question: "Gör Diversa Nordic KYC/AML i webbansökan?",
     answer:
       "Nej. Webbansökan samlar bara grunduppgifter och behov. KYC/AML och eventuell dokumentinsamling hanteras senare av relevant betalnings- eller finansaktör när det krävs.",
   },
@@ -56,7 +56,7 @@ export const businessPaymentsFaqs = [
 export const businessPaymentIncluded = [
   "Bankgirobaserade betalningsflöden",
   "Fakturering och kundinbetalningar",
-  "Ansökan och onboarding via Div3rsa",
+  "Ansökan och onboarding via Diversa Nordic",
   "Status och uppföljning i portal",
   "Intern hantering och support",
   "Möjlighet till API/integration längre fram",

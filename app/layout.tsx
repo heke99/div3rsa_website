@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(company.url),
   title: {
     default: siteMeta.homeTitle,
-    template: "%s | Div3rsa AB",
+    template: "%s | Diversa Nordic AB",
   },
   description: siteMeta.homeDescription,
   keywords: siteMeta.keywords,

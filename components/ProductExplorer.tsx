@@ -71,7 +71,7 @@ export function ProductExplorer({ featuredOnly = false, showFilters = true }: Pr
             <div className="product-card-actions">
               {product.href ? (
                 <a href={product.href} target="_blank" rel="noreferrer" className="product-link">
-                  Besök produkten <span aria-hidden="true">↗</span>
+                  {product.displayDomain || "Besök produkten"} <span aria-hidden="true">↗</span>
                 </a>
               ) : (
                 <ButtonLink href={`/contact?product=${product.slug}`} variant="secondary">

@@ -3,7 +3,7 @@ import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Användarvillkor",
-  description: "Användarvillkor för Div3rsa AB:s webbplats, kontaktflöden och ansökningsflöden.",
+  description: "Användarvillkor för Diversa Nordic AB:s webbplats, kontaktflöden och ansökningsflöden.",
 };
 
 export default function TermsPage() {
@@ -12,10 +12,10 @@ export default function TermsPage() {
       <div className="container narrow legal-stack reveal">
         <p className="eyebrow">Juridik</p>
         <h1>Användarvillkor</h1>
-        <p className="page-lead">Dessa villkor gäller användning av Div3rsa Web och de formulär som finns på webbplatsen.</p>
+        <p className="page-lead">Dessa villkor gäller användning av Diversa Nordic Web och de formulär som finns på webbplatsen.</p>
         <article className="glass-card">
           <h2>Webbplatsens syfte</h2>
-          <p>Webbplatsen presenterar Div3rsa AB:s tjänster och gör det möjligt att skicka kontaktförfrågningar eller ansökningar.</p>
+          <p>Webbplatsen presenterar Diversa Nordic AB:s tjänster och gör det möjligt att skicka kontaktförfrågningar eller ansökningar.</p>
         </article>
         <article className="glass-card">
           <h2>Ingen banktjänst</h2>
@@ -23,7 +23,7 @@ export default function TermsPage() {
         </article>
         <article className="glass-card">
           <h2>Ansökningar</h2>
-          <p>En inskickad ansökan innebär inte automatiskt godkännande eller portalaccess. Div3rsa granskar ansökan och återkommer med nästa steg.</p>
+          <p>En inskickad ansökan innebär inte automatiskt godkännande eller portalaccess. Diversa Nordic granskar ansökan och återkommer med nästa steg.</p>
         </article>
         <article className="glass-card">
           <h2>Riktiga uppgifter</h2>

@@ -5,9 +5,9 @@ import { Section } from "@/components/Section";
 import { businessPaymentsFaqs } from "@/lib/business-payments";
 
 export const metadata: Metadata = {
-  title: "Företagsbetalningar & Bankgiro | Div3rsa",
+  title: "Företagsbetalningar & Bankgiro | Diversa Nordic",
   description:
-    "Ansök om företagsbetalningar, fakturering och bankgirobaserade betalningsflöden via Div3rsa.",
+    "Ansök om företagsbetalningar, fakturering och bankgirobaserade betalningsflöden via Diversa Nordic.",
 };
 
 export default function BusinessPaymentsPage() {
@@ -21,7 +21,7 @@ export default function BusinessPaymentsPage() {
             <p className="eyebrow">Företagsbetalningar & Bankgiro</p>
             <h1>Saknar ditt företag bankgiro eller fungerande företagsbetalningar?</h1>
             <p className="hero-subheadline">
-              Div3rsa hjälper företag att komma igång med fakturering, kundinbetalningar och bankgirobaserade betalningsflöden via en enkel digital portal.
+              Diversa Nordic hjälper företag att komma igång med fakturering, kundinbetalningar och bankgirobaserade betalningsflöden via en enkel digital portal.
             </p>
             <div className="hero-actions">
               <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Ansök nu</ButtonLink>
@@ -35,7 +35,7 @@ export default function BusinessPaymentsPage() {
             </div>
             <div className="bankgiro-line" />
             <div className="bankgiro-card middle">
-              <span>Div3rsa Portal</span>
+              <span>Diversa Nordic Portal</span>
               <strong>Status, fakturor och onboarding</strong>
             </div>
             <div className="bankgiro-line" />
@@ -61,15 +61,15 @@ export default function BusinessPaymentsPage() {
 
       <Section
         eyebrow="Lösningen"
-        title="Ett samlat flöde via Div3rsa."
-        intro="Ni ansöker via Div3rsa. Vi granskar behovet, återkommer med nästa steg och bygger vidare mot portal, onboarding och betalningsflöde."
+        title="Ett samlat flöde via Diversa Nordic."
+        intro="Ni ansöker via Diversa Nordic. Vi granskar behovet, återkommer med nästa steg och bygger vidare mot portal, onboarding och betalningsflöde."
       >
         <div className="process-grid">
           {[
             ["Ansök", "Fyll i företagets uppgifter och betalningsbehov."],
             ["Granskning", "Vi går igenom ärendet och ser vilket upplägg som kan passa."],
             ["Onboarding", "När ansökan är kvalificerad går ärendet vidare i rätt flöde."],
-            ["Portal", "Kunden får åtkomst till Div3rsa Portal när kontot är skapat."],
+            ["Portal", "Kunden får åtkomst till Diversa Nordic Portal när kontot är skapat."],
           ].map(([title, text], index) => (
             <article className="process-step reveal" key={title}>
               <span>{index + 1}</span>

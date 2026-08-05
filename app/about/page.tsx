@@ -5,9 +5,9 @@ import { Section } from "@/components/Section";
 import { aboutValues, company } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Om Div3rsa",
+  title: "Om Diversa Nordic",
   description:
-    "Div3rsa AB är ett svenskt produkt- och utvecklingsbolag som bygger SaaS-plattformar, verksamhetssystem och digitala produkter.",
+    "Diversa Nordic AB är ett svenskt produkt- och utvecklingsbolag som bygger SaaS-plattformar, verksamhetssystem och digitala produkter.",
 };
 
 export default function AboutPage() {
@@ -16,10 +16,10 @@ export default function AboutPage() {
       <section className="page-hero">
         <div className="aurora aurora-one" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Om Div3rsa</p>
+          <p className="eyebrow">Om Diversa Nordic</p>
           <h1>Vi bygger digitala produkter som håller ihop hela verksamheten.</h1>
           <p className="page-lead">
-            Div3rsa AB utvecklar egna system och hjälper företag gå från ett konkret operativt behov till en fungerande, skalbar produkt.
+            Diversa Nordic AB utvecklar egna system och hjälper företag gå från ett konkret operativt behov till en fungerande, skalbar produkt.
           </p>
         </div>
       </section>

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { company } from "@/lib/content";
 
 const productLinks = [
-  { label: "Nordklart", href: "/systems#nordklart" },
-  { label: "Gridex OPS", href: "/systems#gridex-ops" },
-  { label: "Kommunsign", href: "/systems#kommunsign" },
-  { label: "Kundexa", href: "/systems#kundexa" },
+  { label: "Nordklart", href: "https://nordklart.se" },
+  { label: "Gridex OPS", href: "https://app.gridex.se" },
+  { label: "Kommunsign", href: "https://kommunsign.se" },
+  { label: "Kundexa", href: "https://kundexa.se" },
 ];
 
 export function Footer() {
@@ -14,9 +14,9 @@ export function Footer() {
       <div className="footer-glow" />
       <div className="container footer-grid">
         <div className="footer-company">
-          <Link className="brand" href="/" aria-label="Div3rsa startsida">
-            <span className="brand-mark">D3</span>
-            <span className="brand-copy"><strong>Div3rsa</strong><small>Systems</small></span>
+          <Link className="brand" href="/" aria-label="Diversa Nordic startsida">
+            <span className="brand-mark">DN</span>
+            <span className="brand-copy"><strong>Diversa Nordic</strong><small>Digital</small></span>
           </Link>
           <p>Digitala produkter, SaaS-plattformar och verksamhetssystem byggda för verklig drift.</p>
           <a href={`mailto:${company.email}`}>{company.email}</a>
@@ -25,7 +25,7 @@ export function Footer() {
 
         <div>
           <h3>Produkter</h3>
-          {productLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          {productLinks.map((item) => <a key={item.href} href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}
           <Link href="/systems">Alla produkter</Link>
         </div>
 
@@ -39,7 +39,7 @@ export function Footer() {
 
         <div>
           <h3>Företaget</h3>
-          <Link href="/about">Om Div3rsa</Link>
+          <Link href="/about">Om oss</Link>
           <Link href="/contact">Kontakt</Link>
           <Link href="/systems">Produktportfölj</Link>
         </div>

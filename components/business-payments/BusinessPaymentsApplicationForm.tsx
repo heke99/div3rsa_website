@@ -161,7 +161,7 @@ export function BusinessPaymentsApplicationForm() {
         <h2>Vi har tagit emot din ansökan.</h2>
         <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
         <Link className="button button-primary" href="/">
-          Tillbaka till Div3rsa
+          Tillbaka till Diversa Nordic
         </Link>
       </div>
     );
@@ -195,7 +195,7 @@ export function BusinessPaymentsApplicationForm() {
         </div>
         <div className="form-grid">
           <Field name="company_name" label="Företagsnamn" placeholder="Ex. ABC Consulting AB" errors={mergedErrors} />
-          <Field name="org_number" label="Organisationsnummer" placeholder="559416-7149" errors={mergedErrors} />
+          <Field name="org_number" label="Organisationsnummer" placeholder="556855-4884" errors={mergedErrors} />
           <Field name="contact_name" label="Kontaktperson" placeholder="För- och efternamn" errors={mergedErrors} />
           <Field name="email" label="E-post" type="email" placeholder="namn@foretag.se" errors={mergedErrors} />
           <Field name="phone" label="Telefon" type="tel" placeholder="+46 70 000 00 00" errors={mergedErrors} />
@@ -257,10 +257,10 @@ export function BusinessPaymentsApplicationForm() {
           <p>Granska uppgifterna och godkänn villkoren för att skicka ansökan.</p>
         </div>
         <div className="consent-box">
-          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag godkänner att Div3rsa får granska ansökan och kontakta mig om nästa steg." />
+          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag godkänner att Diversa Nordic får granska ansökan och kontakta mig om nästa steg." />
           <CheckboxField name="consent_partner_forwarding" errors={mergedErrors} label="Jag godkänner att nödvändiga uppgifter kan skickas vidare till relevant betalnings- eller finansaktör för fortsatt onboarding när det krävs." />
           <p>
-            Div3rsa är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs.
+            Diversa Nordic är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs.
           </p>
         </div>
       </div>

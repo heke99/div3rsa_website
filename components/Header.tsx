@@ -14,9 +14,9 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" href="/" onClick={closeMenu} aria-label="Div3rsa startsida">
-          <span className="brand-mark">D3</span>
-          <span className="brand-copy"><strong>Div3rsa</strong><small>Systems</small></span>
+        <Link className="brand" href="/" onClick={closeMenu} aria-label="Diversa Nordic startsida">
+          <span className="brand-mark">DN</span>
+          <span className="brand-copy"><strong>Diversa Nordic</strong><small>Digital</small></span>
         </Link>
 
         <button
@@ -46,7 +46,7 @@ export function Header() {
               </Link>
             );
           })}
-          <ButtonLink href="/contact" className="header-cta" ariaLabel="Starta ett systemprojekt med Div3rsa">
+          <ButtonLink href="/contact" className="header-cta" ariaLabel="Starta ett projekt med Diversa Nordic">
             Starta projekt
           </ButtonLink>
         </nav>

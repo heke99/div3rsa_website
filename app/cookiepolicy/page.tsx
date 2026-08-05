@@ -3,7 +3,7 @@ import { company } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Cookiepolicy",
-  description: "Cookiepolicy för Div3rsa AB:s webbplats.",
+  description: "Cookiepolicy för Diversa Nordic AB:s webbplats.",
 };
 
 export default function CookiePolicyPage() {
