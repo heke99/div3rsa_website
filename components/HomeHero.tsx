@@ -1,57 +1,69 @@
-import { heroProductCards, trustIndicators } from "@/lib/content";
 import { ButtonLink } from "./ButtonLink";
+
+const productNodes = ["Nordklart", "Gridex OPS", "Kommunsign", "Kundexa"];
 
 export function HomeHero() {
   return (
-    <section className="hero">
+    <section className="hero systems-hero">
       <div className="aurora aurora-one" />
       <div className="aurora aurora-two" />
       <div className="container hero-grid">
         <div className="hero-copy reveal">
-          <p className="eyebrow">Div3rsa AB · Hemsidor, system och företagsportaler</p>
-          <h1>Hemsidor och system som får ditt företag att kännas större.</h1>
+          <p className="eyebrow">Div3rsa Systems · Digitala produkter för verklig drift</p>
+          <h1>Vi bygger systemen företag faktiskt arbetar i.</h1>
           <p className="hero-subheadline">
-            Vi bygger moderna hemsidor, kundportaler, appar och system. Från en stark 3D-hemsida till bankgiroflöden och interna dashboards.
+            Div3rsa utvecklar egna SaaS-produkter och skräddarsydda verksamhetssystem – från ekonomi och energi till e-signering, CRM och operativ planering.
           </p>
           <div className="hero-actions">
-            <ButtonLink href="/contact">Boka genomgång</ButtonLink>
-            <ButtonLink href="/foretagsbetalningar-bankgiro" className="button-bankgiro">
-              Bankgiro & betalningar
-            </ButtonLink>
-            <ButtonLink href="/websites" variant="secondary">
-              Se hemsidestilar
-            </ButtonLink>
+            <ButtonLink href="/systems">Utforska produkter</ButtonLink>
+            <ButtonLink href="/contact" variant="secondary">Bygg ett system med oss</ButtonLink>
           </div>
-          <div className="trust-strip" aria-label="Div3rsa capabilities">
-            {trustIndicators.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
+          <div className="hero-proof" aria-label="Div3rsas tekniska fokus">
+            <div><strong>Multi-tenant</strong><span>Skalbara SaaS-plattformar</span></div>
+            <div><strong>API-first</strong><span>Integrationer och webhooks</span></div>
+            <div><strong>End-to-end</strong><span>Design, databas och drift</span></div>
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Digital product capabilities visualization">
-          <div className="orbit-card main-dashboard">
-            <div className="dashboard-topline">
-              <span />
-              <span />
-              <span />
+        <div className="systems-visual" aria-label="Div3rsa produktportfölj">
+          <div className="systems-window">
+            <div className="systems-window-head">
+              <div className="window-dots"><i /><i /><i /></div>
+              <span>Div3rsa Product Cloud</span>
+              <b>LIVE</b>
             </div>
-            <div className="dashboard-metric">
-              <strong>Div3rsa Studio</strong>
-              <span>{"3D hemsida → Portal → System"}</span>
-            </div>
-            <div className="dashboard-bars">
-              <i />
-              <i />
-              <i />
+            <div className="systems-window-body">
+              <aside>
+                <span className="active" />
+                <span />
+                <span />
+                <span />
+              </aside>
+              <div className="systems-dashboard">
+                <div className="dashboard-heading">
+                  <div><small>Produktportfölj</small><strong>Ett ekosystem av verksamhetssystem</strong></div>
+                  <i>7 produkter</i>
+                </div>
+                <div className="dashboard-product-list">
+                  {productNodes.map((product, index) => (
+                    <div key={product}>
+                      <span>{product.slice(0, 2).toUpperCase()}</span>
+                      <strong>{product}</strong>
+                      <i style={{ width: `${88 - index * 11}%` }} />
+                    </div>
+                  ))}
+                </div>
+                <div className="dashboard-stats">
+                  <div><small>Arkitektur</small><strong>SaaS</strong></div>
+                  <div><small>Gränssnitt</small><strong>Web + API</strong></div>
+                  <div><small>Fokus</small><strong>Automation</strong></div>
+                </div>
+              </div>
             </div>
           </div>
-          {heroProductCards.map((card, index) => (
-            <div className={"floating-card floating-card-" + index} key={card}>
-              <span className="status-dot" />
-              {card}
-            </div>
-          ))}
+          <div className="system-orbit orbit-one">API</div>
+          <div className="system-orbit orbit-two">DATA</div>
+          <div className="system-orbit orbit-three">SaaS</div>
         </div>
       </div>
     </section>

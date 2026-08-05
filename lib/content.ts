@@ -11,9 +11,9 @@ export const company = {
 };
 
 export const siteMeta = {
-  homeTitle: "Div3rsa AB - Hemsidor, system, appar och SaaS",
+  homeTitle: "Div3rsa Systems - SaaS, verksamhetssystem och digitala produkter",
   homeDescription:
-    "Div3rsa AB bygger moderna hemsidor, webappar, kundportaler, SaaS-plattformar och digitala system för företag.",
+    "Div3rsa utvecklar SaaS-produkter, verksamhetssystem, kundportaler och integrationsbara digitala plattformar för företag och organisationer.",
   keywords: [
     "system development",
     "website development",
@@ -29,10 +29,10 @@ export const siteMeta = {
 };
 
 export const navItems = [
-  { label: "Tjänster", href: "/services" },
+  { label: "Produkter", href: "/systems" },
+  { label: "Systemutveckling", href: "/services" },
   { label: "Hemsidor", href: "/websites" },
-  { label: "Bankgiro", href: "/foretagsbetalningar-bankgiro" },
-  { label: "System", href: "/systems" },
+  { label: "Om oss", href: "/about" },
   { label: "Kontakt", href: "/contact" },
 ];
 
@@ -43,72 +43,76 @@ export const websiteStyleLinks = [
 ];
 
 export const trustIndicators = [
-  "Hemsidor",
-  "System",
+  "SaaS-plattformar",
+  "Verksamhetssystem",
   "Kundportaler",
-  "Bankgiroflöden",
+  "API & integrationer",
   "Automation",
-  "SaaS",
+  "Databaser",
 ];
 
 export const heroProductCards = [
-  "3D / Wow",
-  "Business",
-  "Simple",
-  "Bankgiro",
-  "Portal",
-  "Automation",
+  "Nordklart",
+  "Gridex OPS",
+  "Kommunsign",
+  "Kundexa",
+  "Coordiqo",
+  "Trafexa",
 ];
 
 export const growthSteps = ["Website", "Portal", "Automation", "SaaS Platform"];
 
 export const services = [
   {
-    title: "System Development",
-    text: "Admin portals, customer systems, internal tools, operations systems and SaaS platforms.",
+    title: "SaaS & verksamhetssystem",
+    text: "Kompletta plattformar med organisationsstruktur, roller, arbetsflöden, databas och administration.",
   },
   {
-    title: "Websites",
-    text: "Modern, responsive and conversion-focused websites for companies that want to look serious online.",
+    title: "Kund- och partnerportaler",
+    text: "Säkra inloggade ytor där kunder, partners och personal kan hantera data, dokument, status och ärenden.",
   },
   {
-    title: "Apps & Web Apps",
-    text: "Mobile-friendly apps, dashboards, booking flows, customer portals and user systems.",
+    title: "API & integrationer",
+    text: "REST API:er, webhooks och integrationer som kopplar systemet till externa tjänster och befintliga processer.",
   },
   {
     title: "Automation & AI",
-    text: "Automated workflows, AI assistants, data handling and smarter business processes.",
+    text: "Automatiserade flöden, beslutsstöd och AI-assisterade processer som minskar manuellt arbete.",
   },
   {
-    title: "Customer Portals",
-    text: "Secure portals where customers, partners or staff can log in, manage data, view status and interact with your business.",
+    title: "Admin & operativ styrning",
+    text: "Dashboards och interna verktyg för kunder, avtal, uppgifter, ekonomi, dokument och daglig drift.",
   },
   {
-    title: "Dashboards & Admin Panels",
-    text: "Internal tools that help teams manage customers, operations, tasks, documents, payments and business workflows.",
+    title: "Produktdesign & webb",
+    text: "Tydlig UX, modern design och publika produktsidor som hänger ihop med systemets faktiska funktioner.",
   },
 ];
 
 export const whyChoose = [
   {
-    title: "We build both design and functionality",
-    text: "A good website should not only look good. It should support your business, your sales and your internal processes.",
+    title: "Vi förstår hela systemkedjan",
+    text: "Gränssnitt, affärslogik, databas, behörigheter och integrationer planeras som en sammanhängande produkt.",
   },
   {
-    title: "Business-first development",
-    text: "We think about sales, operations, scalability and real usage from the beginning.",
+    title: "Byggt för verklig användning",
+    text: "Vi utgår från användarnas dagliga arbete, ansvar och beslut – inte från funktioner som bara ser bra ut i en demo.",
   },
   {
-    title: "Start small, scale later",
-    text: "We can start with a website and later expand it into a customer portal, app or SaaS platform.",
+    title: "Skalbar struktur från start",
+    text: "Lösningen kan växa med fler organisationer, användare, moduler och integrationer utan att kärnan behöver byggas om.",
   },
   {
-    title: "Experience from real products",
-    text: "Div3rsa works on digital platforms and products such as Gridex, Coordiqo, Bovaro and DealFlowIQ.",
+    title: "Erfarenhet från flera branscher",
+    text: "Våra produkter täcker bland annat ekonomi, elhandel, offentlig sektor, CRM, transport och fastighet.",
   },
   {
-    title: "Modern systems and automation",
-    text: "We build with databases, dashboards, automation, APIs, payments and AI-ready workflows.",
+    title: "Tydlig produkt och stark design",
+    text: "Tekniken ska vara stabil, men systemet ska också vara enkelt att förstå, sälja in och arbeta i varje dag.",
+  },
+  {
+    title: "Långsiktig utvecklingspartner",
+    text: "Vi kan fortsätta med drift, vidareutveckling, nya integrationer och produktförbättringar efter lansering.",
   },
 ];
 
@@ -129,49 +133,44 @@ export const industries = [
 
 export const solutionPackages = [
   {
-    title: "Start Website",
-    subtitle: "For companies that need a professional website quickly.",
+    title: "Digital förstudie",
+    subtitle: "För verksamheter som behöver strukturera behovet innan utvecklingen startar.",
     includes: [
-      "Homepage",
-      "About",
-      "Services",
-      "Contact",
-      "Mobile responsive design",
-      "Basic SEO structure",
-      "Professional company presentation",
+      "Processkartläggning",
+      "Roller och användarflöden",
+      "Funktionsstruktur",
+      "Teknisk rekommendation",
+      "Prioriterad utvecklingsplan",
+      "Kostnads- och fasindelning",
     ],
-    cta: "Ask about Start Website",
+    cta: "Boka en förstudie",
   },
   {
-    title: "Business Website",
-    subtitle: "For companies that want stronger sales, better design and a more premium feeling.",
+    title: "Verksamhetssystem",
+    subtitle: "För företag som behöver en komplett intern plattform eller kundportal.",
     includes: [
-      "Multiple pages",
-      "CTA flows",
-      "Contact form",
-      "Premium design",
-      "Tracking-ready structure",
-      "Blog/news possibility",
-      "Login/customer portal possibility later",
+      "Admin och dashboards",
+      "Kund- eller partnerportal",
+      "Databas och behörigheter",
+      "Arbetsflöden och automation",
+      "API och integrationer",
+      "Driftsättning",
     ],
-    cta: "Ask about Business Website",
+    cta: "Diskutera ert system",
     featured: true,
   },
   {
-    title: "Custom System / SaaS",
-    subtitle: "For companies that need a real digital system.",
+    title: "SaaS-produkt",
+    subtitle: "För bolag som vill lansera och skala en egen digital produkt.",
     includes: [
-      "Admin dashboard",
-      "Customer portal",
-      "Database",
-      "Roles and permissions",
-      "Payments",
-      "Automation",
-      "Integrations",
-      "Reporting and analytics",
-      "Scalable system architecture",
+      "Multi-tenant-arkitektur",
+      "Onboarding och abonnemang",
+      "Roller och organisationsstruktur",
+      "Produktdesign",
+      "API, webhooks och integrationer",
+      "Skalbar teknisk grund",
     ],
-    cta: "Discuss a custom system",
+    cta: "Bygg en SaaS-produkt",
   },
 ];
 
@@ -333,20 +332,20 @@ export const websiteStyles = [
 
 export const processSteps = [
   {
-    title: "Understand the need",
-    text: "We go through what the company needs: website, app, system, portal or automation.",
+    title: "Kartlägg verksamheten",
+    text: "Vi går igenom användare, roller, data, beslut och de arbetsflöden systemet ska förenkla.",
   },
   {
-    title: "Structure and design",
-    text: "We define the flow, pages, features and design direction.",
+    title: "Designa produktstrukturen",
+    text: "Vi definierar moduler, informationsarkitektur, datamodell, gränssnitt och integrationspunkter.",
   },
   {
-    title: "Build the solution",
-    text: "We develop using modern technology, responsive design and scalable structure.",
+    title: "Bygg och verifiera",
+    text: "Vi utvecklar hela lösningen och testar att UI, API, databas och behörigheter fungerar konsekvent tillsammans.",
   },
   {
-    title: "Launch and improve",
-    text: "We help with launch, adjustments and further development.",
+    title: "Lansera och utveckla vidare",
+    text: "Efter driftsättning följer vi upp användningen och bygger vidare när verksamheten eller produkten växer.",
   },
 ];
 
@@ -417,31 +416,33 @@ export const faqs = [
 ];
 
 export const aboutValues = [
-  "Business-focused development",
-  "Scalable digital products",
-  "Clean design and strong user experience",
-  "Long-term technical foundation",
-  "Automation and AI-ready workflows",
+  "Affärsnära systemutveckling",
+  "Skalbara digitala produkter",
+  "Tydlig design och användarupplevelse",
+  "Långsiktig teknisk grund",
+  "Automation och integrationsbara flöden",
 ];
 
 export const projectTypes = [
-  "Website",
-  "Web app",
-  "Mobile app",
-  "Customer portal",
-  "Admin dashboard",
-  "SaaS platform",
-  "Automation / AI workflow",
-  "Existing system improvement",
-  "Not sure yet",
+  "Verksamhetssystem",
+  "SaaS-plattform",
+  "Kund- eller partnerportal",
+  "Admin och dashboard",
+  "API och integration",
+  "Automation / AI-flöde",
+  "Webbapp",
+  "Mobilapp",
+  "Hemsida eller produktsida",
+  "Vidareutveckling av befintligt system",
+  "Inte säker ännu",
 ];
 
 export const budgetRanges = [
-  "Under 25,000 SEK",
-  "25,000-75,000 SEK",
-  "75,000-150,000 SEK",
-  "150,000+ SEK",
-  "Not sure yet",
+  "Inte säker ännu",
+  "Under 50 000 SEK",
+  "50 000–150 000 SEK",
+  "150 000–500 000 SEK",
+  "500 000+ SEK",
 ];
 
 export const privacySections = [

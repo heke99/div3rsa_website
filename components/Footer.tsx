@@ -1,67 +1,58 @@
 import Link from "next/link";
-import { company, websiteStyleLinks } from "@/lib/content";
+import { company } from "@/lib/content";
 
-const serviceLinks = [
-  { label: "Systemutveckling", href: "/services" },
-  { label: "Hemsidor", href: "/websites" },
-  { label: "Webbappar", href: "/services" },
-  { label: "Automation & AI", href: "/services" },
-  { label: "Företagsbetalningar & Bankgiro", href: "/foretagsbetalningar-bankgiro" },
+const productLinks = [
+  { label: "Nordklart", href: "/systems#nordklart" },
+  { label: "Gridex OPS", href: "/systems#gridex-ops" },
+  { label: "Kommunsign", href: "/systems#kommunsign" },
+  { label: "Kundexa", href: "/systems#kundexa" },
 ];
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="site-footer">
       <div className="footer-glow" />
       <div className="container footer-grid">
         <div className="footer-company">
-          <Link className="brand" href="/" aria-label="Div3rsa home">
+          <Link className="brand" href="/" aria-label="Div3rsa startsida">
             <span className="brand-mark">D3</span>
-            <span>Div3rsa</span>
+            <span className="brand-copy"><strong>Div3rsa</strong><small>Systems</small></span>
           </Link>
-          <p>{company.name}</p>
-          <p>Org.nr: {company.orgNumber}</p>
-          <a href={"mailto:" + company.email}>{company.email}</a>
+          <p>Digitala produkter, SaaS-plattformar och verksamhetssystem byggda för verklig drift.</p>
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+          <span>Org.nr {company.orgNumber}</span>
         </div>
 
         <div>
-          <h3>Bolag</h3>
-          <Link href="/about">Om oss</Link>
+          <h3>Produkter</h3>
+          {productLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          <Link href="/systems">Alla produkter</Link>
+        </div>
+
+        <div>
+          <h3>Vi bygger</h3>
+          <Link href="/services">Systemutveckling</Link>
+          <Link href="/services">SaaS-plattformar</Link>
+          <Link href="/services">API & integrationer</Link>
+          <Link href="/websites">Hemsidor</Link>
+        </div>
+
+        <div>
+          <h3>Företaget</h3>
+          <Link href="/about">Om Div3rsa</Link>
           <Link href="/contact">Kontakt</Link>
-          <Link href="/systems">Projekt</Link>
-          <a href={process.env.NEXT_PUBLIC_PORTAL_URL || "https://portal.div3rsa.com"}>Portal</a>
+          <Link href="/systems">Produktportfölj</Link>
         </div>
 
         <div>
-          <h3>Tjänster</h3>
-          {serviceLinks.map((service) => (
-            <Link key={service.label} href={service.href}>
-              {service.label}
-            </Link>
-          ))}
-        </div>
-
-        <div>
-          <h3>Hemsidestilar</h3>
-          {websiteStyleLinks.map((style) => (
-            <Link key={style.href} href={style.href}>
-              {style.label}
-            </Link>
-          ))}
-        </div>
-
-        <div>
-          <h3>Juridik</h3>
+          <h3>Juridiskt</h3>
           <Link href="/integritetspolicy">Integritetspolicy</Link>
-          <Link href="/anvandarvillkor">Användarvillkor</Link>
           <Link href="/cookiepolicy">Cookiepolicy</Link>
-          <Link href="/foretagsbetalningar-bankgiro/villkor">Villkor Bankgiro</Link>
+          <Link href="/anvandarvillkor">Användarvillkor</Link>
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>&copy; {year} {company.name}. Alla rättigheter förbehållna.</span>
+        © {new Date().getFullYear()} {company.name}. Alla rättigheter förbehållna.
       </div>
     </footer>
   );

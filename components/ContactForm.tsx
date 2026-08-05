@@ -60,7 +60,7 @@ export function ContactForm() {
         </label>
         <label>
           Budget, om du vet
-          <select name="budget" defaultValue="Not sure yet">
+          <select name="budget" defaultValue="Inte säker ännu">
             {budgetRanges.map((range) => (
               <option key={range} value={range}>
                 {range}

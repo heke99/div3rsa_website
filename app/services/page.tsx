@@ -6,9 +6,9 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { processSteps, services, solutionPackages, techItems } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Tjänster",
+  title: "Systemutveckling",
   description:
-    "Div3rsa AB bygger hemsidor, webbappar, kundportaler, adminsystem, SaaS-plattformar, automation och AI-redo flöden.",
+    "Div3rsa bygger verksamhetssystem, SaaS-plattformar, portaler, API-integrationer, automation och moderna digitala produkter.",
 };
 
 export default function ServicesPage() {
@@ -17,13 +17,12 @@ export default function ServicesPage() {
       <section className="page-hero">
         <div className="aurora aurora-two" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Tjänster</p>
-          <h1>Från idé till färdig digital lösning.</h1>
+          <p className="eyebrow">Systemutveckling</p>
+          <h1>Från verksamhetsbehov till färdigt system.</h1>
           <p className="page-lead">
-            Vi hjälper företag bygga hemsidor, webbappar, portaler, adminsystem och automation som känns professionella
-            och går att växa med.
+            Vi hjälper företag bygga verksamhetssystem, SaaS-plattformar, kundportaler, integrationer och automation som fungerar i verklig drift och går att växa med.
           </p>
-          <ButtonLink href="/contact">Starta projekt</ButtonLink>
+          <ButtonLink href="/contact">Starta systemprojekt</ButtonLink>
         </div>
       </section>
 

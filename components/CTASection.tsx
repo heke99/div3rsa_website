@@ -1,38 +1,17 @@
 import { ButtonLink } from "./ButtonLink";
-import { company } from "@/lib/content";
 
-type CTASectionProps = {
-  eyebrow?: string;
-  title?: string;
-  text?: string;
-  primaryLabel?: string;
-  primaryHref?: string;
-  secondaryLabel?: string;
-  secondaryHref?: string;
-};
-
-export function CTASection({
-  eyebrow = "Börja här",
-  title = "Redo att bygga något seriöst?",
-  text = "Oavsett om ni behöver en tydlig hemsida, en premiumwebb eller ett helt system kan Div3rsa hjälpa er bygga rätt grund.",
-  primaryLabel = "Starta projekt",
-  primaryHref = "/contact",
-  secondaryLabel = "Maila oss",
-  secondaryHref = "mailto:" + company.email,
-}: CTASectionProps) {
+export function CTASection() {
   return (
     <section className="final-cta">
       <div className="container final-cta-inner reveal">
         <div>
-          <p className="eyebrow">{eyebrow}</p>
-          <h2>{title}</h2>
-          <p>{text}</p>
+          <p className="eyebrow">Nästa produkt</p>
+          <h2>Har ni ett arbetsflöde som borde vara ett system?</h2>
+          <p>Vi hjälper er gå från behov och process till en skalbar digital produkt.</p>
         </div>
         <div className="cta-actions">
-          <ButtonLink href={primaryHref}>{primaryLabel}</ButtonLink>
-          <ButtonLink href={secondaryHref} variant="secondary">
-            {secondaryLabel}
-          </ButtonLink>
+          <ButtonLink href="/contact">Starta dialogen</ButtonLink>
+          <ButtonLink href="/systems" variant="secondary">Se våra produkter</ButtonLink>
         </div>
       </div>
     </section>
