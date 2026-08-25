@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { company, siteMeta } from "@/lib/content";
+import { CookieConsent } from "@/components/CookieConsent";
+import { company, siteMeta } from "@/lib/company";
 import "./globals.css";
+import "./cookie-consent.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(company.url),
   title: {
     default: siteMeta.homeTitle,
-    template: "%s | Diversa Nordic AB",
+    template: "%s | Attmos AB",
   },
   description: siteMeta.homeDescription,
   keywords: siteMeta.keywords,
@@ -41,6 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main>{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
