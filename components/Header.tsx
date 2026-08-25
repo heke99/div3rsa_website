@@ -14,9 +14,9 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" href="/" onClick={closeMenu} aria-label="Diversa Nordic startsida">
-          <span className="brand-mark">DN</span>
-          <span className="brand-copy"><strong>Diversa Nordic</strong><small>Digital</small></span>
+        <Link className="brand" href="/" onClick={closeMenu} aria-label="Attmos startsida">
+          <span className="brand-mark">AT</span>
+          <span className="brand-copy"><strong>Attmos</strong><small>Digital</small></span>
         </Link>
 
         <button
@@ -46,7 +46,7 @@ export function Header() {
               </Link>
             );
           })}
-          <ButtonLink href="/contact" className="header-cta" ariaLabel="Starta ett projekt med Diversa Nordic">
+          <ButtonLink href="/contact" className="header-cta" ariaLabel="Starta ett projekt med Attmos">
             Starta projekt
           </ButtonLink>
         </nav>

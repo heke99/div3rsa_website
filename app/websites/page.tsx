@@ -7,7 +7,7 @@ import { WebsiteStyleSelector } from "@/components/WebsiteStyleSelector";
 export const metadata: Metadata = {
   title: "Hemsidor för företag",
   description:
-    "Jämför tre tydliga hemsidestilar från Diversa Nordic AB: Premium 3D, Business och Simple. Klicka på ett alternativ för att se stilen direkt.",
+    "Jämför tre tydliga hemsidestilar från Attmos AB: Premium 3D, Business och Simple. Klicka på ett alternativ för att se stilen direkt.",
 };
 
 const includedItems = [

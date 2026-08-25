@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { Section } from "@/components/Section";
-import { aboutValues, company } from "@/lib/content";
+import { aboutValues } from "@/lib/content";
+import { company } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Om Diversa Nordic",
+  title: "Om Attmos",
   description:
-    "Diversa Nordic AB är ett svenskt produkt- och utvecklingsbolag som bygger SaaS-plattformar, verksamhetssystem och digitala produkter.",
+    "Attmos AB är ett svenskt produkt- och utvecklingsbolag som bygger SaaS-plattformar, verksamhetssystem och digitala produkter.",
 };
 
 export default function AboutPage() {
@@ -16,10 +17,10 @@ export default function AboutPage() {
       <section className="page-hero">
         <div className="aurora aurora-one" />
         <div className="container narrow reveal">
-          <p className="eyebrow">Om Diversa Nordic</p>
+          <p className="eyebrow">Om Attmos</p>
           <h1>Vi bygger digitala produkter som håller ihop hela verksamheten.</h1>
           <p className="page-lead">
-            Diversa Nordic AB utvecklar egna system och hjälper företag gå från ett konkret operativt behov till en fungerande, skalbar produkt.
+            Attmos AB utvecklar egna system och hjälper företag gå från ett konkret operativt behov till en fungerande, skalbar produkt.
           </p>
         </div>
       </section>
