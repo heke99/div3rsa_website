@@ -5,9 +5,9 @@ import { Section } from "@/components/Section";
 import { businessPaymentsFaqs } from "@/lib/business-payments";
 
 export const metadata: Metadata = {
-  title: "Företagsbetalningar & Bankgiro | Diversa Nordic",
+  title: "Företagsbetalningar & Bankgiro | Attmos",
   description:
-    "Ansök om företagsbetalningar, fakturering och bankgirobaserade betalningsflöden via Diversa Nordic.",
+    "Ansök om företagsbetalningar, fakturering och bankgirobaserade betalningsflöden via Attmos AB.",
 };
 
 export default function BusinessPaymentsPage() {
@@ -21,7 +21,7 @@ export default function BusinessPaymentsPage() {
             <p className="eyebrow">Företagsbetalningar & Bankgiro</p>
             <h1>Saknar ditt företag bankgiro eller fungerande företagsbetalningar?</h1>
             <p className="hero-subheadline">
-              Diversa Nordic hjälper företag att komma igång med fakturering, kundinbetalningar och bankgirobaserade betalningsflöden via en enkel digital portal.
+              Attmos hjälper företag med ett digitalt ansöknings- och portalflöde för fakturering, kundinbetalningar och bankgirobaserade betalningslösningar. Själva betalnings- eller finanstjänsten tillhandahålls, när det krävs, av relevant extern aktör efter godkänd onboarding.
             </p>
             <div className="hero-actions">
               <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Ansök nu</ButtonLink>
@@ -35,13 +35,13 @@ export default function BusinessPaymentsPage() {
             </div>
             <div className="bankgiro-line" />
             <div className="bankgiro-card middle">
-              <span>Diversa Nordic Portal</span>
+              <span>Attmos Portal</span>
               <strong>Status, fakturor och onboarding</strong>
             </div>
             <div className="bankgiro-line" />
             <div className="bankgiro-card bottom">
               <span>Utbetalning</span>
-              <strong>Även till utländskt bankkonto</strong>
+              <strong>Enligt godkänd betalningslösning</strong>
             </div>
           </div>
         </div>
@@ -61,15 +61,15 @@ export default function BusinessPaymentsPage() {
 
       <Section
         eyebrow="Lösningen"
-        title="Ett samlat flöde via Diversa Nordic."
-        intro="Ni ansöker via Diversa Nordic. Vi granskar behovet, återkommer med nästa steg och bygger vidare mot portal, onboarding och betalningsflöde."
+        title="Ett samlat ansöknings- och portalflöde via Attmos."
+        intro="Ni ansöker via Attmos. Vi gör en första granskning av behovet och, när det är relevant, går ärendet vidare till rätt betalnings- eller finansaktör för dess egen prövning och onboarding."
       >
         <div className="process-grid">
           {[
             ["Ansök", "Fyll i företagets uppgifter och betalningsbehov."],
-            ["Granskning", "Vi går igenom ärendet och ser vilket upplägg som kan passa."],
-            ["Onboarding", "När ansökan är kvalificerad går ärendet vidare i rätt flöde."],
-            ["Portal", "Kunden får åtkomst till Diversa Nordic Portal när kontot är skapat."],
+            ["Första granskning", "Attmos går igenom ärendet och bedömer vilket upplägg som kan vara relevant."],
+            ["Extern onboarding", "När det krävs går ärendet vidare till relevant betalnings- eller finansaktör för egen kontroll och godkännande."],
+            ["Portal", "Efter godkänt upplägg kan kunden få tillgång till Attmos Portal för de funktioner som ingår i lösningen."],
           ].map(([title, text], index) => (
             <article className="process-step reveal" key={title}>
               <span>{index + 1}</span>
@@ -92,7 +92,7 @@ export default function BusinessPaymentsPage() {
         <div className="container final-cta-inner">
           <p className="eyebrow">Ansök online</p>
           <h2>Vill du se om lösningen passar ditt företag?</h2>
-          <p>Skicka in en kort ansökan. Vi samlar inte in KYC-dokument i webbformuläret.</p>
+          <p>Skicka in en kort ansökan. En ansökan är inte ett godkännande eller ett erbjudande om bank- eller betalningstjänst.</p>
           <div className="cta-actions">
             <ButtonLink href="/foretagsbetalningar-bankgiro/ansok">Ansök nu</ButtonLink>
             <ButtonLink href="/foretagsbetalningar-bankgiro/villkor" variant="secondary">Läs villkor</ButtonLink>
