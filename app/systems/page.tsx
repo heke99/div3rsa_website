@@ -6,7 +6,7 @@ import { Section } from "@/components/Section";
 export const metadata: Metadata = {
   title: "Produkter",
   description:
-    "Utforska Diversa Nordics systemportfölj inom ekonomi, energi, offentlig sektor, CRM, drift, transport och fastighet.",
+    "Utforska Attmos systemportfölj inom ekonomi, energi, offentlig sektor, CRM, drift, transport och fastighet.",
 };
 
 export default function ProductsPage() {
