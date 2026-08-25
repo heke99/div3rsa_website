@@ -4,7 +4,8 @@ import { HomeHero } from "@/components/HomeHero";
 import { ProductExplorer } from "@/components/ProductExplorer";
 import { Section } from "@/components/Section";
 import { ButtonLink } from "@/components/ButtonLink";
-import { company, processSteps, services, whyChoose } from "@/lib/content";
+import { processSteps, services, whyChoose } from "@/lib/content";
+import { company } from "@/lib/company";
 import { TextCard } from "@/components/Cards";
 
 export default function Home() {
@@ -56,7 +57,7 @@ export default function Home() {
 
       <Section
         id="why"
-        eyebrow="Varför Diversa Nordic"
+        eyebrow="Varför Attmos"
         title="Produktkänsla utan att tappa den tekniska grunden."
       >
         <div className="card-grid three compact-cards">
