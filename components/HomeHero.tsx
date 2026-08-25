@@ -9,27 +9,27 @@ export function HomeHero() {
       <div className="aurora aurora-two" />
       <div className="container hero-grid">
         <div className="hero-copy reveal">
-          <p className="eyebrow">Diversa Nordic Systems · Digitala produkter för verklig drift</p>
+          <p className="eyebrow">Attmos Systems · Digitala produkter för verklig drift</p>
           <h1>Vi bygger systemen företag faktiskt arbetar i.</h1>
           <p className="hero-subheadline">
-            Diversa Nordic utvecklar egna SaaS-produkter och skräddarsydda verksamhetssystem – från ekonomi och energi till e-signering, CRM och operativ planering.
+            Attmos utvecklar egna SaaS-produkter och skräddarsydda verksamhetssystem – från ekonomi och energi till e-signering, CRM och operativ planering.
           </p>
           <div className="hero-actions">
             <ButtonLink href="/systems">Utforska produkter</ButtonLink>
             <ButtonLink href="/contact" variant="secondary">Bygg ett system med oss</ButtonLink>
           </div>
-          <div className="hero-proof" aria-label="Diversa Nordics tekniska fokus">
+          <div className="hero-proof" aria-label="Attmos tekniska fokus">
             <div><strong>Multi-tenant</strong><span>Skalbara SaaS-plattformar</span></div>
             <div><strong>API-first</strong><span>Integrationer och webhooks</span></div>
             <div><strong>End-to-end</strong><span>Design, databas och drift</span></div>
           </div>
         </div>
 
-        <div className="systems-visual" aria-label="Diversa Nordic produktportfölj">
+        <div className="systems-visual" aria-label="Attmos produktportfölj">
           <div className="systems-window">
             <div className="systems-window-head">
               <div className="window-dots"><i /><i /><i /></div>
-              <span>Diversa Nordic Product Cloud</span>
+              <span>Attmos Product Cloud</span>
               <b>LIVE</b>
             </div>
             <div className="systems-window-body">
