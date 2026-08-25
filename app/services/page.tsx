@@ -8,7 +8,7 @@ import { processSteps, services, solutionPackages, techItems } from "@/lib/conte
 export const metadata: Metadata = {
   title: "Systemutveckling",
   description:
-    "Diversa Nordic bygger verksamhetssystem, SaaS-plattformar, portaler, API-integrationer, automation och moderna digitala produkter.",
+    "Attmos bygger verksamhetssystem, SaaS-plattformar, portaler, API-integrationer, automation och moderna digitala produkter.",
 };
 
 export default function ServicesPage() {
