@@ -102,7 +102,7 @@ export async function submitContactRequest(_previousState: ContactFormState, for
       subject,
       replyTo: payload.email,
       text: [
-      "Ny kontaktförfrågan från Diversa Nordic Web.",
+      "Ny kontaktförfrågan från Attmos via div3rsa.com.",
       "",
       `Namn: ${payload.name}`,
       `Bolag: ${payload.company_name || "-"}`,
@@ -115,7 +115,7 @@ export async function submitContactRequest(_previousState: ContactFormState, for
     ].join("\n"),
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
-          <h2>Ny kontaktförfrågan från Diversa Nordic Web</h2>
+          <h2>Ny kontaktförfrågan från Attmos / div3rsa.com</h2>
           <table style="border-collapse:collapse;width:100%;max-width:720px;">${rows}</table>
         </div>`,
     });
