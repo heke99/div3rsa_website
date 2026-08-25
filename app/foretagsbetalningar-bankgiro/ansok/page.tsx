@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { BusinessPaymentsApplicationForm } from "@/components/business-payments/BusinessPaymentsApplicationForm";
 
 export const metadata: Metadata = {
-  title: "Ansök om Företagsbetalningar & Bankgiro | Diversa Nordic",
-  description: "Skicka in en ansökan för företagsbetalningar och bankgirobaserade betalningsflöden via Diversa Nordic.",
+  title: "Ansök om Företagsbetalningar & Bankgiro | Attmos",
+  description: "Skicka in en ansökan för företagsbetalningar och bankgirobaserade betalningsflöden via Attmos AB.",
 };
 
 export default function ApplyBusinessPaymentsPage() {
@@ -14,7 +14,7 @@ export default function ApplyBusinessPaymentsPage() {
           <p className="eyebrow">Ansökan</p>
           <h1>Ansök om Företagsbetalningar & Bankgiro</h1>
           <p className="page-lead">
-            Fyll i uppgifterna nedan. Ansökan skickas till Diversa Nordic för granskning. Kunden får inget automatiskt bekräftelsemail.
+            Fyll i uppgifterna nedan. Ansökan skickas till Attmos AB för en första granskning. En inskickad ansökan innebär inte automatiskt godkännande eller att en betalningslösning har beviljats.
           </p>
         </div>
       </section>
