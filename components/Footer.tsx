@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company } from "@/lib/content";
+import { company } from "@/lib/company";
 
 const productLinks = [
   { label: "Nordklart", href: "https://nordklart.se" },
@@ -14,13 +14,13 @@ export function Footer() {
       <div className="footer-glow" />
       <div className="container footer-grid">
         <div className="footer-company">
-          <Link className="brand" href="/" aria-label="Diversa Nordic startsida">
-            <span className="brand-mark">DN</span>
-            <span className="brand-copy"><strong>Diversa Nordic</strong><small>Digital</small></span>
+          <Link className="brand" href="/" aria-label="Attmos startsida">
+            <span className="brand-mark">AT</span>
+            <span className="brand-copy"><strong>Attmos</strong><small>Digital</small></span>
           </Link>
           <p>Digitala produkter, SaaS-plattformar och verksamhetssystem byggda för verklig drift.</p>
           <a href={`mailto:${company.email}`}>{company.email}</a>
-          <span>Org.nr {company.orgNumber}</span>
+          <span>{company.name} · Org.nr {company.orgNumber}</span>
         </div>
 
         <div>
@@ -49,6 +49,7 @@ export function Footer() {
           <Link href="/integritetspolicy">Integritetspolicy</Link>
           <Link href="/cookiepolicy">Cookiepolicy</Link>
           <Link href="/anvandarvillkor">Användarvillkor</Link>
+          <a href={`mailto:${company.email}`}>Kontakt</a>
         </div>
       </div>
       <div className="container footer-bottom">
