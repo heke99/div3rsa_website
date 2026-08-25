@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | Attmos AB",
   },
   description: siteMeta.homeDescription,
-  keywords: siteMeta.keywords,
+  keywords: [...siteMeta.keywords],
   applicationName: company.name,
   authors: [{ name: company.name }],
   creator: company.name,
