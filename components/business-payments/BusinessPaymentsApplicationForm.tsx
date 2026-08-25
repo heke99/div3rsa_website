@@ -33,8 +33,8 @@ function getLabel(name: string) {
     invoice_count_estimate: "Antal fakturor per månad",
     average_invoice_amount: "Genomsnittligt fakturabelopp",
     urgency: "Hur snabbt behöver ni komma igång?",
-    consent_contact: "Samtycke kontakt",
-    consent_partner_forwarding: "Samtycke onboarding",
+    consent_contact: "Bekräftelse kontakt",
+    consent_partner_forwarding: "Bekräftelse onboarding",
   };
   return labels[name] || name;
 }
@@ -96,7 +96,7 @@ function YesNoField({ name, label }: { name: string; label: string }) {
   );
 }
 
-function CheckboxField({ name, label, errors }: { name: string; label: string; errors: Record<string, string> }) {
+function CheckboxField({ name, label, errors }: { name: string; label: React.ReactNode; errors: Record<string, string> }) {
   return (
     <label className="checkbox-card">
       <input name={name} type="checkbox" />
@@ -161,7 +161,7 @@ export function BusinessPaymentsApplicationForm() {
         <h2>Vi har tagit emot din ansökan.</h2>
         <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
         <Link className="button button-primary" href="/">
-          Tillbaka till Diversa Nordic
+          Tillbaka till Attmos
         </Link>
       </div>
     );
@@ -195,7 +195,7 @@ export function BusinessPaymentsApplicationForm() {
         </div>
         <div className="form-grid">
           <Field name="company_name" label="Företagsnamn" placeholder="Ex. ABC Consulting AB" errors={mergedErrors} />
-          <Field name="org_number" label="Organisationsnummer" placeholder="556855-4884" errors={mergedErrors} />
+          <Field name="org_number" label="Organisationsnummer" placeholder="556000-0000" errors={mergedErrors} />
           <Field name="contact_name" label="Kontaktperson" placeholder="För- och efternamn" errors={mergedErrors} />
           <Field name="email" label="E-post" type="email" placeholder="namn@foretag.se" errors={mergedErrors} />
           <Field name="phone" label="Telefon" type="tel" placeholder="+46 70 000 00 00" errors={mergedErrors} />
@@ -254,13 +254,13 @@ export function BusinessPaymentsApplicationForm() {
         <div className="form-step-heading">
           <p className="eyebrow">Steg 3</p>
           <h2>Bekräfta</h2>
-          <p>Granska uppgifterna och godkänn villkoren för att skicka ansökan.</p>
+          <p>Granska uppgifterna och bekräfta informationen nedan för att skicka ansökan.</p>
         </div>
         <div className="consent-box">
-          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag godkänner att Diversa Nordic får granska ansökan och kontakta mig om nästa steg." />
-          <CheckboxField name="consent_partner_forwarding" errors={mergedErrors} label="Jag godkänner att nödvändiga uppgifter kan skickas vidare till relevant betalnings- eller finansaktör för fortsatt onboarding när det krävs." />
+          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag vill att Attmos AB granskar min ansökan och kontaktar mig om nästa steg." />
+          <CheckboxField name="consent_partner_forwarding" errors={mergedErrors} label={<>Jag har läst <Link href="/integritetspolicy">integritetspolicyn</Link> och förstår att nödvändiga uppgifter kan lämnas till relevant betalnings- eller finansaktör när det krävs för fortsatt prövning och onboarding.</>} />
           <p>
-            Diversa Nordic är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs.
+            Attmos AB är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och relevant onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs. Se även <Link href="/foretagsbetalningar-bankgiro/villkor">villkoren för tjänsten</Link>.
           </p>
         </div>
       </div>
