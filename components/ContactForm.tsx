@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { submitContactRequest, type ContactFormState } from "@/app/contact/actions";
 import { budgetRanges, projectTypes } from "@/lib/content";
@@ -70,6 +71,7 @@ export function ContactForm() {
         <textarea name="message" rows={6} required />
         {fieldErrors.message ? <span className="field-error">{fieldErrors.message}</span> : null}
       </label>
+      <p className="contact-privacy-note">När du skickar formuläret behandlar Attmos AB dina uppgifter för att hantera din förfrågan. Läs mer i vår <Link href="/integritetspolicy">integritetspolicy</Link>.</p>
       <button className="button button-primary" type="submit" disabled={isPending}>
         {isPending ? "Skickar..." : "Skicka förfrågan"}
       </button>
