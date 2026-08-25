@@ -1,7 +1,7 @@
 {
   "name": "div3rsa-website",
   "version": "1.0.0",
-  "description": "Professional company website for Div3rsa AB.",
+  "description": "Professional company website for Attmos AB.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,12 +13,12 @@
     "url": "git+https://github.com/heke99/div3rsa_website.git"
   },
   "keywords": [
-    "Div3rsa AB",
+    "Attmos AB",
     "system development",
     "website development",
     "SaaS development"
   ],
-  "author": "",
+  "author": "Attmos AB",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/heke99/div3rsa_website/issues"
