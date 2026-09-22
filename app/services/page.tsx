@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { PackageCard } from "@/components/Cards";
 import { services, solutionPackages, processSteps, techItems } from "@/lib/content";
-export const metadata: Metadata = { title: "Services", description: "Business software, SaaS development, customer portals, integrations and product design. From a clear brief to a maintainable product.", alternates: { canonical: "/services" } };
+export const metadata = pageMetadata({ title: "Services", description: "Business software, SaaS development, customer portals, integrations and product design. From a clear brief to a maintainable product.", path: "/services" });
 export default function ServicesPage() {
   return <><section className="page-hero"><div className="container"><p className="eyebrow">Services</p><h1>Build the right thing.<br />Build it properly.</h1><p className="page-lead">We help turn operational needs into useful digital products. The interface, data, permissions and integrations are designed to work together.</p><ButtonLink href="/contact">Discuss your project <span aria-hidden="true">↗</span></ButtonLink></div></section>
     <section className="section"><div className="container service-details">{services.map(service => <article key={service.title}><h2>{service.title}</h2><div><p>{service.text}</p><strong>{service.deliverable}</strong></div></article>)}</div></section>

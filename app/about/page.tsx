@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { CTASection } from "@/components/CTASection";
 import { EntityCards } from "@/components/EntityCards";
-export const metadata: Metadata = { title: "Company", description: "Meet Trafexa Nordic AB in Sweden and Diversa Solutions LLC in Wyoming. Digital products, business software and considered engineering.", alternates: { canonical: "/about" } };
+export const metadata = pageMetadata({ title: "Company", description: "Meet Trafexa Nordic AB in Sweden and Diversa Solutions LLC in Wyoming. Digital products, business software and considered engineering.", path: "/about" });
 export default function AboutPage() {
   return <><section className="page-hero"><div className="container"><p className="eyebrow">The company</p><h1>We care about<br />how the work works.</h1><p className="page-lead">We develop our own digital products and build software for businesses with a specific operational need. Product thinking and engineering belong in the same conversation.</p></div></section>
     <section className="section"><div className="container two-column"><h2>Useful software starts<br />with a real understanding.</h2><div className="rich-copy"><p>A customer request. A contract. A document waiting for a signature. These are the things a business runs on. Our work is about making the systems around them clearer and more connected.</p><p>Our portfolio spans accounting, energy operations, signing, customer management and planning. Each product addresses a distinct operational need, with its current development stage noted in the portfolio.</p><p>For a new engagement, we begin with the people who will use the product, the information they rely on and the decisions they need to make.</p></div></div></section>

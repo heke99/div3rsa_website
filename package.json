@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint .",
     "audit:dependencies": "node scripts/audit-dependencies.mjs",
-    "test:smtp": "node --test scripts/smtp-compatibility.test.mjs"
+    "test:smtp": "node --test scripts/smtp-compatibility.test.mjs",
+    "test:brand": "node scripts/generate-brand-assets.mjs && node scripts/generate-brand-assets.mjs --check && node --test scripts/brand-assets.test.mjs",
+    "predev": "node scripts/generate-brand-assets.mjs",
+    "prebuild": "node scripts/generate-brand-assets.mjs"
   },
   "repository": {
     "type": "git",

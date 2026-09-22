@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/lib/company";
-export const metadata:Metadata={title:"Business payment application terms",description:"Important information about the business payment application process.",alternates:{canonical:"/business-payments/terms"}};
+export const metadata = pageMetadata({ title: "Business payment application terms", description: "Important information about the business payment application process.", path: "/business-payments/terms" });
 export default function PaymentTerms(){return <LegalPage title="Application terms" intro="Important information about the business payment application process." sections={[
  ["No guarantee of a payment service",`${company.name} is not a bank and does not guarantee a Bankgiro, business account or payment solution before the relevant provider has approved the application and onboarding.`],
  ["Information and assessment","The form collects basic company information and payment requirements. Required KYC/AML checks and supporting documents are handled later by the relevant payment or financial provider."],

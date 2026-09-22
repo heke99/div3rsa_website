@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ProductExplorer } from "@/components/ProductExplorer";
 import { CTASection } from "@/components/CTASection";
 import { productCategories, type ProductCategory } from "@/lib/products";
-export const metadata: Metadata = { title: "Our work", description: "Explore our product and engineering work across energy, accounting, signing, CRM and operations. Project scopes and development stages are clearly identified.", alternates: { canonical: "/systems" } };
+export const metadata = pageMetadata({ title: "Our work", description: "Explore our product and engineering work across energy, accounting, signing, CRM and operations. Project scopes and development stages are clearly identified.", path: "/systems" });
 export default async function WorkPage({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
   const { category } = await searchParams;
   const activeCategory: ProductCategory = productCategories.find(item => item.id === category)?.id ?? "all";

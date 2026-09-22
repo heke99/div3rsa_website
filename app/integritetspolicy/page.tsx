@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/lib/company";
-export const metadata:Metadata={title:"Privacy notice",description:"How we handle information when you visit, contact us or submit an application.",alternates:{canonical:"/privacy"}};
+export const metadata = pageMetadata({ title: "Privacy notice", description: "How we handle information when you visit, contact us or submit an application.", path: "/privacy" });
 export default function PrivacyPage(){return <LegalPage title="Privacy notice" intro="How we handle information when you visit, contact us or submit an application." sections={[
  ["The website operator",`${company.name}, company registration number ${company.orgNumber}, is responsible for the processing described in this notice. Contact ${company.email} with questions. Diversa Solutions LLC is a separate Wyoming entity; a project agreement will identify the relevant contracting entity. Selecting an entity in an enquiry does not itself enter you into an agreement.`],
  ["Information we process","We may process your name, email address, telephone number, company name, registration number, industry, website, project or payment requirements, application status and messages. Technical security and log information may also be processed to operate the website and protect the services."],
