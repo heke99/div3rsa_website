@@ -18,12 +18,21 @@ jobs:
       VERIFICATION_TOOLS_DIR: /tmp/website-verification-tools
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Require zero dependency vulnerabilities
+        run: npm run audit:dependencies
       - run: npm run lint
+      - name: Verify SMTP compatibility and rejection handling
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:smtp | tee verification/smtp-tests.txt
       - run: npm run build
       - name: Install isolated browser verification tools
         run: |
@@ -42,11 +51,8 @@ jobs:
           agent-browser snapshot -i > verification/agent-browser-snapshot.txt
           agent-browser screenshot verification/agent-browser-home.png
           agent-browser close
-      - name: Record dependency audit
-        if: always()
-        run: |
-          mkdir -p verification
-          npm audit --json > verification/dependency-audit.json || true
+      - name: Verify dependency files were not mutated
+        run: git diff --exit-code -- package.json package-lock.json
       - name: Archive verification evidence
         if: always()
         uses: actions/upload-artifact@v4
