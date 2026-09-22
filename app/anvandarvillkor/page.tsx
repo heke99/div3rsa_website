@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/lib/company";
-export const metadata:Metadata={title:"Website terms",description:"The terms for using this website and its enquiry and application forms.",alternates:{canonical:"/terms"}};
+export const metadata = pageMetadata({ title: "Website terms", description: "The terms for using this website and its enquiry and application forms.", path: "/terms" });
 export default function TermsPage(){return <LegalPage title="Website terms" intro="The terms for using this website and its enquiry and application forms." sections={[
  ["Purpose of the website","This website presents products and services and lets you submit enquiries or applications. Website information is not a binding offer unless explicitly stated otherwise."],
  ["Contracting entities",`${company.name} (Sweden, registration number ${company.orgNumber}) and Diversa Solutions LLC (Wyoming, United States) are separate legal entities. The applicable proposal or agreement identifies the entity responsible for a project, its deliverables and commercial terms. An enquiry or entity preference is not a contract.`],

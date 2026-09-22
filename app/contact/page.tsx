@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ContactForm } from "@/components/ContactForm";
 import { company, entities } from "@/lib/company";
-export const metadata: Metadata = { title: "Contact", description: "Discuss a software product, website or operational workflow with Trafexa Nordic. Tell us what needs to work better.", alternates: { canonical: "/contact" } };
+export const metadata = pageMetadata({ title: "Contact", description: "Discuss a software product, website or operational workflow with Trafexa Nordic. Tell us what needs to work better.", path: "/contact" });
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{product?:string}> }) {
  const {product} = await searchParams;
  const productName = typeof product === "string" ? product.slice(0,160) : undefined;

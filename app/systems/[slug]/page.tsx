@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/products";
@@ -6,7 +7,7 @@ import { ButtonLink } from "@/components/ButtonLink";
 export function generateStaticParams() { return products.map(({ slug }) => ({ slug })); }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params; const product = products.find(item => item.slug === slug);
-  return product ? { title: product.name, description: product.description, alternates: { canonical: `/systems/${product.slug}` } } : { title: "Project not found" };
+  return product ? pageMetadata({ title: product.name, description: product.description, path: `/systems/${product.slug}` }) : { title: "Project not found" };
 }
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; const product = products.find(item => item.slug === slug); if (!product) notFound();

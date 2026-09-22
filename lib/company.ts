@@ -9,7 +9,7 @@ export const company = {
   orgNumber: entities[0].registrationNumber,
   email: "info@div3rsa.com",
   domain: "div3rsa.com",
-  url: "https://div3rsa.com",
+  url: "https://www.div3rsa.com",
 } as const;
 export const siteMeta = {
   homeTitle: "Trafexa Nordic — Digital products & engineering",

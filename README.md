@@ -43,3 +43,9 @@ Tests cover English copy, entities, route responses, 320/390/768/1440 px overflo
 Dependency audit evidence is archived separately. Lint/build success is not a security clearance; review the audit before production release.
 
 See `docs/website-redesign.md` for provenance and release boundaries.
+
+## Browser identity and search metadata
+
+The existing Trafexa symbol is shared through `lib/brand.json` and exported for SVG/ICO favicons, Apple/Android home-screen icons, a maskable icon and Safari pinned tabs. Reproduce the browser assets with `node scripts/generate-brand-assets.mjs`; `npm run test:brand` verifies their geometry, content and sizes. `predev` and `prebuild` generate them automatically from the committed source. CI also checks the served icons, manifest, social images and page metadata.
+
+`company.url` matches the production primary host, `https://www.div3rsa.com`. Each public page has its own canonical URL and social title/description. The home page publishes WebSite/Organization structured data using only the existing operator information. See `docs/brand-and-launch-review-2026-09-22.md` for verification limits and operational follow-up items.

@@ -4,3 +4,9 @@ out
 .env*.local
 .DS_Store
 *.log
+
+# Browser identity exports are generated from lib/brand.json by predev/prebuild.
+/app/favicon.ico
+/app/apple-icon.png
+/public/brand/*.png
+/verification/

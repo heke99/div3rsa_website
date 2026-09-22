@@ -27,6 +27,8 @@ jobs:
       - run: npm ci
       - name: Require zero dependency vulnerabilities
         run: npm run audit:dependencies
+      - name: Verify brand assets and maskable safe zone
+        run: npm run test:brand
       - run: npm run lint
       - name: Verify SMTP compatibility and rejection handling
         shell: bash
@@ -44,6 +46,7 @@ jobs:
           npm start -- --hostname 127.0.0.1 > verification/server.log 2>&1 &
           for i in $(seq 1 45); do curl -fsS http://127.0.0.1:3000 > /dev/null && break; sleep 1; done
           node scripts/verify-website.mjs
+          node scripts/verify-brand.mjs
       - name: Agent browser visual check
         run: |
           export PATH="$VERIFICATION_TOOLS_DIR/node_modules/.bin:$PATH"
