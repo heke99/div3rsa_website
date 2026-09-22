@@ -1,102 +1,14 @@
-import { ContactForm } from "@/components/ContactForm";
-import { CTASection } from "@/components/CTASection";
+import Link from "next/link";
 import { HomeHero } from "@/components/HomeHero";
 import { ProductExplorer } from "@/components/ProductExplorer";
-import { Section } from "@/components/Section";
-import { ButtonLink } from "@/components/ButtonLink";
-import { processSteps, services, whyChoose } from "@/lib/content";
-import { company } from "@/lib/company";
-import { TextCard } from "@/components/Cards";
-
+import { CTASection } from "@/components/CTASection";
+import { EntityCards } from "@/components/EntityCards";
+import { services, processSteps } from "@/lib/content";
 export default function Home() {
-  return (
-    <>
-      <HomeHero />
-
-      <Section
-        id="products"
-        eyebrow="Utvalda produkter"
-        title="System för ekonomi, energi, offentlig sektor och försäljning."
-        intro="Vi bygger inte generiska demos. Varje produkt utgår från ett verkligt arbetsflöde, tydliga roller och data som måste hänga ihop hela vägen."
-        className="home-products-section"
-      >
-        <ProductExplorer featuredOnly showFilters={false} />
-        <div className="center-actions">
-          <ButtonLink href="/systems" variant="secondary">Se hela produktportföljen</ButtonLink>
-        </div>
-      </Section>
-
-      <Section
-        id="services"
-        eyebrow="Vad vi utvecklar"
-        title="Från verksamhetsproblem till ett komplett system."
-        intro="Vi tar ansvar för helheten: produktlogik, användarupplevelse, databas, integrationer, behörigheter och driftsättning."
-      >
-        <div className="card-grid three compact-cards systems-capability-grid">
-          {services.map((service) => (
-            <TextCard key={service.title} {...service} />
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        id="process"
-        eyebrow="Arbetssätt"
-        title="Vi bygger med verksamheten som utgångspunkt."
-      >
-        <div className="process-grid">
-          {processSteps.map((step, index) => (
-            <article className="process-step reveal" key={step.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        id="why"
-        eyebrow="Varför Attmos"
-        title="Produktkänsla utan att tappa den tekniska grunden."
-      >
-        <div className="card-grid three compact-cards">
-          {whyChoose.map((item) => (
-            <TextCard key={item.title} {...item} />
-          ))}
-        </div>
-      </Section>
-
-      <Section className="website-bridge-section">
-        <div className="website-bridge reveal">
-          <div>
-            <p className="eyebrow">Webb & varumärke</p>
-            <h2>Behöver systemet också en stark publik sida?</h2>
-            <p>Vi bygger även moderna företags- och produktsidor som kopplas ihop med portaler, onboarding och era digitala flöden.</p>
-          </div>
-          <ButtonLink href="/websites" variant="secondary">Se hemsidelösningar</ButtonLink>
-        </div>
-      </Section>
-
-      <Section
-        id="contact"
-        eyebrow="Kontakt"
-        title="Berätta vilket arbetsflöde du vill förbättra."
-        intro="Beskriv verksamheten, problemet och vilka som ska använda lösningen. Vi hjälper dig strukturera nästa steg."
-      >
-        <div className="two-column contact-layout">
-          <div className="contact-info reveal">
-            <span className="case-label">Systemstudio i Sverige</span>
-            <h3>{company.name}</h3>
-            <p>Vi utvecklar egna produkter och skräddarsydda digitala system för företag och organisationer.</p>
-            <p>E-post: <a href={`mailto:${company.email}`}>{company.email}</a></p>
-            <p>Org.nr: {company.orgNumber}</p>
-          </div>
-          <ContactForm />
-        </div>
-      </Section>
-
-      <CTASection />
-    </>
-  );
+  return <><HomeHero />
+    <section className="section work-section" id="selected-work"><div className="container"><div className="section-heading split-heading"><div><p className="eyebrow">Selected work</p><h2>Different industries.<br />The same attention to detail.</h2></div><div><p>A closer look at the products and operational workflows we are developing.</p><Link className="text-link" href="/systems">Explore the portfolio <span aria-hidden="true">↗</span></Link></div></div><ProductExplorer featuredOnly showFilters={false} /></div></section>
+    <section className="section capabilities-section"><div className="container capabilities-layout"><div className="section-heading"><p className="eyebrow">What we do</p><h2>The whole product.<br />Not just the screens.</h2><p>Good software starts with understanding the work. We connect product thinking, interface design and engineering in one development process.</p><Link className="text-link" href="/services">How we can help <span aria-hidden="true">↗</span></Link></div><div className="service-list">{services.map(service => <article key={service.title}><h3>{service.title}</h3><p>{service.text}</p></article>)}</div></div></section>
+    <section className="section"><div className="container"><div className="section-heading"><p className="eyebrow">How we work</p><h2>Clear thinking.<br />Then careful execution.</h2></div><div className="process-grid">{processSteps.map((step,index) => <article className="process-step" key={step.title}><span className="process-number">0{index+1}</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div></div></section>
+    <section className="section entity-section"><div className="container"><div className="section-heading split-heading"><div><p className="eyebrow">The company behind the work</p><h2>Swedish roots.<br />An international outlook.</h2></div><div><p>Two legal entities, clearly identified. We confirm the scope, responsibilities and contracting entity before a project starts.</p><Link className="text-link" href="/about">Meet the company <span aria-hidden="true">↗</span></Link></div></div><EntityCards /></div></section>
+    <CTASection /></>;
 }

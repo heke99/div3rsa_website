@@ -1,284 +1,48 @@
 "use server";
-
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 import { sendSmtpMail } from "@/lib/email/smtp";
-
-type ActionState = {
-  ok: boolean;
-  message: string;
-  errors?: Record<string, string>;
-};
-
-const requiredFields = [
-  ["company_name", "Skriv företagsnamn."],
-  ["org_number", "Skriv organisationsnummer."],
-  ["contact_name", "Skriv kontaktperson."],
-  ["email", "Skriv e-postadress."],
-  ["phone", "Skriv telefonnummer."],
-  ["industry", "Skriv bransch."],
-  ["business_description", "Beskriv verksamheten kort."],
-  ["customer_type", "Välj kundtyp."],
-  ["monthly_volume_estimate", "Ange uppskattad månadsvolym."],
-  ["invoice_count_estimate", "Ange antal fakturor per månad."],
-  ["average_invoice_amount", "Ange genomsnittligt fakturabelopp."],
-  ["urgency", "Välj hur snabbt ni behöver komma igång."],
-] as const;
-
-function value(formData: FormData, key: string) {
-  return String(formData.get(key) || "").trim();
-}
-
-function boolValue(formData: FormData, key: string) {
-  return formData.get(key) === "on" || formData.get(key) === "true";
-}
-
-function optionalBool(formData: FormData, key: string) {
-  const raw = value(formData, key);
-  if (!raw) return null;
-  return raw === "yes";
-}
-
-function moneyToNumber(input: string) {
-  const cleaned = input.replace(/\s/g, "").replace(",", ".").replace(/[^0-9.]/g, "");
-  if (!cleaned) return null;
-  const parsed = Number(cleaned);
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-function buildAdminEmail(payload: Record<string, unknown>) {
-  const portalUrl = process.env.PORTAL_ADMIN_URL || "https://portal.div3rsa.com/admin/payment-applications";
-  const lines = [
-    "Ny ansökan har skickats in via Attmos på div3rsa.com.",
-    "",
-    `Företag: ${payload.company_name}`,
-    `Org.nr: ${payload.org_number}`,
-    `Kontaktperson: ${payload.contact_name}`,
-    `E-post: ${payload.email}`,
-    `Telefon: ${payload.phone}`,
-    `Bransch: ${payload.industry}`,
-    `Hemsida: ${payload.website || "-"}`,
-    `Har svenskt företagskonto: ${payload.has_swedish_business_account === null ? "Ej valt" : payload.has_swedish_business_account ? "Ja" : "Nej"}`,
-    `Har bankgiro: ${payload.has_bankgiro === null ? "Ej valt" : payload.has_bankgiro ? "Ja" : "Nej"}`,
-    `Nekad banktjänst: ${payload.was_denied_bank_services === null ? "Ej valt" : payload.was_denied_bank_services ? "Ja" : "Nej"}`,
-    `Kundtyp: ${payload.customer_type}`,
-    `Uppskattad månadsvolym: ${payload.monthly_volume_estimate}`,
-    `Antal fakturor/månad: ${payload.invoice_count_estimate}`,
-    `Genomsnittligt fakturabelopp: ${payload.average_invoice_amount}`,
-    `Befintligt fakturasystem: ${payload.current_invoice_system || "-"}`,
-    `Behöver komma igång: ${payload.urgency}`,
-    "",
-    "Behov:",
-    `- Fakturering: ${payload.needs_invoicing ? "Ja" : "Nej"}`,
-    `- Kundinbetalningar: ${payload.needs_customer_payments ? "Ja" : "Nej"}`,
-    `- Bankgiroflöde: ${payload.needs_bankgiro_flow ? "Ja" : "Nej"}`,
-    `- Fakturaköp/förskott: ${payload.needs_invoice_financing ? "Ja" : "Nej"}`,
-    `- API/integration: ${payload.needs_api ? "Ja" : "Nej"}`,
-    "",
-    "Verksamhetsbeskrivning:",
-    String(payload.business_description || "-"),
-    "",
-    "Övrig kommentar:",
-    String(payload.other_comment || "-"),
-    "",
-    `Admin: ${portalUrl}`,
-  ];
-
-  return lines.join("\n");
-}
-
-function escapeHtml(value: unknown) {
-  return String(value ?? "-")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function buildAdminEmailHtml(payload: Record<string, unknown>) {
-  const portalUrl = process.env.PORTAL_ADMIN_URL || "https://portal.div3rsa.com/admin/payment-applications";
-  const rows: Array<[string, unknown]> = [
-    ["Företag", payload.company_name],
-    ["Org.nr", payload.org_number],
-    ["Kontaktperson", payload.contact_name],
-    ["E-post", payload.email],
-    ["Telefon", payload.phone],
-    ["Bransch", payload.industry],
-    ["Hemsida", payload.website || "-"],
-    ["Har svenskt företagskonto", payload.has_swedish_business_account === null ? "Ej valt" : payload.has_swedish_business_account ? "Ja" : "Nej"],
-    ["Har bankgiro", payload.has_bankgiro === null ? "Ej valt" : payload.has_bankgiro ? "Ja" : "Nej"],
-    ["Nekad banktjänst", payload.was_denied_bank_services === null ? "Ej valt" : payload.was_denied_bank_services ? "Ja" : "Nej"],
-    ["Kundtyp", payload.customer_type],
-    ["Uppskattad månadsvolym", payload.monthly_volume_estimate],
-    ["Antal fakturor/månad", payload.invoice_count_estimate],
-    ["Genomsnittligt fakturabelopp", payload.average_invoice_amount],
-    ["Befintligt fakturasystem", payload.current_invoice_system || "-"],
-    ["Behöver komma igång", payload.urgency],
-    ["Fakturering", payload.needs_invoicing ? "Ja" : "Nej"],
-    ["Kundinbetalningar", payload.needs_customer_payments ? "Ja" : "Nej"],
-    ["Bankgiroflöde", payload.needs_bankgiro_flow ? "Ja" : "Nej"],
-    ["Fakturaköp/förskott", payload.needs_invoice_financing ? "Ja" : "Nej"],
-    ["API/integration", payload.needs_api ? "Ja" : "Nej"],
-    ["Verksamhetsbeskrivning", payload.business_description || "-"],
-    ["Övrig kommentar", payload.other_comment || "-"],
-  ];
-
-  return `
-    <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111827;">
-      <h2>Ny ansökan – Företagsbetalningar & Bankgiro</h2>
-      <p>Ny ansökan har skickats in via Attmos på div3rsa.com.</p>
-      <table style="border-collapse:collapse;width:100%;max-width:760px;">
-        ${rows
-          .map(
-            ([label, value]) =>
-              `<tr><td style="padding:8px 10px;border:1px solid #e5e7eb;font-weight:700;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e5e7eb;white-space:pre-wrap;">${escapeHtml(value)}</td></tr>`,
-          )
-          .join("")}
-      </table>
-      <p><a href="${escapeHtml(portalUrl)}">Öppna admin</a></p>
-    </div>`;
-}
-
-export async function submitBusinessPaymentApplication(_: ActionState, formData: FormData): Promise<ActionState> {
-  const errors: Record<string, string> = {};
-
-  for (const [field, message] of requiredFields) {
-    if (!value(formData, field)) errors[field] = message;
-  }
-
-  if (!value(formData, "email").includes("@")) {
-    errors.email = "Skriv en giltig e-postadress.";
-  }
-
-  if (!boolValue(formData, "consent_contact")) {
-    errors.consent_contact = "Du behöver bekräfta att Attmos AB får granska ansökan och kontakta dig om nästa steg.";
-  }
-
-  if (!boolValue(formData, "consent_partner_forwarding")) {
-    errors.consent_partner_forwarding = "Du behöver bekräfta att du har läst informationen om eventuell vidare onboarding.";
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return { ok: false, message: "Kontrollera fälten och försök igen.", errors };
-  }
-
-  const supabase = getSupabaseAdmin();
-  const payload = {
-    company_name: value(formData, "company_name"),
-    org_number: value(formData, "org_number"),
-    contact_name: value(formData, "contact_name"),
-    email: value(formData, "email"),
-    phone: value(formData, "phone"),
-    industry: value(formData, "industry"),
-    website: value(formData, "website") || null,
-    business_description: value(formData, "business_description"),
-    has_swedish_business_account: optionalBool(formData, "has_swedish_business_account"),
-    has_bankgiro: optionalBool(formData, "has_bankgiro"),
-    was_denied_bank_services: optionalBool(formData, "was_denied_bank_services"),
-    customer_type: value(formData, "customer_type"),
-    monthly_volume_estimate: moneyToNumber(value(formData, "monthly_volume_estimate")),
-    invoice_count_estimate: Number(value(formData, "invoice_count_estimate")) || null,
-    average_invoice_amount: moneyToNumber(value(formData, "average_invoice_amount")),
-    needs_invoicing: boolValue(formData, "needs_invoicing"),
-    needs_customer_payments: boolValue(formData, "needs_customer_payments"),
-    needs_bankgiro_flow: boolValue(formData, "needs_bankgiro_flow"),
-    needs_invoice_financing: boolValue(formData, "needs_invoice_financing"),
-    needs_api: boolValue(formData, "needs_api"),
-    current_invoice_system: value(formData, "current_invoice_system") || null,
-    urgency: value(formData, "urgency"),
-    other_comment: value(formData, "other_comment") || null,
-    consent_partner_forwarding: boolValue(formData, "consent_partner_forwarding"),
-    consent_contact: boolValue(formData, "consent_contact"),
-    status: "new",
-    admin_notification_status: "pending",
-  };
-
-  const { data, error } = await supabase.from("payment_applications").insert(payload).select("id").single();
-
-  if (error || !data) {
-    return { ok: false, message: "Ansökan kunde inte sparas. Försök igen eller kontakta info@div3rsa.com." };
-  }
-
-  console.info("Business payment application saved", {
-    applicationId: data.id,
-    companyName: payload.company_name,
-    email: payload.email,
-  });
-
-  await supabase.from("payment_application_events").insert({
-    application_id: data.id,
-    event_type: "application_submitted",
-    description: "Ansökan skickades in via Attmos på div3rsa.com.",
-    created_by: "public_form",
-  });
-
-  const recipient = process.env.ADMIN_NOTIFICATION_EMAIL || "info@div3rsa.com";
-  const subject = "Ny ansökan – Företagsbetalningar & Bankgiro";
-  const body = buildAdminEmail(payload);
-  const html = buildAdminEmailHtml(payload);
-
-  console.info("Sending business payment application admin notification", {
-    applicationId: data.id,
-    recipient,
-  });
-
-  try {
-    const result = await sendSmtpMail({
-      to: recipient,
-      subject,
-      text: body,
-      html,
-      replyTo: payload.email,
-    });
-    await supabase.from("email_logs").insert({
-      application_id: data.id,
-      email_type: "admin_new_application_notification",
-      recipient,
-      subject,
-      status: "sent",
-      provider_message_id: result.messageId || null,
-      sent_at: new Date().toISOString(),
-    });
-    await supabase
-      .from("payment_applications")
-      .update({ admin_notification_status: "sent" })
-      .eq("id", data.id);
-    await supabase.from("payment_application_events").insert({
-      application_id: data.id,
-      event_type: "admin_notification_email_sent",
-      description: `Intern mailnotis skickades till ${recipient}.`,
-      created_by: "system",
-    });
-    console.info("Business payment application admin notification sent", {
-      applicationId: data.id,
-      recipient,
-      messageId: result.messageId || null,
-    });
-  } catch (mailError) {
-    const message = mailError instanceof Error ? mailError.message : "Unknown SMTP error";
-    console.error("Business payment application admin notification failed", {
-      applicationId: data.id,
-      recipient,
-      error: mailError,
-    });
-    await supabase.from("email_logs").insert({
-      application_id: data.id,
-      email_type: "admin_new_application_notification",
-      recipient,
-      subject,
-      status: "failed",
-      error_message: message,
-    });
-    await supabase
-      .from("payment_applications")
-      .update({ admin_notification_status: "failed" })
-      .eq("id", data.id);
-    await supabase.from("payment_application_events").insert({
-      application_id: data.id,
-      event_type: "admin_notification_email_failed",
-      description: message,
-      created_by: "system",
-    });
-  }
-
-  return { ok: true, message: "Vi har tagit emot din ansökan." };
+import { renderRows } from "@/lib/server/business-payments-email";
+import { escapeHtml } from "@/lib/server/escape-html";
+import { company } from "@/lib/company";
+type ActionState={ok:boolean;message:string;errors?:Record<string,string>};
+const requiredFields=["company_name","org_number","contact_name","email","phone","industry","business_description","customer_type","monthly_volume_estimate","invoice_count_estimate","average_invoice_amount","urgency"];
+const value=(data:FormData,key:string)=>String(data.get(key)||"").trim();
+const boolValue=(data:FormData,key:string)=>data.get(key)==="on"||data.get(key)==="true";
+function optionalBool(data:FormData,key:string){const raw=value(data,key);return raw ? raw==="yes":null;}
+function amount(data:FormData,key:string){return Number(value(data,key).replace(/\s/g,"").replace(",","."));}
+export async function submitBusinessPaymentApplication(_:ActionState,formData:FormData):Promise<ActionState> {
+ const errors:Record<string,string>={};
+ for(const field of requiredFields){if(!value(formData,field))errors[field]="Please complete this field.";if(field!=="business_description"&&value(formData,field).length>254)errors[field]="Please use no more than 254 characters.";}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value(formData,"email"))) errors.email="Please enter a valid email address.";
+ for(const field of ["business_description","other_comment"])if(value(formData,field).length>8000)errors[field]="Please use no more than 8,000 characters.";
+ for(const field of ["website","current_invoice_system"])if(value(formData,field).length>500)errors[field]="Please use no more than 500 characters.";
+ for(const field of ["has_swedish_business_account","has_bankgiro","was_denied_bank_services"])if(!["","yes","no"].includes(value(formData,field)))errors[field]="Please select yes or no.";
+ if(!["B2B","B2C","both"].includes(value(formData,"customer_type")))errors.customer_type="Please choose a customer type.";
+ if(!["asap","1-2 weeks","this month","planning"].includes(value(formData,"urgency")))errors.urgency="Please select your timeframe.";
+ for(const field of ["monthly_volume_estimate","average_invoice_amount"]){const raw=value(formData,field).replace(/\s/g,"").replace(",",".");if(!/^\d+(\.\d{1,2})?$/.test(raw)||Number(raw)<=0||!Number.isFinite(Number(raw)))errors[field]="Please enter a positive amount in SEK, with up to two decimal places.";}
+ if(!/^\d+$/.test(value(formData,"invoice_count_estimate"))||!Number.isSafeInteger(Number(value(formData,"invoice_count_estimate")))||Number(value(formData,"invoice_count_estimate"))<1)errors.invoice_count_estimate="Please enter a positive whole number.";
+ if(!boolValue(formData,"consent_contact"))errors.consent_contact=`Please confirm that ${company.name} may review your application and contact you about next steps.`;
+ if(!boolValue(formData,"consent_partner_forwarding"))errors.consent_partner_forwarding="Please confirm that you have read the information about further onboarding.";
+ if(Object.keys(errors).length)return {ok:false,message:"Please check the highlighted fields and try again.",errors};
+ let supabase:ReturnType<typeof getSupabaseAdmin>;
+ try{supabase=getSupabaseAdmin();}catch{return {ok:false,message:"The application service is unavailable. Please email info@div3rsa.com directly."};}
+ const payload={company_name:value(formData,"company_name"),org_number:value(formData,"org_number"),contact_name:value(formData,"contact_name"),email:value(formData,"email"),phone:value(formData,"phone"),industry:value(formData,"industry"),website:value(formData,"website")||null,business_description:value(formData,"business_description"),has_swedish_business_account:optionalBool(formData,"has_swedish_business_account"),has_bankgiro:optionalBool(formData,"has_bankgiro"),was_denied_bank_services:optionalBool(formData,"was_denied_bank_services"),customer_type:value(formData,"customer_type"),monthly_volume_estimate:amount(formData,"monthly_volume_estimate"),invoice_count_estimate:Number(value(formData,"invoice_count_estimate")),average_invoice_amount:amount(formData,"average_invoice_amount"),needs_invoicing:boolValue(formData,"needs_invoicing"),needs_customer_payments:boolValue(formData,"needs_customer_payments"),needs_bankgiro_flow:boolValue(formData,"needs_bankgiro_flow"),needs_invoice_financing:boolValue(formData,"needs_invoice_financing"),needs_api:boolValue(formData,"needs_api"),current_invoice_system:value(formData,"current_invoice_system")||null,urgency:value(formData,"urgency"),other_comment:value(formData,"other_comment")||null,consent_partner_forwarding:boolValue(formData,"consent_partner_forwarding"),consent_contact:boolValue(formData,"consent_contact"),status:"new",admin_notification_status:"pending"};
+ let applicationId:string;
+ try{const {data,error}=await supabase.from("payment_applications").insert(payload).select("id").single();if(error||!data)throw new Error("Not saved");applicationId=data.id;}
+ catch{return {ok:false,message:"We could not save the application. Please try again or contact info@div3rsa.com."};}
+ const recipient=process.env.ADMIN_NOTIFICATION_EMAIL||company.email;
+ const subject="New application – Business payments & Bankgiro";
+ const portalUrl=process.env.PORTAL_ADMIN_URL||"https://portal.div3rsa.com/admin/payment-applications";
+ const rows:Array<[string,string]>=Object.entries(payload).map(([key,item])=>[key.replaceAll("_"," "),item===null?"Not specified":String(item)]);
+ let status:"sent"|"failed"="sent";let providerMessageId:string|null=null;let errorMessage:string|null=null;
+ try{const result=await sendSmtpMail({to:recipient,subject,replyTo:payload.email,text:[`New application for ${company.name}.`,...rows.map(([label,item])=>`${label}: ${item}`),`Admin: ${portalUrl}`].join("\n"),html:`<div style="font-family:Arial,sans-serif;line-height:1.6;color:#152a31"><h2>New business payment application</h2><table style="border-collapse:collapse">${renderRows(rows)}</table><p><a href="${escapeHtml(portalUrl)}">Open admin</a></p></div>`});providerMessageId=result.messageId||null;}
+ catch(error){status="failed";errorMessage=error instanceof Error?error.message:"Unknown SMTP error";console.error("Application notification failed",{applicationId});}
+ // Keep the existing event, email-log and notification status contracts for the separate portal.
+ try{
+  await supabase.from("payment_application_events").insert({application_id:applicationId,event_type:"application_submitted",description:`Application submitted to ${company.name} via ${company.domain}.`,created_by:"public_form"});
+  await supabase.from("email_logs").insert({application_id:applicationId,email_type:"admin_new_application_notification",recipient,subject,status,provider_message_id:providerMessageId,error_message:errorMessage,sent_at:status==="sent"?new Date().toISOString():null});
+  await supabase.from("payment_applications").update({admin_notification_status:status}).eq("id",applicationId);
+  await supabase.from("payment_application_events").insert({application_id:applicationId,event_type:status==="sent"?"admin_notification_email_sent":"admin_notification_email_failed",description:status==="sent"?`Internal notification sent to ${recipient}.`:errorMessage,created_by:"system"});
+ }catch{console.error("Application notification audit failed",{applicationId});}
+ return {ok:true,message:"Your application has been received."};
 }

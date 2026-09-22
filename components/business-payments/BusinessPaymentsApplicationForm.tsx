@@ -1,278 +1,64 @@
 "use client";
-
 import Link from "next/link";
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { submitBusinessPaymentApplication } from "@/app/foretagsbetalningar-bankgiro/ansok/actions";
-
-type FormState = {
-  ok: boolean;
-  message: string;
-  errors?: Record<string, string>;
-};
-
-const initialState: FormState = { ok: false, message: "" };
-const steps = ["Företag", "Behov", "Bekräfta"];
-
-const requiredByStep: Record<number, string[]> = {
-  0: ["company_name", "org_number", "contact_name", "email", "phone", "industry", "business_description"],
-  1: ["customer_type", "monthly_volume_estimate", "invoice_count_estimate", "average_invoice_amount", "urgency"],
-  2: ["consent_contact", "consent_partner_forwarding"],
-};
-
-function getLabel(name: string) {
-  const labels: Record<string, string> = {
-    company_name: "Företagsnamn",
-    org_number: "Organisationsnummer",
-    contact_name: "Kontaktperson",
-    email: "E-post",
-    phone: "Telefon",
-    industry: "Bransch",
-    business_description: "Kort verksamhetsbeskrivning",
-    customer_type: "Kundtyp",
-    monthly_volume_estimate: "Uppskattad månadsvolym",
-    invoice_count_estimate: "Antal fakturor per månad",
-    average_invoice_amount: "Genomsnittligt fakturabelopp",
-    urgency: "Hur snabbt behöver ni komma igång?",
-    consent_contact: "Bekräftelse kontakt",
-    consent_partner_forwarding: "Bekräftelse onboarding",
-  };
-  return labels[name] || name;
-}
-
-function Field({
-  name,
-  label,
-  type = "text",
-  placeholder,
-  errors,
-}: {
-  name: string;
-  label: string;
-  type?: string;
-  placeholder?: string;
-  errors: Record<string, string>;
-}) {
-  return (
-    <label>
-      {label}
-      <input name={name} type={type} placeholder={placeholder} autoComplete="off" />
-      {errors[name] ? <span className="field-error">{errors[name]}</span> : null}
-    </label>
-  );
-}
-
-function SelectField({
-  name,
-  label,
-  children,
-  errors,
-}: {
-  name: string;
-  label: string;
-  children: React.ReactNode;
-  errors: Record<string, string>;
-}) {
-  return (
-    <label>
-      {label}
-      <select name={name} defaultValue="">
-        {children}
-      </select>
-      {errors[name] ? <span className="field-error">{errors[name]}</span> : null}
-    </label>
-  );
-}
-
-function YesNoField({ name, label }: { name: string; label: string }) {
-  return (
-    <label>
-      {label}
-      <select name={name} defaultValue="">
-        <option value="">Välj</option>
-        <option value="yes">Ja</option>
-        <option value="no">Nej</option>
-      </select>
-    </label>
-  );
-}
-
-function CheckboxField({ name, label, errors }: { name: string; label: React.ReactNode; errors: Record<string, string> }) {
-  return (
-    <label className="checkbox-card">
-      <input name={name} type="checkbox" />
-      <span>{label}</span>
-      {errors[name] ? <strong className="field-error">{errors[name]}</strong> : null}
-    </label>
-  );
-}
-
-export function BusinessPaymentsApplicationForm() {
-  const [state, formAction, pending] = useActionState(submitBusinessPaymentApplication, initialState);
-  const [step, setStep] = useState(0);
-  const [clientErrors, setClientErrors] = useState<Record<string, string>>({});
-  const mergedErrors = useMemo(() => ({ ...(state.errors || {}), ...clientErrors }), [state.errors, clientErrors]);
-
-  function validateStep(currentStep: number) {
-    const form = document.querySelector<HTMLFormElement>("#business-payment-application-form");
-    if (!form) return true;
-    const data = new FormData(form);
-    const nextErrors: Record<string, string> = {};
-
-    for (const field of requiredByStep[currentStep]) {
-      const raw = data.get(field);
-      const isCheckbox = field.startsWith("consent_");
-      const isEmpty = isCheckbox ? raw !== "on" : !String(raw || "").trim();
-      if (isEmpty) nextErrors[field] = `${getLabel(field)} behöver fyllas i.`;
-    }
-
-    const email = String(data.get("email") || "").trim();
-    if (currentStep === 0 && email && !email.includes("@")) {
-      nextErrors.email = "Skriv en giltig e-postadress.";
-    }
-
-    setClientErrors(nextErrors);
-    if (Object.keys(nextErrors).length > 0) {
-      setTimeout(() => document.querySelector(".field-error")?.scrollIntoView({ behavior: "smooth", block: "center" }), 30);
-      return false;
-    }
-    return true;
-  }
-
-  function nextStep() {
-    if (!validateStep(step)) return;
-    setStep((current) => Math.min(current + 1, steps.length - 1));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function previousStep() {
-    setClientErrors({});
-    setStep((current) => Math.max(current - 1, 0));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    if (!validateStep(2)) event.preventDefault();
-  }
-
-  if (state.ok) {
-    return (
-      <div className="success-card reveal" role="status">
-        <div className="success-icon">✓</div>
-        <h2>Vi har tagit emot din ansökan.</h2>
-        <p>Vi går igenom uppgifterna och återkommer med nästa steg.</p>
-        <Link className="button button-primary" href="/">
-          Tillbaka till Attmos
-        </Link>
-      </div>
-    );
-  }
-
-  return (
-    <form id="business-payment-application-form" className="application-form reveal" action={formAction} onSubmit={onSubmit}>
-      <div className="step-indicator" aria-label="Ansökningssteg">
-        {steps.map((label, index) => (
-          <button
-            key={label}
-            type="button"
-            className={index === step ? "step-pill active" : index < step ? "step-pill done" : "step-pill"}
-            onClick={() => {
-              if (index <= step || validateStep(step)) setStep(index);
-            }}
-          >
-            <span>{index + 1}</span>
-            {label}
-          </button>
-        ))}
-      </div>
-
-      {state.message && !state.ok ? <p className="form-alert">{state.message}</p> : null}
-
-      <div className={step === 0 ? "form-step active" : "form-step"} aria-hidden={step !== 0}>
-        <div className="form-step-heading">
-          <p className="eyebrow">Steg 1</p>
-          <h2>Företaget</h2>
-          <p>Fyll i grunduppgifter. Inga KYC-dokument behövs i webbansökan.</p>
-        </div>
-        <div className="form-grid">
-          <Field name="company_name" label="Företagsnamn" placeholder="Ex. ABC Consulting AB" errors={mergedErrors} />
-          <Field name="org_number" label="Organisationsnummer" placeholder="556000-0000" errors={mergedErrors} />
-          <Field name="contact_name" label="Kontaktperson" placeholder="För- och efternamn" errors={mergedErrors} />
-          <Field name="email" label="E-post" type="email" placeholder="namn@foretag.se" errors={mergedErrors} />
-          <Field name="phone" label="Telefon" type="tel" placeholder="+46 70 000 00 00" errors={mergedErrors} />
-          <Field name="industry" label="Bransch" placeholder="Ex. e-handel, konsult, bygg" errors={mergedErrors} />
-          <Field name="website" label="Hemsida" placeholder="https://..." errors={mergedErrors} />
-          <YesNoField name="has_swedish_business_account" label="Har företaget svenskt företagskonto idag?" />
-          <YesNoField name="has_bankgiro" label="Har företaget bankgiro idag?" />
-          <YesNoField name="was_denied_bank_services" label="Har företaget blivit nekat bankkonto/bankgiro?" />
-        </div>
-        <label>
-          Kort verksamhetsbeskrivning
-          <textarea name="business_description" rows={4} placeholder="Beskriv kort vad företaget gör och varför ni behöver företagsbetalningar eller bankgiro." />
-          {mergedErrors.business_description ? <span className="field-error">{mergedErrors.business_description}</span> : null}
-        </label>
-      </div>
-
-      <div className={step === 1 ? "form-step active" : "form-step"} aria-hidden={step !== 1}>
-        <div className="form-step-heading">
-          <p className="eyebrow">Steg 2</p>
-          <h2>Behovet</h2>
-          <p>Välj det som stämmer bäst. Det behöver inte vara perfekt.</p>
-        </div>
-        <div className="form-grid">
-          <SelectField name="customer_type" label="Vilka kunder fakturerar ni?" errors={mergedErrors}>
-            <option value="" disabled>Välj kundtyp</option>
-            <option value="B2B">Företag</option>
-            <option value="B2C">Privatpersoner</option>
-            <option value="both">Både företag och privatpersoner</option>
-          </SelectField>
-          <Field name="monthly_volume_estimate" label="Uppskattad månadsvolym" placeholder="Ex. 250000" errors={mergedErrors} />
-          <Field name="invoice_count_estimate" label="Antal fakturor per månad" type="number" placeholder="Ex. 80" errors={mergedErrors} />
-          <Field name="average_invoice_amount" label="Genomsnittligt fakturabelopp" placeholder="Ex. 3000" errors={mergedErrors} />
-          <Field name="current_invoice_system" label="Befintligt fakturasystem" placeholder="Ex. Fortnox, Dooer, Excel eller inget" errors={mergedErrors} />
-          <SelectField name="urgency" label="Hur snabbt behöver ni komma igång?" errors={mergedErrors}>
-            <option value="" disabled>Välj</option>
-            <option value="asap">Så snart som möjligt</option>
-            <option value="1-2 weeks">Inom 1–2 veckor</option>
-            <option value="this month">Denna månad</option>
-            <option value="planning">Vi planerar framåt</option>
-          </SelectField>
-        </div>
-        <div className="checkbox-grid">
-          <label className="checkbox-card"><input name="needs_invoicing" type="checkbox" defaultChecked /> <span>Fakturering</span></label>
-          <label className="checkbox-card"><input name="needs_customer_payments" type="checkbox" defaultChecked /> <span>Ta emot kundinbetalningar</span></label>
-          <label className="checkbox-card"><input name="needs_bankgiro_flow" type="checkbox" defaultChecked /> <span>Bankgirobaserat betalflöde</span></label>
-          <label className="checkbox-card"><input name="needs_invoice_financing" type="checkbox" /> <span>Fakturaköp/förskottsutbetalning</span></label>
-          <label className="checkbox-card"><input name="needs_api" type="checkbox" /> <span>API eller integration senare</span></label>
-        </div>
-        <label>
-          Övrig kommentar
-          <textarea name="other_comment" rows={4} placeholder="Skriv något mer som kan hjälpa oss förstå behovet." />
-        </label>
-      </div>
-
-      <div className={step === 2 ? "form-step active" : "form-step"} aria-hidden={step !== 2}>
-        <div className="form-step-heading">
-          <p className="eyebrow">Steg 3</p>
-          <h2>Bekräfta</h2>
-          <p>Granska uppgifterna och bekräfta informationen nedan för att skicka ansökan.</p>
-        </div>
-        <div className="consent-box">
-          <CheckboxField name="consent_contact" errors={mergedErrors} label="Jag vill att Attmos AB granskar min ansökan och kontaktar mig om nästa steg." />
-          <CheckboxField name="consent_partner_forwarding" errors={mergedErrors} label={<>Jag har läst <Link href="/integritetspolicy">integritetspolicyn</Link> och förstår att nödvändiga uppgifter kan lämnas till relevant betalnings- eller finansaktör när det krävs för fortsatt prövning och onboarding.</>} />
-          <p>
-            Attmos AB är inte en bank och bankgiro/företagsbetalningar garanteras inte innan ansökan och relevant onboarding är godkänd. KYC/AML hanteras senare av relevant aktör när det krävs. Se även <Link href="/foretagsbetalningar-bankgiro/villkor">villkoren för tjänsten</Link>.
-          </p>
-        </div>
-      </div>
-
-      <div className="form-actions-sticky">
-        {step > 0 ? <button className="button button-secondary" type="button" onClick={previousStep}>Tillbaka</button> : <span />}
-        {step < steps.length - 1 ? (
-          <button className="button button-primary" type="button" onClick={nextStep}>Nästa steg</button>
-        ) : (
-          <button className="button button-primary" type="submit" disabled={pending}>{pending ? "Skickar..." : "Skicka ansökan"}</button>
-        )}
-      </div>
-    </form>
-  );
+import { company } from "@/lib/company";
+const steps=["Company","Requirements","Confirm"];
+const fields=[{name:"company_name",label:"Company name",autocomplete:"organization"},{name:"org_number",label:"Registration number"},{name:"contact_name",label:"Contact name",autocomplete:"name"},{name:"email",label:"Email",type:"email",autocomplete:"email"},{name:"phone",label:"Phone",type:"tel",autocomplete:"tel"},{name:"industry",label:"Industry"}];
+const requiredByStep=[[...fields.map(field=>field.name),"business_description"],["customer_type","monthly_volume_estimate","invoice_count_estimate","average_invoice_amount","urgency"],["consent_contact","consent_partner_forwarding"]];
+const stepFields=[[...requiredByStep[0],"website","has_swedish_business_account","has_bankgiro","was_denied_bank_services"],[...requiredByStep[1],"current_invoice_system","other_comment"],requiredByStep[2]];
+export function BusinessPaymentsApplicationForm(){
+ const [state,formAction,pending]=useActionState(submitBusinessPaymentApplication,{ok:false,message:""});
+ const [step,setStep]=useState(0);
+ const [clientErrors,setClientErrors]=useState<Record<string,string>>({});
+ const form=useRef<HTMLFormElement>(null);
+ const serverErrorStep=state.errors?stepFields.findIndex(names=>names.some(name=>state.errors?.[name])):-1;
+ const [reviewedServerState,setReviewedServerState]=useState(state);
+ const currentStep=state!==reviewedServerState&&serverErrorStep>=0?serverErrorStep:step;
+ const errors={...(state!==reviewedServerState?state.errors:{}),...clientErrors};
+ useEffect(()=>{if(!state.ok&&state.message)form.current?.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();},[state]);
+ function fieldError(name:string){return errors[name]?<span id={`${name}-error`} className="field-error">{errors[name]}</span>:null;}
+ function attrs(name:string){return {id:name,name,"aria-invalid":Boolean(errors[name]),"aria-describedby":errors[name]?`${name}-error`:undefined};}
+ function validate(index:number){
+  if(!form.current)return false;
+  const data=new FormData(form.current);const next:Record<string,string>={};
+  for(const name of requiredByStep[index])if(!String(data.get(name)||"").trim())next[name]=name.startsWith("consent_")?"Please confirm before continuing.":"Please complete this field.";
+  if(index===0&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.get("email")||"")))next.email="Please enter a valid email address.";
+  if(index===1){for(const name of ["monthly_volume_estimate","average_invoice_amount"]){const raw=String(data.get(name)||"").replace(/\s/g,"").replace(",",".");if(!/^\d+(\.\d{1,2})?$/.test(raw)||Number(raw)<=0)next[name]="Enter a positive amount in SEK.";}const count=String(data.get("invoice_count_estimate")||"");if(!/^\d+$/.test(count)||Number(count)<1)next.invoice_count_estimate="Enter a positive whole number.";}
+  setClientErrors(next);const name=Object.keys(next)[0];if(name)requestAnimationFrame(()=>form.current?.querySelector<HTMLElement>(`[name="${name}"]`)?.focus());return !name;
+ }
+ function move(target:number){setReviewedServerState(state);if(target>currentStep)for(let index=currentStep;index<target;index++)if(!validate(index)){setStep(index);return;}setStep(target);setClientErrors({});}
+ if(state.ok)return <div className="success-card" role="status"><p className="eyebrow">Application received</p><h2>Thank you for the details.</h2><p>We will review your application and contact you about next steps. This is not a payment service approval.</p><Link className="button button-primary" href="/">Back to Trafexa Nordic</Link></div>;
+ return <form ref={form} id="business-payment-application-form" className="application-form" action={formAction} noValidate onSubmit={event=>{for(let index=0;index<steps.length;index++)if(!validate(index)){event.preventDefault();setStep(index);setReviewedServerState(state);return;}}}>
+  <div className="step-indicator" aria-label="Application steps">{steps.map((label,index)=><button key={label} className={index===currentStep?"step-pill active":"step-pill"} type="button" aria-current={index===currentStep?"step":undefined} onClick={()=>move(index)}><span>{index+1}</span> {label}</button>)}</div>
+  {state.message&&<p role="alert" className="form-alert">{state.message}</p>}
+  <div className={currentStep===0?"form-step active":"form-step"}>
+   <div className="form-step-heading"><p className="eyebrow">Step 1</p><h2>The company.</h2><p>Basic details only. Do not upload identity documents or bank credentials.</p></div>
+   <div className="form-grid">{fields.map(field=><label key={field.name} htmlFor={field.name}>{field.label}<input {...attrs(field.name)} type={field.type||"text"} autoComplete={field.autocomplete} maxLength={254}/>{fieldError(field.name)}</label>)}
+    <label htmlFor="website">Website (optional)<input {...attrs("website")} placeholder="https://" autoComplete="url" maxLength={500}/>{fieldError("website")}</label>
+    {[["has_swedish_business_account","Do you have a Swedish business account?"],["has_bankgiro","Do you currently have Bankgiro?"],["was_denied_bank_services","Have you previously been declined bank services?"]].map(([name,label])=><label key={name} htmlFor={name}>{label}<select {...attrs(name)} defaultValue=""><option value="">Not specified</option><option value="yes">Yes</option><option value="no">No</option></select>{fieldError(name)}</label>)}
+   </div>
+   <label htmlFor="business_description">Brief business description<textarea {...attrs("business_description")} rows={4} maxLength={8000}/>{fieldError("business_description")}</label>
+  </div>
+  <div className={currentStep===1?"form-step active":"form-step"}>
+   <div className="form-step-heading"><p className="eyebrow">Step 2</p><h2>Your requirements.</h2><p>Estimates are fine. All payment amounts below are in SEK.</p></div>
+   <div className="form-grid">
+    <label htmlFor="customer_type">Who do you invoice?<select {...attrs("customer_type")} defaultValue=""><option value="" disabled>Select customer type</option><option value="B2B">Businesses</option><option value="B2C">Consumers</option><option value="both">Both</option></select>{fieldError("customer_type")}</label>
+    {[["monthly_volume_estimate","Estimated monthly volume (SEK)"],["invoice_count_estimate","Invoices per month"],["average_invoice_amount","Average invoice amount (SEK)"]].map(([name,label])=><label key={name} htmlFor={name}>{label}<input {...attrs(name)} inputMode={name==="invoice_count_estimate"?"numeric":"decimal"} maxLength={20}/>{fieldError(name)}</label>)}
+    <label htmlFor="current_invoice_system">Current invoicing system (optional)<input {...attrs("current_invoice_system")} maxLength={254}/>{fieldError("current_invoice_system")}</label>
+    <label htmlFor="urgency">When would you like to start?<select {...attrs("urgency")} defaultValue=""><option value="" disabled>Select timeframe</option><option value="asap">As soon as possible</option><option value="1-2 weeks">Within 1–2 weeks</option><option value="this month">This month</option><option value="planning">Planning ahead</option></select>{fieldError("urgency")}</label>
+   </div>
+   <div className="checkbox-grid">{[["needs_invoicing","Invoicing"],["needs_customer_payments","Receiving customer payments"],["needs_bankgiro_flow","Bankgiro-based workflow"],["needs_invoice_financing","Invoice financing / advance payments"],["needs_api","Future API or integration"]].map(([name,label],index)=><label className="checkbox-card" key={name}><input type="checkbox" name={name} defaultChecked={index<3}/><span>{label}</span></label>)}</div>
+   <label htmlFor="other_comment">Additional comments (optional)<textarea {...attrs("other_comment")} rows={4} maxLength={8000}/>{fieldError("other_comment")}</label>
+  </div>
+  <div className={currentStep===2?"form-step active":"form-step"}>
+   <div className="form-step-heading"><p className="eyebrow">Step 3</p><h2>Review and confirm.</h2><p>You can return to either previous step to review your details before submitting.</p></div>
+   <div className="consent-box">
+    <label className="checkbox-card"><input type="checkbox" {...attrs("consent_contact")}/><span>I ask {company.name} to review my application and contact me about next steps.</span>{fieldError("consent_contact")}</label>
+    <label className="checkbox-card"><input type="checkbox" {...attrs("consent_partner_forwarding")}/><span>I have read the <Link href="/privacy">privacy notice</Link> and understand that necessary information may be shared with a relevant payment or financial provider for further assessment and onboarding.</span>{fieldError("consent_partner_forwarding")}</label>
+    <p>{company.name} is not a bank. Bankgiro and payment services are not guaranteed. Required KYC/AML checks are handled later by the relevant provider. Read the <Link href="/business-payments/terms">application terms</Link>.</p>
+   </div>
+  </div>
+  <div className="form-actions-sticky">{currentStep>0?<button type="button" className="button button-secondary" onClick={()=>move(currentStep-1)}>Back</button>:<span/>}{currentStep<2?<button className="button button-primary" type="button" onClick={()=>move(currentStep+1)}>Next step</button>:<button className="button button-primary" type="submit" disabled={pending}>{pending?"Submitting…":"Submit application"}</button>}</div>
+ </form>;
 }

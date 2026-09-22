@@ -1,60 +1,13 @@
 import Link from "next/link";
-import { company } from "@/lib/company";
-
-const productLinks = [
-  { label: "Nordklart", href: "https://nordklart.se" },
-  { label: "Gridex OPS", href: "https://app.gridex.se" },
-  { label: "Kommunsign", href: "https://kommunsign.se" },
-  { label: "Kundexa", href: "https://kundexa.se" },
-];
-
+import { company, entities } from "@/lib/company";
+import { Brand } from "./Brand";
 export function Footer() {
-  return (
-    <footer className="site-footer">
-      <div className="footer-glow" />
-      <div className="container footer-grid">
-        <div className="footer-company">
-          <Link className="brand" href="/" aria-label="Attmos startsida">
-            <span className="brand-mark">AT</span>
-            <span className="brand-copy"><strong>Attmos</strong><small>Digital</small></span>
-          </Link>
-          <p>Digitala produkter, SaaS-plattformar och verksamhetssystem byggda för verklig drift.</p>
-          <a href={`mailto:${company.email}`}>{company.email}</a>
-          <span>{company.name} · Org.nr {company.orgNumber}</span>
-        </div>
-
-        <div>
-          <h3>Produkter</h3>
-          {productLinks.map((item) => <a key={item.href} href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}
-          <Link href="/systems">Alla produkter</Link>
-        </div>
-
-        <div>
-          <h3>Vi bygger</h3>
-          <Link href="/services">Systemutveckling</Link>
-          <Link href="/services">SaaS-plattformar</Link>
-          <Link href="/services">API & integrationer</Link>
-          <Link href="/websites">Hemsidor</Link>
-        </div>
-
-        <div>
-          <h3>Företaget</h3>
-          <Link href="/about">Om oss</Link>
-          <Link href="/contact">Kontakt</Link>
-          <Link href="/systems">Produktportfölj</Link>
-        </div>
-
-        <div>
-          <h3>Juridiskt</h3>
-          <Link href="/integritetspolicy">Integritetspolicy</Link>
-          <Link href="/cookiepolicy">Cookiepolicy</Link>
-          <Link href="/anvandarvillkor">Användarvillkor</Link>
-          <a href={`mailto:${company.email}`}>Kontakt</a>
-        </div>
-      </div>
-      <div className="container footer-bottom">
-        © {new Date().getFullYear()} {company.name}. Alla rättigheter förbehållna.
-      </div>
-    </footer>
-  );
+  return <footer className="site-footer"><div className="container">
+    <div className="footer-top"><div><Brand /><p>Digital products.<br />Considered engineering.</p></div>
+      <div className="footer-links"><h2>Explore</h2><Link href="/systems">Our work</Link><Link href="/services">Services</Link><Link href="/websites">Websites</Link><Link href="/about">Company</Link></div>
+      <div className="footer-links"><h2>Get in touch</h2><a href={`mailto:${company.email}`}>{company.email}</a><Link href="/contact">Discuss a project ↗</Link><a href="https://portal.div3rsa.com">Client portal ↗</a></div>
+    </div>
+    <div className="footer-entities">{entities.map(entity => <div key={entity.id}><strong>{entity.name}</strong><span>{entity.jurisdiction}{entity.id === "sweden" ? ` · ${entity.registrationNumber}` : ""}</span></div>)}<p>The contracting entity is identified in each proposal and agreement.</p></div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} {company.shortName}</span><div><Link href="/privacy">Privacy</Link><Link href="/cookies">Cookies</Link><Link href="/terms">Terms</Link></div><span className="footer-signoff">Built with purpose.</span></div>
+  </div></footer>;
 }

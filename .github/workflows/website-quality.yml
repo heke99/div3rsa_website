@@ -12,22 +12,54 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      VERIFICATION_TOOLS_DIR: /tmp/website-verification-tools
     steps:
       - uses: actions/checkout@v4
-      - name: Archive review source
-        run: git archive --format=zip --output=website-source.zip HEAD
-      - uses: actions/upload-artifact@v4
-        with:
-          name: website-source
-          path: website-source.zip
-          retention-days: 3
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-        env:
-          NEXT_TELEMETRY_DISABLED: '1'
+      - name: Install isolated browser verification tools
+        run: |
+          npm install --prefix "$VERIFICATION_TOOLS_DIR" --no-audit --no-fund playwright@1.63.0 agent-browser@0.38.1
+          "$VERIFICATION_TOOLS_DIR/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify rendered website
+        run: |
+          mkdir -p verification
+          npm start -- --hostname 127.0.0.1 > verification/server.log 2>&1 &
+          for i in $(seq 1 45); do curl -fsS http://127.0.0.1:3000 > /dev/null && break; sleep 1; done
+          node scripts/verify-website.mjs
+      - name: Agent browser visual check
+        run: |
+          export PATH="$VERIFICATION_TOOLS_DIR/node_modules/.bin:$PATH"
+          agent-browser open http://127.0.0.1:3000
+          agent-browser snapshot -i > verification/agent-browser-snapshot.txt
+          agent-browser screenshot verification/agent-browser-home.png
+          agent-browser close
+      - name: Record dependency audit
+        if: always()
+        run: |
+          mkdir -p verification
+          npm audit --json > verification/dependency-audit.json || true
+      - name: Archive verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-verification
+          path: verification/
+          retention-days: 7
+      - name: Archive exact source
+        if: always()
+        run: git archive --format=zip --output=website-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: website-source
+          path: website-source.zip
+          retention-days: 3

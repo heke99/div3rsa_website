@@ -1,43 +1,9 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/ButtonLink";
 import { ContactForm } from "@/components/ContactForm";
-import { CTASection } from "@/components/CTASection";
-import { company } from "@/lib/company";
-
-export const metadata: Metadata = {
-  title: "Kontakt",
-  description:
-    "Kontakta Attmos AB för hemsida, webbapp, kundportal, SaaS-plattform, automation eller digitalt system.",
-};
-
-export default function ContactPage() {
-  return (
-    <>
-      <section className="page-hero">
-        <div className="aurora aurora-one" />
-        <div className="container narrow reveal">
-          <p className="eyebrow">Kontakt</p>
-          <h1>Berätta vad du vill bygga.</h1>
-          <p className="page-lead">
-            Skicka en kort beskrivning så återkommer vi med nästa steg. Du behöver inte ha allt klart från början.
-          </p>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container two-column contact-layout">
-          <div className="contact-info reveal">
-            <h2>Kontakta Attmos</h2>
-            <p>Email: <a href={"mailto:" + company.email}>{company.email}</a></p>
-            <p>Bolag: {company.name}</p>
-            <p>Org.nr: {company.orgNumber}</p>
-            <ButtonLink href={"mailto:" + company.email}>Maila Attmos</ButtonLink>
-          </div>
-          <ContactForm />
-        </div>
-      </section>
-
-      <CTASection />
-    </>
-  );
+import { company, entities } from "@/lib/company";
+export const metadata: Metadata = { title: "Contact", description: "Discuss a software product, website or operational workflow with Trafexa Nordic. Tell us what needs to work better.", alternates: { canonical: "/contact" } };
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{product?:string}> }) {
+ const {product} = await searchParams;
+ const productName = typeof product === "string" ? product.slice(0,160) : undefined;
+ return <><section className="page-hero compact"><div className="container"><p className="eyebrow">Start a conversation</p><h1>What are you<br/>working on?</h1><p className="page-lead">A new idea, a complicated workflow or an existing product that could work better. Tell us where you are and where you want to go.</p></div></section><section className="section contact-section"><div className="container contact-layout"><aside className="contact-info"><h2>A useful first conversation.</h2><p>You do not need a finished specification. A little context about the business and the problem is a good place to start.</p><a className="contact-email" href={`mailto:${company.email}`}>{company.email}</a><div className="contact-entities">{entities.map(entity=><div key={entity.id}><strong>{entity.name}</strong><span>{entity.jurisdiction}</span>{entity.id==="sweden" && <span>Registration no. {entity.registrationNumber}</span>}</div>)}</div><p className="contact-privacy-note">Enquiries are handled by Trafexa Nordic AB. The appropriate contracting entity is agreed before work begins.</p></aside><ContactForm productName={productName}/></div></section></>;
 }

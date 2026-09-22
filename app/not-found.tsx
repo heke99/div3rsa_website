@@ -1,0 +1,2 @@
+import { ButtonLink } from "@/components/ButtonLink";
+export default function NotFound() { return <section className="page-hero"><div className="container"><p className="eyebrow">404 / Page not found</p><h1>That page is<br/>not here.</h1><p className="page-lead">The link may have changed. Explore our work or return to the homepage.</p><div className="hero-actions"><ButtonLink href="/">Back to home</ButtonLink><ButtonLink href="/systems" variant="secondary">Explore our work</ButtonLink></div></div></section>; }

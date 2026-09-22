@@ -1,62 +1,9 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
-import { Section } from "@/components/Section";
-import { aboutValues } from "@/lib/content";
-import { company } from "@/lib/company";
-
-export const metadata: Metadata = {
-  title: "Om Attmos",
-  description:
-    "Attmos AB är ett svenskt produkt- och utvecklingsbolag som bygger SaaS-plattformar, verksamhetssystem och digitala produkter.",
-};
-
+import { EntityCards } from "@/components/EntityCards";
+export const metadata: Metadata = { title: "Company", description: "Meet Trafexa Nordic AB in Sweden and Diversa Solutions LLC in Wyoming. Digital products, business software and considered engineering.", alternates: { canonical: "/about" } };
 export default function AboutPage() {
-  return (
-    <>
-      <section className="page-hero">
-        <div className="aurora aurora-one" />
-        <div className="container narrow reveal">
-          <p className="eyebrow">Om Attmos</p>
-          <h1>Vi bygger digitala produkter som håller ihop hela verksamheten.</h1>
-          <p className="page-lead">
-            Attmos AB utvecklar egna system och hjälper företag gå från ett konkret operativt behov till en fungerande, skalbar produkt.
-          </p>
-        </div>
-      </section>
-
-      <Section>
-        <div className="two-column">
-          <div className="rich-copy reveal">
-            <p>
-              Vi kombinerar systemutveckling, produktdesign och affärsförståelse. Målet är inte att lägga till så många funktioner som möjligt, utan att skapa ett tydligt system där användare, data och arbetsflöden hänger ihop.
-            </p>
-            <p>
-              Våra produkter och projekt omfattar bland annat ekonomi, elhandel, e-signering, CRM, transport, planering och fastighet. Samma grundprincip gäller överallt: stabil datamodell, tydliga roller, bra användarupplevelse och möjlighet att integrera med omvärlden.
-            </p>
-            <ButtonLink href="/contact">Starta en projektgenomgång</ButtonLink>
-          </div>
-          <div className="company-card reveal">
-            <span className="case-label">Svenskt utvecklingsbolag</span>
-            <h2>{company.name}</h2>
-            <p>Org.nr: {company.orgNumber}</p>
-            <a href={`mailto:${company.email}`}>{company.email}</a>
-          </div>
-        </div>
-      </Section>
-
-      <Section eyebrow="Vårt sätt att tänka" title="Tydlig produkt. Stark teknisk grund.">
-        <div className="card-grid three">
-          {aboutValues.map((value) => (
-            <article className="glass-card reveal" key={value}>
-              <h3>{value}</h3>
-              <p>Varje lösning ska lösa ett verkligt behov, vara enkel att arbeta i och kunna utvecklas när verksamheten växer.</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      <CTASection />
-    </>
-  );
+  return <><section className="page-hero"><div className="container"><p className="eyebrow">The company</p><h1>We care about<br />how the work works.</h1><p className="page-lead">We develop our own digital products and build software for businesses with a specific operational need. Product thinking and engineering belong in the same conversation.</p></div></section>
+    <section className="section"><div className="container two-column"><h2>Useful software starts<br />with a real understanding.</h2><div className="rich-copy"><p>A customer request. A contract. A document waiting for a signature. These are the things a business runs on. Our work is about making the systems around them clearer and more connected.</p><p>Our portfolio spans accounting, energy operations, signing, customer management and planning. Each product addresses a distinct operational need, with its current development stage noted in the portfolio.</p><p>For a new engagement, we begin with the people who will use the product, the information they rely on and the decisions they need to make.</p></div></div></section>
+    <section className="section entity-section"><div className="container"><div className="section-heading"><p className="eyebrow">Legal entities</p><h2>Two entities.<br />Clear responsibilities.</h2><p>Trafexa Nordic AB and Diversa Solutions LLC are presented separately. The entity responsible for a project is named in the proposal and contract.</p></div><EntityCards /><p className="entity-note">Enquiries through this website are handled by Trafexa Nordic AB. Mention the US entity in your enquiry when relevant; the appropriate arrangement is confirmed before an engagement begins.</p></div></section><CTASection /></>;
 }

@@ -1,142 +1,15 @@
-export type ProductCategory =
-  | "all"
-  | "finance"
-  | "energy"
-  | "public"
-  | "sales"
-  | "operations"
-  | "property";
-
+export type ProductCategory = "all" | "finance" | "energy" | "public" | "sales" | "operations" | "property";
 export type Product = {
-  slug: string;
-  name: string;
-  monogram: string;
-  category: Exclude<ProductCategory, "all">;
-  categoryLabel: string;
-  tagline: string;
-  description: string;
-  highlights: string[];
-  audience: string;
-  status: "Produkt" | "Plattform" | "Under utveckling";
-  href?: string;
-  displayDomain?: string;
-  featured?: boolean;
+ slug:string; name:string; monogram:string; category:Exclude<ProductCategory,"all">; categoryLabel:string; tagline:string; description:string; highlights:string[]; audience:string; status:string; href?:string; displayDomain?:string; featured?:boolean; problem:string; approach:string; note?:string;
 };
-
-export const productCategories: Array<{ id: ProductCategory; label: string }> = [
-  { id: "all", label: "Alla produkter" },
-  { id: "finance", label: "Ekonomi" },
-  { id: "energy", label: "Energi" },
-  { id: "public", label: "Offentlig sektor" },
-  { id: "sales", label: "Försäljning & CRM" },
-  { id: "operations", label: "Drift & planering" },
-  { id: "property", label: "Fastighet" },
-];
-
-export const products: Product[] = [
-  {
-    slug: "nordklart",
-    name: "Nordklart",
-    monogram: "NK",
-    category: "finance",
-    categoryLabel: "Ekonomi",
-    tagline: "Bokföring och ekonomistyrning utan onödigt manuellt arbete.",
-    description:
-      "En modern ekonomiplattform för löpande bokföring, bankavstämning, bokslut, rapportering och byråsamarbete – byggd för att göra ekonomiarbetet tydligare och mer automatiserat.",
-    highlights: ["Löpande bokföring", "Bankavstämning", "Bokslut", "Rapportering"],
-    audience: "Företag och redovisningsbyråer",
-    status: "Produkt",
-    href: "https://nordklart.se",
-    displayDomain: "nordklart.se",
-    featured: true,
-  },
-  {
-    slug: "gridex-ops",
-    name: "Gridex OPS",
-    monogram: "GX",
-    category: "energy",
-    categoryLabel: "Energi",
-    tagline: "Operativsystemet för moderna elhandelsbolag.",
-    description:
-      "En komplett driftplattform för elhandel med kundintag, avtal, fullmakter, leverantörsbyten, Ediel-flöden, prissättning, faktureringsunderlag och tenantbaserad administration.",
-    highlights: ["Kundintag", "Ediel & marknadsflöden", "Avtal & portfölj", "Multi-tenant"],
-    audience: "Elhandelsbolag och energipartners",
-    status: "Plattform",
-    href: "https://app.gridex.se",
-    displayDomain: "app.gridex.se",
-    featured: true,
-  },
-  {
-    slug: "kommunsign",
-    name: "Kommunsign",
-    monogram: "KS",
-    category: "public",
-    categoryLabel: "Offentlig sektor",
-    tagline: "Säker e-underskrift för kommuner och offentliga verksamheter.",
-    description:
-      "En e-signeringstjänst med BankID, dokumentflöden, spårbar beviskedja, behörigheter, organisationshantering och API-stöd för integration med verksamhetssystem.",
-    highlights: ["BankID-signering", "Bevispaket", "Rollstyrning", "API & integrationer"],
-    audience: "Kommuner, myndigheter och organisationer",
-    status: "Produkt",
-    href: "https://kommunsign.se",
-    displayDomain: "kommunsign.se",
-    featured: true,
-  },
-  {
-    slug: "kundexa",
-    name: "Kundexa",
-    monogram: "KX",
-    category: "sales",
-    categoryLabel: "Försäljning & CRM",
-    tagline: "CRM, telefoni och försäljningsstyrning i ett sammanhängande flöde.",
-    description:
-      "Ett multi-tenant CRM för säljteam med kundlistor, leads, samtal, nummerhantering, aktiviteter, anteckningar, uppföljning och operativ överblick.",
-    highlights: ["CRM & leads", "Telefoni", "Teamstyrning", "Aktiviteter & KPI"],
-    audience: "Säljorganisationer och kundcenter",
-    status: "Plattform",
-    href: "https://kundexa.se",
-    displayDomain: "kundexa.se",
-    featured: true,
-  },
-  {
-    slug: "coordiqo",
-    name: "Coordiqo",
-    monogram: "CQ",
-    category: "operations",
-    categoryLabel: "Drift & planering",
-    tagline: "Planering, resurser och uppdrag samlade i en operativ vy.",
-    description:
-      "Ett verksamhetssystem för organisationer som behöver samordna personal, uppdrag, resurser, scheman, tillgänglighet och ruttbaserat arbete.",
-    highlights: ["Personalplanering", "Uppdrag", "Resurser", "Rutter & schema"],
-    audience: "Service-, omsorgs- och fältorganisationer",
-    status: "Plattform",
-    href: "https://coordiqo.com",
-    displayDomain: "coordiqo.com",
-  },
-  {
-    slug: "trafexa",
-    name: "Trafexa",
-    monogram: "TX",
-    category: "operations",
-    categoryLabel: "Drift & planering",
-    tagline: "Digital dispatch och transportstyrning från order till leverans.",
-    description:
-      "En transportplattform för bokning, dispatch, transportörsnätverk, acceptflöden, statusuppdateringar, dokument, mobil användning, API och webhooks.",
-    highlights: ["Order & dispatch", "Transportörsnätverk", "Mobilflöden", "POD & dokument"],
-    audience: "Transport-, logistik- och leveransbolag",
-    status: "Under utveckling",
-  },
-  {
-    slug: "bovaro",
-    name: "Bovaro",
-    monogram: "BV",
-    category: "property",
-    categoryLabel: "Fastighet",
-    tagline: "En modern digital marknadsplats och portal för bostäder.",
-    description:
-      "En plattform för bostadssökande, hyresvärdar och administration med objekthantering, ansökningar, matchning, dokument och tydliga kundflöden.",
-    highlights: ["Bostadsmarknad", "Ansökningar", "Hyresvärdsportal", "Matchning"],
-    audience: "Fastighetsbolag och bostadssökande",
-    status: "Under utveckling",
-  },
+export const productCategories:Array<{id:ProductCategory;label:string}>=[{id:"all",label:"All work"},{id:"energy",label:"Energy"},{id:"finance",label:"Finance"},{id:"public",label:"Public sector"},{id:"sales",label:"Sales & CRM"},{id:"operations",label:"Operations"},{id:"property",label:"Property"}];
+export const products:Product[]=[
+ {slug:"gridex-ops",name:"Gridex OPS",monogram:"GX",category:"energy",categoryLabel:"Energy operations",tagline:"A clearer operating view for electricity trading.",description:"An operations platform bringing customer onboarding, agreements, metering points and Ediel market communication into connected workflows.",highlights:["Customer onboarding","Ediel workflows","Agreements & permissions","Operational follow-up"],audience:"Electricity retailers and energy partners",status:"Pilot preparation",href:"https://app.gridex.se",displayDomain:"app.gridex.se",featured:true,problem:"Electricity operations connect customers, contracts, metering points and market messages. Those pieces need to stay consistent as a case moves between people and systems.",approach:"Structure the operational journey around traceable records, clear responsibilities and checks at the boundaries between workflows.",note:"Development and verification are ongoing. Market integration and pilot scope are confirmed separately."},
+ {slug:"nordklart",name:"Nordklart",monogram:"NK",category:"finance",categoryLabel:"Finance & accounting",tagline:"Bring the accounting workflow together.",description:"Accounting software in development for Swedish businesses and accounting firms, connecting bookkeeping, reconciliation, reporting and year-end work.",highlights:["Bookkeeping","Bank reconciliation","Year-end workflows","Accounting firm collaboration"],audience:"Swedish businesses and accounting firms",status:"Product development",href:"https://nordklart.se",displayDomain:"nordklart.se",featured:true,problem:"Accounting work is a chain of related tasks. Imports, supporting documents, reconciliations and reports need a consistent structure across the financial year.",approach:"Connect the underlying records and give each user a clear route from day-to-day bookkeeping to period-end work."},
+ {slug:"kommunsign",name:"Kommunsign",monogram:"KS",category:"public",categoryLabel:"Public-sector workflows",tagline:"A considered path from document to signature.",description:"Electronic-signature workflows developed around documents, identity verification, organisational roles and a traceable signing record.",highlights:["Document preparation","Identity verification","Signing records","Organisation & roles"],audience:"Municipalities and organisations",status:"Product development",href:"https://kommunsign.se",displayDomain:"kommunsign.se",featured:true,problem:"Signing a document involves more than collecting a signature. Teams need to manage the document, participants, responsibilities and record of what happened.",approach:"Bring the signing journey and its supporting evidence into an understandable, role-based workflow. Integration scope is agreed for each deployment."},
+ {slug:"kundexa",name:"Kundexa",monogram:"KX",category:"sales",categoryLabel:"Sales & customer operations",tagline:"Keep the conversation and the follow-up connected.",description:"A CRM platform bringing together customer records, calling, activities and the daily work of a sales team.",highlights:["Customer & lead records","Calling workflows","Team activities","Follow-up"],audience:"Sales teams and customer centres",status:"Platform development",href:"https://kundexa.se",displayDomain:"kundexa.se",featured:true,problem:"Customer conversations lose context when calls, notes and follow-up tasks live in separate tools.",approach:"Keep customer information and the next action close together, with team-level oversight and organisation-specific access."},
+ {slug:"flexexa",name:"Flexexa",monogram:"FX",category:"energy",categoryLabel:"Charging & flexibility",tagline:"Connect smaller resources to a usable workflow.",description:"A smart-charging and flexibility platform in development, covering resource connection, available capacity, control and traceable delivery records.",highlights:["Resource onboarding","Capacity assessment","Charging control","Delivery records"],audience:"Energy companies and flexibility partners",status:"Product development",problem:"Small flexible resources need a practical route from connection to assessment, control and documented delivery.",approach:"Design the partner workflow around explicit permissions, resource availability and traceable records. Market and partner integrations remain subject to testing and agreement."},
+ {slug:"coordiqo",name:"Coordiqo",monogram:"CQ",category:"operations",categoryLabel:"Planning & operations",tagline:"Put people, assignments and resources in context.",description:"A planning product for teams coordinating staff, assignments, schedules, resources and route-based work.",highlights:["Staff planning","Assignments","Resource overview","Scheduling & routes"],audience:"Service and field operations",status:"Product development",href:"https://coordiqo.com",displayDomain:"coordiqo.com",problem:"Day-to-day planning changes as staff availability, assignments and resource needs change.",approach:"Bring related planning information into a shared operational view, with clear assignments and a structure for managing changes."},
+ {slug:"trafexa",name:"Trafexa",monogram:"TX",category:"operations",categoryLabel:"Vehicle sourcing",tagline:"A more structured approach to vehicle sourcing.",description:"A vehicle-sourcing initiative for professional buyers, with digital workflows for stock information, enquiries and commercial follow-up.",highlights:["Stock information","Buyer requirements","Sourcing enquiries","Commercial follow-up"],audience:"Vehicle dealers and professional buyers",status:"Development initiative",href:"https://trafexa.com",displayDomain:"trafexa.com",problem:"Professional vehicle sourcing requires comparable specifications, clear commercial terms and organised follow-up between buyers and suppliers.",approach:"Structure the sourcing journey around the buyer’s requirements, vehicle information and the next commercial decision."},
+ {slug:"bovaro",name:"Bovaro",monogram:"BV",category:"property",categoryLabel:"Property & housing",tagline:"A clearer route through housing information.",description:"A property-product concept covering listings, search, applications and communication between applicants and property organisations.",highlights:["Property listings","Search & filtering","Applications","Property portal"],audience:"Property organisations and housing applicants",status:"Product concept",problem:"Housing journeys involve property information, search criteria, applications and communication across different participants.",approach:"Explore a connected structure for presenting properties and managing the application journey. This work is presented as a concept, not a launched service."},
 ];

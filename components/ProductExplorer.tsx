@@ -1,91 +1,16 @@
-"use client";
-
-import { useMemo, useState } from "react";
+import Link from "next/link";
 import { productCategories, products, type ProductCategory } from "@/lib/products";
-import { ButtonLink } from "./ButtonLink";
-
-type ProductExplorerProps = {
-  featuredOnly?: boolean;
-  showFilters?: boolean;
-};
-
-export function ProductExplorer({ featuredOnly = false, showFilters = true }: ProductExplorerProps) {
-  const [activeCategory, setActiveCategory] = useState<ProductCategory>("all");
-
-  const visibleProducts = useMemo(() => {
-    const source = featuredOnly ? products.filter((product) => product.featured) : products;
-    return activeCategory === "all"
-      ? source
-      : source.filter((product) => product.category === activeCategory);
-  }, [activeCategory, featuredOnly]);
-
-  return (
-    <div className="product-explorer">
-      {showFilters && (
-        <div className="product-filters" role="tablist" aria-label="Filtrera produkter">
-          {productCategories.map((category) => (
-            <button
-              key={category.id}
-              type="button"
-              role="tab"
-              aria-selected={activeCategory === category.id}
-              className={activeCategory === category.id ? "product-filter active" : "product-filter"}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className={featuredOnly ? "product-grid product-grid-featured" : "product-grid"}>
-        {visibleProducts.map((product, index) => (
-          <article className="product-card reveal" id={product.slug} key={product.slug} style={{ animationDelay: `${index * 55}ms` }}>
-            <div className="product-card-top">
-              <div className={`product-monogram product-monogram-${product.category}`} aria-hidden="true">
-                {product.monogram}
-              </div>
-              <div className="product-meta">
-                <span>{product.categoryLabel}</span>
-                <span className="product-status"><i />{product.status}</span>
-              </div>
-            </div>
-
-            <div className="product-copy">
-              <h3>{product.name}</h3>
-              <strong>{product.tagline}</strong>
-              <p>{product.description}</p>
-            </div>
-
-            <div className="product-audience">
-              <span>För</span>
-              <strong>{product.audience}</strong>
-            </div>
-
-            <div className="product-features" aria-label={`${product.name} funktioner`}>
-              {product.highlights.map((highlight) => (
-                <span key={highlight}>{highlight}</span>
-              ))}
-            </div>
-
-            <div className="product-card-actions">
-              {product.href ? (
-                <a href={product.href} target="_blank" rel="noreferrer" className="product-link">
-                  {product.displayDomain || "Besök produkten"} <span aria-hidden="true">↗</span>
-                </a>
-              ) : (
-                <ButtonLink href={`/contact?product=${product.slug}`} variant="secondary">
-                  Diskutera {product.name}
-                </ButtonLink>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {visibleProducts.length === 0 && (
-        <div className="product-empty">Inga produkter finns i den här kategorin ännu.</div>
-      )}
-    </div>
-  );
+type Props = { featuredOnly?: boolean; showFilters?: boolean; activeCategory?: ProductCategory };
+export function ProductExplorer({ featuredOnly = false, showFilters = true, activeCategory = "all" }: Props) {
+  const visible = products.filter(p => (!featuredOnly || p.featured) && (activeCategory === "all" || p.category === activeCategory));
+  return <div className="product-explorer">{showFilters && <nav className="product-filters" aria-label="Filter work by sector">{productCategories.map(category => <Link key={category.id} className={activeCategory === category.id ? "product-filter active" : "product-filter"} href={category.id === "all" ? "/systems" : `/systems?category=${category.id}`} aria-current={activeCategory === category.id ? "true" : undefined}>{category.label}</Link>)}</nav>}
+    <div className="product-grid">{visible.map(product => <article className={`product-card product-${product.category}`} key={product.slug}>
+      <Link className="product-art" href={`/systems/${product.slug}`} aria-label={`Explore ${product.name}`}>
+        <div className="art-top"><span>{product.categoryLabel}</span><span aria-hidden="true">↗</span></div>
+        <div className="art-identity"><span className="art-monogram" aria-hidden="true">{product.monogram}</span><strong translate="no">{product.name}</strong></div>
+        <div className="art-bottom"><span>Product & engineering</span><span>{product.status}</span></div>
+      </Link>
+      <div className="product-copy"><h3><Link href={`/systems/${product.slug}`}>{product.tagline}</Link></h3><p>{product.description}</p><Link className="text-link" href={`/systems/${product.slug}`}>Explore {product.name} <span aria-hidden="true">↗</span></Link></div>
+    </article>)}</div>{visible.length === 0 && <p className="empty-state">No work is listed in this category yet. <Link href="/systems">View all work.</Link></p>}
+  </div>;
 }
