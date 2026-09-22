@@ -15,6 +15,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, re
 const errors = [];
 page.on('pageerror', error => errors.push(error.message));
 const passed = [];
+const pageMetadataEvidence = [];
 const check = (name, condition) => { assert.ok(condition, name); passed.push(name); console.log(`PASS ${name}`); };
 const localUrl = url => {
   const parsed = new URL(url, origin);
@@ -95,8 +96,12 @@ try {
     const twitterTitle = await attribute('meta[name="twitter:title"]', 'content');
     const description = await attribute('meta[name="description"]', 'content');
     const ogDescription = await attribute('meta[property="og:description"]', 'content');
-    check(`Canonical URL and HTTP status ${route}`, result.status() === 200 && canonical === new URL(route, canonicalOrigin).href);
-    check(`Social URL points to this page ${route}`, ogUrl === canonical);
+    // Next serialises an origin-only URL without its optional root slash. Compare URL semantics.
+    const canonicalHref = canonical ? new URL(canonical).href : null;
+    const socialHref = ogUrl ? new URL(ogUrl).href : null;
+    pageMetadataEvidence.push({ route, status: result.status(), canonical, ogUrl, ogTitle, twitterTitle });
+    check(`Canonical URL and HTTP status ${route}: ${canonical}`, result.status() === 200 && canonicalHref === new URL(route, canonicalOrigin).href);
+    check(`Social URL points to this page ${route}: ${ogUrl}`, socialHref === canonicalHref);
     check(`Social title matches this page ${route}`, ogTitle === await page.title() && twitterTitle === ogTitle);
     check(`Social description matches this page ${route}`, description === ogDescription);
     check(`One canonical declaration ${route}`, await page.locator('link[rel="canonical"]').count() === 1);
@@ -105,7 +110,7 @@ try {
   await page.evaluate(() => Promise.all([...document.images].map(image => image.decode())));
   await page.screenshot({ path: 'verification/brand-icons.png' });
   check('No browser runtime errors', errors.length === 0);
-  fs.writeFileSync('verification/brand-report.json', JSON.stringify({ testedCommit: process.env.GITHUB_SHA, passed, errors }, null, 2));
+  fs.writeFileSync('verification/brand-report.json', JSON.stringify({ testedCommit: process.env.GITHUB_SHA, passed, pageMetadataEvidence, errors }, null, 2));
 } catch (error) {
   await page.screenshot({ path: 'verification/brand-failure.png', fullPage: true });
   fs.writeFileSync('verification/brand-failure.txt', String(error.stack || error));
