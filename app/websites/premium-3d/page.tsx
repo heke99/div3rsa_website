@@ -1,24 +1,4 @@
 import type { Metadata } from "next";
 import { WebsiteStyleDetail } from "@/components/WebsiteStyleDetail";
-import { CTASection } from "@/components/CTASection";
-import { websiteStyles } from "@/lib/content";
-
-const style = websiteStyles.find((item) => item.slug === "premium-3d");
-
-export const metadata: Metadata = {
-  title: "Premium 3D / Wow-hemsida",
-  description: "Premium 3D-hemsida med wow-känsla, animationer, stark hero och modern varumärkesdesign av Diversa Nordic AB.",
-};
-
-export default function Page() {
-  if (!style) {
-    return null;
-  }
-
-  return (
-    <>
-      <WebsiteStyleDetail style={style} />
-      <CTASection />
-    </>
-  );
-}
+export const metadata: Metadata = { title: "Product-led websites", description: "Distinctive product storytelling and considered interaction for software and technology companies.", alternates: { canonical: "/websites/premium-3d" } };
+export default function Page() { return <WebsiteStyleDetail slug="premium-3d" />; }

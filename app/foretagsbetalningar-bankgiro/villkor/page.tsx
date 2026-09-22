@@ -1,35 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/lib/company";
-
-export const metadata: Metadata = {
-  title: "Villkor för Företagsbetalningar & Bankgiro | Attmos",
-  description: "Villkor och viktig information för Attmos AB:s ansökningsflöde för företagsbetalningar och bankgiro.",
-};
-
-export default function BusinessPaymentsTermsPage() {
-  return (
-    <section className="page-hero">
-      <div className="container narrow rich-copy reveal">
-        <p className="eyebrow">Villkor</p>
-        <h1>Villkor för Företagsbetalningar & Bankgiro</h1>
-        <p>
-          {company.name} är inte en bank och garanterar inte bankgiro, företagskonto eller betalningslösning innan ansökan och relevant onboarding har godkänts av den aktör som ansvarar för den aktuella tjänsten.
-        </p>
-        <p>
-          Webbansökan samlar grundläggande företagsuppgifter och information om betalningsbehov. KYC/AML och eventuell dokumentinsamling hanteras senare av relevant betalnings- eller finansaktör när det krävs.
-        </p>
-        <p>
-          Genom att skicka in ansökan ber du {company.name} att behandla uppgifterna för att bedöma och hantera din förfrågan samt kontakta dig om nästa steg. Om ärendet behöver lämnas vidare till en betalnings- eller finansaktör sker det endast när det finns en rättslig grund för behandlingen och du har fått den information som krävs för den fortsatta onboardingen.
-        </p>
-        <p>
-          En inskickad ansökan innebär inte att ett avtal om betalningstjänst har ingåtts. Eventuella avgifter, villkor, kontroller och beslut från en extern betalnings- eller finansaktör framgår i så fall i dess separata onboarding eller avtal.
-        </p>
-        <p>
-          Läs även vår <Link href="/integritetspolicy">integritetspolicy</Link> och våra <Link href="/anvandarvillkor">allmänna användarvillkor</Link>.
-        </p>
-        <p>{company.name} · Org.nr {company.orgNumber} · <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
-      </div>
-    </section>
-  );
-}
+export const metadata:Metadata={title:"Business payment application terms",description:"Important information about the business payment application process.",alternates:{canonical:"/business-payments/terms"}};
+export default function PaymentTerms(){return <LegalPage title="Application terms" intro="Important information about the business payment application process." sections={[
+ ["No guarantee of a payment service",`${company.name} is not a bank and does not guarantee a Bankgiro, business account or payment solution before the relevant provider has approved the application and onboarding.`],
+ ["Information and assessment","The form collects basic company information and payment requirements. Required KYC/AML checks and supporting documents are handled later by the relevant payment or financial provider."],
+ ["Your application",`Submitting asks ${company.name} to assess your enquiry and contact you about next steps. Information is passed to another provider only where there is a legal basis and you have received the information required for further onboarding.`],
+ ["Separate agreements","Submission does not establish an agreement for payment services. Any external provider’s fees, conditions, checks and decisions are set out in its separate onboarding or agreement."],
+ ]}/>;}

@@ -1,49 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LegalPage } from "@/components/LegalPage";
 import { company } from "@/lib/company";
-
-export const metadata: Metadata = {
-  title: "Användarvillkor",
-  description: "Användarvillkor för Attmos AB:s webbplats, kontaktflöden och ansökningsflöden.",
-};
-
-export default function TermsPage() {
-  return (
-    <section className="page-hero legal-page">
-      <div className="container narrow legal-stack reveal">
-        <p className="eyebrow">Juridik</p>
-        <h1>Användarvillkor</h1>
-        <p className="page-lead">Dessa villkor gäller användning av {company.domain} och de kontakt- och ansökningsflöden som {company.name} tillhandahåller på webbplatsen.</p>
-        <article className="glass-card">
-          <h2>Webbplatsens syfte</h2>
-          <p>Webbplatsen presenterar {company.name}:s produkter och tjänster och gör det möjligt att skicka kontaktförfrågningar eller ansökningar. Information på webbplatsen utgör inte i sig ett bindande erbjudande om inte det uttryckligen anges.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Ingen banktjänst</h2>
-          <p>{company.name} är inte en bank. Information på webbplatsen är inte en garanti om bankkonto, bankgiro, finansiering eller godkänd betalningslösning. Sådana tjänster kan, när det är relevant, tillhandahållas eller beslutas av en separat betalnings- eller finansaktör.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Ansökningar</h2>
-          <p>En inskickad ansökan innebär inte automatiskt godkännande, avtal, bankgiro, betalningslösning eller portalaccess. {company.shortName} granskar ansökan och återkommer om nästa steg. Eventuell extern aktör kan genomföra en egen prövning och onboarding.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Riktiga uppgifter och behörighet</h2>
-          <p>Den som skickar in ett formulär ansvarar för att uppgifterna är korrekta och för att personen har rätt att lämna uppgifterna och, när det är tillämpligt, företräda företaget.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Tredjepartstjänster</h2>
-          <p>Webbplatsen kan hänvisa till eller samverka med fristående leverantörer. Deras tjänster, beslut och villkor styrs av respektive leverantörs avtal och ansvar, om inget annat uttryckligen avtalats med {company.name}.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Personuppgifter och cookies</h2>
-          <p>Hur vi behandlar personuppgifter beskrivs i vår <Link href="/integritetspolicy">integritetspolicy</Link>. Information om cookies och liknande lagring finns i vår <Link href="/cookiepolicy">cookiepolicy</Link>.</p>
-        </article>
-        <article className="glass-card">
-          <h2>Kontakt och bolagsuppgifter</h2>
-          <p>{company.name} · Org.nr {company.orgNumber} · <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
-        </article>
-        <p className="contact-privacy-note">Senast uppdaterad: 25 augusti 2026.</p>
-      </div>
-    </section>
-  );
-}
+export const metadata:Metadata={title:"Website terms",description:"The terms for using this website and its enquiry and application forms.",alternates:{canonical:"/terms"}};
+export default function TermsPage(){return <LegalPage title="Website terms" intro="The terms for using this website and its enquiry and application forms." sections={[
+ ["Purpose of the website","This website presents products and services and lets you submit enquiries or applications. Website information is not a binding offer unless explicitly stated otherwise."],
+ ["Contracting entities",`${company.name} (Sweden, registration number ${company.orgNumber}) and Diversa Solutions LLC (Wyoming, United States) are separate legal entities. The applicable proposal or agreement identifies the entity responsible for a project, its deliverables and commercial terms. An enquiry or entity preference is not a contract.`],
+ ["No banking service or guarantee",`${company.name} is not a bank. The website does not guarantee a bank account, Bankgiro, financing or an approved payment solution. Where relevant, these services are provided or decided by a separate payment or financial provider.`],
+ ["Applications","Submitting an application does not automatically grant approval, an agreement, a payment solution or portal access. We review the information and respond with next steps. An external provider may carry out its own assessment and onboarding."],
+ ["Accurate information and authority","You are responsible for providing accurate information and for having authority to share that information and, where relevant, represent the company."],
+ ["Third-party services","The website may refer to or interact with independent providers. Their services, decisions and conditions are governed by their own agreements and responsibilities unless expressly agreed otherwise."],
+ ["Changes","Website content and these terms may be updated. Project-specific obligations are governed by the applicable agreement rather than a general description on this website."],
+ ]}/>;}

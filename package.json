@@ -1,24 +1,26 @@
 {
   "name": "div3rsa-website",
   "version": "1.0.0",
-  "description": "Professional company website for Attmos AB.",
+  "description": "The company and product portfolio website for Trafexa Nordic AB and Diversa Solutions LLC.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "audit:dependencies": "node scripts/audit-dependencies.mjs",
+    "test:smtp": "node --test scripts/smtp-compatibility.test.mjs"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/heke99/div3rsa_website.git"
   },
   "keywords": [
-    "Attmos AB",
+    "Trafexa Nordic AB",
     "system development",
     "website development",
     "SaaS development"
   ],
-  "author": "Attmos AB",
+  "author": "Trafexa Nordic AB",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/heke99/div3rsa_website/issues"
@@ -26,22 +28,21 @@
   "homepage": "https://github.com/heke99/div3rsa_website#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.87.1",
-    "next": "^16.2.6",
-    "nodemailer": "^7.0.11",
+    "next": "16.3.5",
+    "nodemailer": "10.0.10",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19.2.15",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.6",
-    "postcss": "^8.5.15",
+    "eslint-config-next": "16.3.5",
+    "postcss": "8.5.23",
     "typescript": "^6.0.3"
   },
   "private": true,
   "overrides": {
-    "postcss": "^8.5.15"
+    "postcss": "$postcss"
   }
 }

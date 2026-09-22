@@ -1,25 +1,7 @@
 import type { MetadataRoute } from "next";
-import { company, websiteStyleLinks } from "@/lib/content";
-
+import { company } from "@/lib/company";
+import { products } from "@/lib/products";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = company.url;
-  const routes = [
-    "",
-    "/services",
-    "/websites",
-    ...websiteStyleLinks.map((item) => item.href),
-    "/systems",
-    "/about",
-    "/contact",
-    "/integritetspolicy",
-    "/anvandarvillkor",
-    "/cookiepolicy",
-  ];
-
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route.includes("foretagsbetalningar") ? 0.9 : 0.7,
-  }));
+ const routes=["", "/about", "/services", "/systems", "/websites", "/contact", "/privacy", "/cookies", "/terms", "/business-payments", "/business-payments/apply", "/business-payments/terms", "/websites/hybrid-business", "/websites/premium-3d", "/websites/simple-info", ...products.map(p=>`/systems/${p.slug}`)];
+ return routes.map(route=>({url:`${company.url}${route}`,changeFrequency:"monthly",priority:route===""?1:0.6}));
 }
