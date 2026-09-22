@@ -16,7 +16,13 @@ export const metadata: Metadata = {
   applicationName: company.shortName, authors: [{ name: company.name }], creator: company.name, publisher: company.name,
   openGraph: { type: "website", locale: "en_GB", url: company.url, siteName: company.shortName, title: siteMeta.homeTitle, description: siteMeta.homeDescription },
   twitter: { card: "summary_large_image", title: siteMeta.homeTitle, description: siteMeta.homeDescription },
-  icons: { icon: [{ url: "/brand/favicon-96.png", type: "image/png", sizes: "96x96" }] },
+  icons: {
+    icon: [
+      { url: "/brand/favicon-96.png", type: "image/png", sizes: "96x96" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
   other: { "apple-mobile-web-app-title": company.shortName },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
