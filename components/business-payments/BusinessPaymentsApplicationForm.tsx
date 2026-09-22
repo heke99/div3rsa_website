@@ -29,7 +29,7 @@ export function BusinessPaymentsApplicationForm(){
  }
  function move(target:number){setReviewedServerState(state);if(target>currentStep)for(let index=currentStep;index<target;index++)if(!validate(index)){setStep(index);return;}setStep(target);setClientErrors({});}
  if(state.ok)return <div className="success-card" role="status"><p className="eyebrow">Application received</p><h2>Thank you for the details.</h2><p>We will review your application and contact you about next steps. This is not a payment service approval.</p><Link className="button button-primary" href="/">Back to Trafexa Nordic</Link></div>;
- return <form ref={form} id="business-payment-application-form" className="application-form" action={formAction} noValidate onSubmit={event=>{for(let index=0;index<steps.length;index++)if(!validate(index)){event.preventDefault();setStep(index);setReviewedServerState(state);return;}}}>
+ return <form ref={form} id="business-payment-application-form" className="application-form" action={formAction} onReset={event=>event.preventDefault()} aria-busy={pending} noValidate onSubmit={event=>{for(let index=0;index<steps.length;index++)if(!validate(index)){event.preventDefault();setStep(index);setReviewedServerState(state);return;}}}>
   <div className="step-indicator" aria-label="Application steps">{steps.map((label,index)=><button key={label} className={index===currentStep?"step-pill active":"step-pill"} type="button" aria-current={index===currentStep?"step":undefined} onClick={()=>move(index)}><span>{index+1}</span> {label}</button>)}</div>
   {state.message&&<p role="alert" className="form-alert">{state.message}</p>}
   <div className={currentStep===0?"form-step active":"form-step"}>

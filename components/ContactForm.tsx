@@ -13,7 +13,8 @@ export function ContactForm({ productName }: { productName?: string }) {
   const attrs = (name: string) => ({ "aria-invalid": !!errors[name], "aria-describedby": errors[name] ? `contact-error-${name}` : undefined });
   const error = (name: string) => errors[name] ? <span id={`contact-error-${name}`} className="field-error">{errors[name]}</span> : null;
   if (state.ok) return <div className="success-card" role="status"><p className="eyebrow">Enquiry received</p><h2>Thank you for the introduction.</h2><p>{state.message}</p><p>Your enquiry has been recorded for our team. For anything else, email <a className="text-link" href={`mailto:${company.email}`}>{company.email}</a>.</p></div>;
-  return <form ref={formRef} className="contact-form" action={formAction} aria-busy={isPending}>
+  // Failed Actions also resolve: preserve the visitor’s fields until the success view replaces the form.
+  return <form ref={formRef} className="contact-form" action={formAction} onReset={(event) => event.preventDefault()} aria-busy={isPending}>
     {state.message && <div className="form-alert" role="alert">{state.message}</div>}
     <div className="honeypot" aria-hidden="true"><label>Leave this field empty<input name="website_check" type="text" tabIndex={-1} autoComplete="off" /></label></div>
     <div className="form-grid">
